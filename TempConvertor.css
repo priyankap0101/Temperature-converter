@@ -99,23 +99,47 @@ button:active {
   transform: translateY(2px);
 }
 
-/* Output Box */
-.output {
-  background: #34495e;
-  color: #fff;
-  padding: 20px; /* Reduced padding */
-  margin-top: 15px; /* Reduced margin */
-  border-radius: 12px;
-  font-size: 22px; /* Slightly smaller font size */
-  font-weight: bold;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  transition: all 0.4s ease;
-}
-
-.output:hover {
-  transform: scale(1.05);
-  background: #2c3e50;
-}
+/* Result Box */
+.output-box {
+    background: rgba(0, 123, 255, 0.15);
+    color: #fff;
+    padding: 25px 35px;
+    margin-top: 15px;
+    border-radius: 12px;
+    font-size: 30px;
+    font-weight: bold;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: scale(0.5);
+    animation: fadeIn 0.5s forwards;
+    transition: background 0.4s ease, transform 0.4s ease;
+  }
+  
+  /* Gradient background based on temperature */
+  .hot {
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  }
+  
+  .cold {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+  }
+  
+  /* Animation for Fade-in */
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Mobile responsiveness for result box */
+  @media (max-width: 480px) {
+    .output-box {
+      font-size: 24px;
+      padding: 20px 25px;
+    }
+  }
+  
 
 /* Mobile Responsiveness */
 @media (max-width: 480px) {
