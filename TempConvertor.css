@@ -3,108 +3,138 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Body Styling */
 body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  min-height: 100vh;
+  background: linear-gradient(135deg, #4a90e2, #6fd8db);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #333;
+  height: 100vh;
+  color: #fff;
+  font-size: 16px;
+  padding: 0 15px;
 }
 
-/* Main Container */
+/* Container */
 .container {
-  background-color: white;
-  padding: 25px 35px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  padding: 30px; /* Reduced padding to decrease height */
+  width: 100%;
+  max-width: 450px;
   text-align: center;
-  width: 400px;
-  max-width: 90%;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease-in-out;
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Hover Effect for Container */
+.container:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  transform: scale(1.02);
+}
+
+/* Title Styling */
 h1 {
-  font-size: 2.2rem;
-  color: #4facfe;
-  margin-bottom: 10px;
+  font-size: 30px; /* Slightly smaller font size */
+  margin-bottom: 15px; /* Reduced margin */
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-p {
-  color: #666;
-  margin-bottom: 20px;
-  font-size: 1rem;
-}
-
-/* Form Controls */
+/* Form Input & Select Styling */
 input,
 select,
 button {
-  font-size: 1rem;
-  padding: 12px 15px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
   width: 100%;
-  margin: 8px 0;
+  padding: 12px; /* Reduced padding */
+  margin: 10px 0;
+  border-radius: 12px;
+  border: 2px solid #fff;
   outline: none;
-  transition: all 0.3s ease;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
 }
 
 input:focus,
 select:focus {
-  border-color: #4facfe;
-  box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #00bcd4;
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.6);
+}
+
+/* Dropdown Styling */
+select {
+  color: black; /* Ensure black text color for select */
+  font-weight: bold;
 }
 
 /* Button Styling */
 button {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  border: none;
+  background: linear-gradient(135deg, #ff8c00, #ff6f00);
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  border-radius: 12px;
+  padding: 12px; /* Reduced padding */
+  border: none;
+  font-size: 18px;
+  transition: background 0.3s, transform 0.3s ease;
 }
 
 button:hover {
-  background: linear-gradient(135deg, #00f2fe, #4facfe);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #ff6f00, #ff8c00);
+  transform: translateY(-5px);
 }
 
 button:active {
-  transform: translateY(1px);
-  box-shadow: none;
+  transform: translateY(2px);
 }
 
-/* Output Styling */
-#output {
-  margin-top: 20px;
-  font-size: 1.2rem;
-  color: #333;
-  background-color: #f3f4f6;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  display: inline-block;
-  width: 100%;
-  text-align: center;
+/* Output Box */
+.output {
+  background: #34495e;
+  color: #fff;
+  padding: 20px; /* Reduced padding */
+  margin-top: 15px; /* Reduced margin */
+  border-radius: 12px;
+  font-size: 22px; /* Slightly smaller font size */
+  font-weight: bold;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
 }
 
-/* Media Query for Smaller Screens */
-@media (max-width: 768px) {
+.output:hover {
+  transform: scale(1.05);
+  background: #2c3e50;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
   .container {
-    width: 95%;
-    padding: 20px;
+    padding: 15px; /* Further reduced padding for mobile */
   }
 
   h1 {
-    font-size: 1.8rem;
+    font-size: 28px;
   }
 
-  p {
-    font-size: 0.9rem;
+  input,
+  select,
+  button {
+    font-size: 14px;
+    padding: 10px; /* Smaller padding */
+  }
+
+  .output {
+    font-size: 18px; /* Smaller font size for output */
   }
 }
