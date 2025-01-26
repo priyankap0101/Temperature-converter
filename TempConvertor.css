@@ -103,15 +103,26 @@ select option {
 label {
   display: block;
   text-align: left;
-  margin-bottom: 6px;
-  font-size: 0.95rem;
-  color: #94a3b8;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  margin-bottom: 12px; /* Increased spacing for a cleaner layout */
+  font-size: 1.1rem; /* Slightly larger for improved readability */
+  color: #e2e8f0; /* Softer tone for better contrast on dark backgrounds */
+  font-weight: 700; /* Bolder for better emphasis */
+  letter-spacing: 0.7px; /* Improved spacing for clarity */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smoother transition */
+  line-height: 1.5; /* Added better spacing between lines */
 }
 
 label:hover {
-  color: #60a5fa;
+  color: #3b82f6; /* Bright, eye-catching color */
+  transform: translateX(5px); /* Slightly stronger movement effect */
+  cursor: pointer; /* Reinforces interactivity */
+  text-shadow: 0 1px 3px rgba(59, 130, 246, 0.6); /* Subtle glow effect on hover */
+}
+
+/* Additional label focus style for accessibility */
+label:focus-within {
+  color: #2563eb; /* Change to darker shade for focus indication */
+  text-shadow: 0 1px 5px rgba(37, 99, 235, 0.8); /* Highlight the label */
 }
 
 /* Button Styling (Reduced) */
