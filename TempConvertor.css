@@ -99,30 +99,48 @@ select option {
   background-color: white;
 }
 
-/* Labels */
+/* Base label styling */
 label {
   display: block;
   text-align: left;
-  margin-bottom: 12px; /* Increased spacing for a cleaner layout */
-  font-size: 1.1rem; /* Slightly larger for improved readability */
-  color: #e2e8f0; /* Softer tone for better contrast on dark backgrounds */
-  font-weight: 700; /* Bolder for better emphasis */
-  letter-spacing: 0.7px; /* Improved spacing for clarity */
-  transition: color 0.3s ease, transform 0.3s ease; /* Smoother transition */
-  line-height: 1.5; /* Added better spacing between lines */
+  margin-bottom: 12px; /* Maintains spacing for clean layout */
+  font-size: 1.1rem; /* Retains readability with a modern size */
+  color: #e2e8f0; /* Softer tone for dark backgrounds */
+  font-weight: 700; /* Emphasizes importance */
+  letter-spacing: 0.7px; /* Ensures text clarity */
+  line-height: 1.5; /* Consistent spacing between lines */
+  transition: color 0.25s ease, transform 0.25s ease; /* Slightly faster transitions for better UX */
 }
 
+/* Hover state */
 label:hover {
-  color: #3b82f6; /* Bright, eye-catching color */
-  transform: translateX(5px); /* Slightly stronger movement effect */
+  color: #3b82f6; /* Bright, attention-grabbing color */
+  transform: translateX(3px); /* Subtle movement for a smoother effect */
   cursor: pointer; /* Reinforces interactivity */
-  text-shadow: 0 1px 3px rgba(59, 130, 246, 0.6); /* Subtle glow effect on hover */
+  text-shadow: 0 2px 4px rgba(59, 130, 246, 0.4); /* Softer glow for subtlety */
 }
 
-/* Additional label focus style for accessibility */
+/* Focus state for accessibility */
 label:focus-within {
-  color: #2563eb; /* Change to darker shade for focus indication */
-  text-shadow: 0 1px 5px rgba(37, 99, 235, 0.8); /* Highlight the label */
+  color: #2563eb; /* Darker blue for a strong focus indication */
+  text-shadow: 0 2px 6px rgba(37, 99, 235, 0.6); /* More pronounced glow effect */
+  outline: none; /* Avoid default browser outline */
+}
+
+/* Optional: Label for disabled or inactive states */
+label:disabled {
+  color: #64748b; /* Muted tone for disabled labels */
+  text-shadow: none; /* Removes glow effect */
+  cursor: not-allowed; /* Indicates non-interactive state */
+  opacity: 0.6; /* Visual feedback for disabled state */
+}
+
+/* Media query for responsive scaling */
+@media (max-width: 640px) {
+  label {
+    font-size: 1rem; /* Adjust size for smaller screens */
+    margin-bottom: 10px; /* Slightly reduce spacing for tighter layouts */
+  }
 }
 
 /* Button Styling (Reduced) */
