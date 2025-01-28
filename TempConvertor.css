@@ -146,34 +146,38 @@ label:disabled {
 /* Button Styling (Reduced) */
 button {
   width: 100%;
-  padding: 0.7rem; /* Reduced padding */
-  margin-top: 1rem; /* Reduced margin */
-  border-radius: 8px; /* Reduced radius */
+  padding: 0.8rem; /* Slightly adjusted padding for balance */
+  margin-top: 1rem;
+  border-radius: 10px; /* Slightly rounded for a modern look */
   border: none;
-  font-size: 0.95rem; /* Reduced font size */
-  font-weight: bold;
+  font-size: 1rem; /* Slightly adjusted font size for readability */
+  font-weight: 600; /* Adjusted for balance between bold and readability */
   color: #fff;
   background: linear-gradient(135deg, #4f46e5, #3b82f6);
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease, filter 0.2s ease;
   box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
 }
 
 button:hover {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.05); /* Added scaling for more emphasis */
   box-shadow: 0 8px 16px rgba(59, 130, 246, 0.4);
 }
 
 button:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
 }
 
 button:focus-visible {
-  outline: 2px solid #60a5fa;
-  outline-offset: 3px;
+  outline: 3px solid #60a5fa;
+  /*Increasedoutlineforbettervisibility*/outline-offset: 4px;
+  filter: brightness(1.1);
+   /* Slight brightness boost on focus for better interaction feedback */:;
+  -webkit-filter: brightness(1.1);
 }
+
 
 /* Output Box Styling (Reduced) */
 .output-box {
