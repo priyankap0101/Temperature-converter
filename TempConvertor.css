@@ -143,51 +143,66 @@ label:disabled {
   }
 }
 
-/* Button Styling (Reduced) */
+/* Modern Button Styling */
 button {
   width: 100%;
-  padding: 1rem 1.5rem; /* Increased padding for a more substantial look */
+  padding: 0.9em 1.4em; /* Balanced padding for a sleek look */
   margin-top: 1rem;
-  border-radius: 30px; /* Rounded corners for a modern, soft feel */
+  border-radius: 28px; /* Slightly softened corners */
   border: none;
-  font-size: 1.15rem; /* Slightly larger text for readability */
+  font-size: 1.1rem; /* Slightly refined text size */
   font-weight: 600;
   color: #fff;
   background: linear-gradient(135deg, #4f46e5, #3b82f6);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth, bouncy transition */
-  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2); /* Deep shadow for dimension */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
+    background 0.3s ease-in-out;
+  box-shadow: 0 8px 18px rgba(59, 130, 246, 0.2);
   text-transform: uppercase;
-  letter-spacing: 2px; /* Increased letter-spacing for a cleaner look */
+  letter-spacing: 1.8px; /* Slightly reduced for a more natural appearance */
 }
 
 button:hover {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
-  transform: translateY(-10px) scale(1.08); /* More pronounced scaling and lift */
-  box-shadow: 0 20px 30px rgba(59, 130, 246, 0.3); /* Stronger shadow effect on hover */
-  filter: brightness(1.25); /* Brightens the button more on hover */
-  border-color: #60a5fa; /* Smooth transition to highlight border */
+  transform: translateY(-6px) scale(1.05); /* Subtle hover effect */
+  box-shadow: 0 14px 28px rgba(59, 130, 246, 0.25);
+  filter: brightness(1.15); /* Softer brightness adjustment */
 }
 
 button:active {
-  transform: translateY(0) scale(1); /* Reset to normal size on click */
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2); /* Subtle shadow for the active state */
-  filter: brightness(1); /* Reset brightness on click */
+  transform: translateY(0) scale(0.98); /* Minor shrink on click for feedback */
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  filter: brightness(1);
 }
 
 button:focus-visible {
-  outline: 4px solid #60a5fa; /* A bolder focus outline for accessibility */
-  outline-offset: 5px;
-  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.4); /* Soft glowing focus effect */
+  outline: 3px solid #60a5fa;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.35);
 }
 
 button:disabled {
-  background: #e0e0e0; /* Light gray background when disabled */
-  color: #b0b0b0; /* Subtle gray text */
-  cursor: not-allowed; /* Disabled cursor to indicate inactivity */
-  box-shadow: none; /* Remove shadow for the disabled state */
-  border-color: #ccc; /* Subtle border for disabled look */
-  filter: none; /* No filter when disabled */
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  border-color: #d1d5db;
+  filter: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  button {
+    font-size: 1rem; /* Slightly smaller font for smaller screens */
+    padding: 0.8em 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  button {
+    font-size: 0.95rem;
+    padding: 0.7em 1.1em;
+  }
 }
 
 /* Output Box Styling (Reduced) */
