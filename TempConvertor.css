@@ -143,58 +143,64 @@ label:disabled {
   }
 }
 
-/* Modern Button Styling */
+/* Modern & Responsive Button Styling */
 button {
   width: 100%;
-  padding: 0.9em 1.4em; /* Balanced padding for a sleek look */
+  padding: 0.85em 1.4em; /* Slightly balanced for better proportion */
   margin-top: 1rem;
-  border-radius: 28px; /* Slightly softened corners */
+  border-radius: 28px; /* Soft corners for a modern look */
   border: none;
-  font-size: 1.1rem; /* Slightly refined text size */
+  font-size: 1.1rem;
   font-weight: 600;
   color: #fff;
   background: linear-gradient(135deg, #4f46e5, #3b82f6);
   cursor: pointer;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
-    background 0.3s ease-in-out;
-  box-shadow: 0 8px 18px rgba(59, 130, 246, 0.2);
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2);
   text-transform: uppercase;
-  letter-spacing: 1.8px; /* Slightly reduced for a more natural appearance */
+  letter-spacing: 1.6px; /* Slightly reduced for readability */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* Space for optional icons */
 }
 
+/* Hover Effect */
 button:hover {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
-  transform: translateY(-6px) scale(1.05); /* Subtle hover effect */
-  box-shadow: 0 14px 28px rgba(59, 130, 246, 0.25);
-  filter: brightness(1.15); /* Softer brightness adjustment */
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.25);
+  filter: brightness(1.1);
 }
 
+/* Active (Click) State */
 button:active {
-  transform: translateY(0) scale(0.98); /* Minor shrink on click for feedback */
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
   filter: brightness(1);
 }
 
+/* Focus State (Accessibility) */
 button:focus-visible {
   outline: 3px solid #60a5fa;
-  outline-offset: 4px;
-  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.35);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.35);
 }
 
+/* Disabled Button */
 button:disabled {
   background: #e5e7eb;
   color: #9ca3af;
   cursor: not-allowed;
   box-shadow: none;
-  border-color: #d1d5db;
-  filter: none;
+  opacity: 0.6;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   button {
-    font-size: 1rem; /* Slightly smaller font for smaller screens */
-    padding: 0.8em 1.2em;
+    font-size: 1rem;
+    padding: 0.75em 1.2em;
   }
 }
 
@@ -202,6 +208,7 @@ button:disabled {
   button {
     font-size: 0.95rem;
     padding: 0.7em 1.1em;
+    border-radius: 24px;
   }
 }
 
