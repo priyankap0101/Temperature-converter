@@ -1,12 +1,13 @@
 function convertTemp() {
-  const inputTemp = parseFloat(document.getElementById("inputTemp").value); // Input temperature
-  const inputUnit = document.getElementById("inputUnit").value; // From unit
-  const targetUnit = document.getElementById("targetUnit").value; // To unit
-  const output = document.getElementById("output"); // Output container
+  const inputTemp = parseFloat(document.getElementById("inputTemp").value);
+  const inputUnit = document.getElementById("inputUnit").value;
+  const targetUnit = document.getElementById("targetUnit").value;
+  const outputBox = document.getElementById("output"); // Output container
 
   // Validate input
   if (isNaN(inputTemp)) {
-    output.innerHTML =
+    outputBox.style.display = "block"; // Show output box for error
+    outputBox.innerHTML =
       '<p style="color: red;">Please enter a valid number.</p>';
     return;
   }
@@ -15,7 +16,7 @@ function convertTemp() {
 
   // Conversion logic
   if (inputUnit === targetUnit) {
-    result = inputTemp; // No conversion needed
+    result = inputTemp;
   } else if (inputUnit === "celsius") {
     if (targetUnit === "fahrenheit") {
       result = (inputTemp * 9) / 5 + 32;
@@ -36,8 +37,20 @@ function convertTemp() {
     }
   }
 
+  // Show the output box
+  outputBox.style.display = "block";
+
+  // Determine if the temperature is "hot" or "cold" for styling
+  if (result > 30) {
+    outputBox.classList.add("hot");
+    outputBox.classList.remove("cold");
+  } else {
+    outputBox.classList.add("cold");
+    outputBox.classList.remove("hot");
+  }
+
   // Display the converted result
-  output.innerHTML = `<p><strong>Converted Temperature:</strong> ${result.toFixed(
+  outputBox.innerHTML = `<p><strong>Converted Temperature:</strong> ${result.toFixed(
     2
   )} ${
     targetUnit === "celsius" ? "°C" : targetUnit === "fahrenheit" ? "°F" : "K"
