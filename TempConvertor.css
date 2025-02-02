@@ -212,25 +212,66 @@ button:disabled {
   }
 }
 
-/* Output Box Styling (Enhanced) */
+/* Show class (for smooth animation) */
 .output-box {
-  display: none; /* Hidden by default */
+  display: none; /* Initially hidden */
   opacity: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15),
-    rgba(255, 255, 255, 0.1)
-  );
-  padding: 1.2rem;
-  margin-top: 1rem;
-  border-radius: 12px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
-  color: #f8fafc;
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.45);
-  animation: fadeInScale 0.5s forwards ease-out;
+  transform: scale(0.9);
+  transition: opacity 0.4s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* When the output box appears */
+.output-box.show {
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Description Styling */
+.output-box .description {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-top: 0.6rem;
+  opacity: 0.95;
+  color: #e5e7eb;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+/* Hot and Cold Effects with enhanced gradient & smooth animation */
+.output-box.hot {
+  background: linear-gradient(135deg, #dc2626, #f97316);
+  box-shadow: 0px 4px 12px rgba(255, 85, 0, 0.6);
+  animation: pulse 1.2s infinite alternate;
+}
+
+.output-box.cold {
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  box-shadow: 0px 4px 12px rgba(0, 85, 255, 0.6);
+  animation: pulse 1.2s infinite alternate;
+}
+
+/* Extreme Hot and Cold Effects */
+.output-box.extreme-hot {
+  background: linear-gradient(135deg, #b91c1c, #ef4444);
+  box-shadow: 0px 6px 16px rgba(255, 0, 0, 0.8);
+  animation: pulse 0.8s infinite alternate;
+}
+
+.output-box.extreme-cold {
+  background: linear-gradient(135deg, #1e40af, #60a5fa);
+  box-shadow: 0px 6px 16px rgba(0, 150, 255, 0.8);
+  animation: pulse 0.8s infinite alternate;
+}
+
+/* Pulse Animation for Temperature Effects */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
 }
 
 /* Show class (for animation) */
@@ -272,48 +313,7 @@ button:disabled {
     transform: scale(1.05);
   }
 }
-/* Fade-in & Scale Animation */
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 
-/* Pulse Effect for Extreme Temperatures */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.08);
-  }
-}
-
-/* Temperature-Based Colors */
-.output-box.hot {
-  background: linear-gradient(135deg, #ff6a00, #ff4500);
-  animation: pulse 1.8s infinite alternate;
-}
-
-.output-box.extreme-hot {
-  background: linear-gradient(135deg, #e60000, #ff0000);
-  animation: pulse 1.2s infinite alternate;
-}
-
-.output-box.cold {
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-  animation: pulse 1.8s infinite alternate;
-}
-
-.output-box.extreme-cold {
-  background: linear-gradient(135deg, #1e40af, #0c4a6e);
-  animation: pulse 1.2s infinite alternate;
-}
 /* Animations */
 @keyframes fadeIn {
   from {
