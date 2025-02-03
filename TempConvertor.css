@@ -212,74 +212,24 @@ button:disabled {
   }
 }
 
-/* General Styling */
-body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #1e293b, #0f172a);
-  color: #e5e7eb;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
-/* Temperature Input Container */
-.input-container {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-}
-
-/* Input Field */
-input {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-  width: 100%;
-  font-size: 1.1rem;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-}
-
-/* Convert Button */
-button {
-  margin-top: 12px;
-  padding: 12px 20px;
-  background: linear-gradient(135deg, #06b6d4, #0ea5e9);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-}
-
-button:hover {
-  background: linear-gradient(135deg, #0ea5e9, #2563eb);
-  transform: scale(1.05);
-}
-
-/* Output Box - Glassmorphism Effect */
+/* Output Box - Glassmorphism Style */
 .output-box {
-  display: none;
+  display: none; /* Initially hidden */
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 0.5s ease-in-out, transform 0.4s ease-in-out;
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 12px;
+  transition: opacity 0.4s ease-in-out, transform 0.3s ease-in-out;
   backdrop-filter: blur(10px);
-  box-shadow: 0px 5px 14px rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.2rem;
   text-align: center;
+  color: #f1f5f9;
+  text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Show Class - When the output box appears */
+/* When the output box appears */
 .output-box.show {
   display: block;
   opacity: 1;
@@ -288,39 +238,45 @@ button:hover {
 
 /* Description Styling */
 .output-box .description {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   margin-top: 0.6rem;
   opacity: 0.95;
   color: #e5e7eb;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  letter-spacing: 0.6px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
 }
 
-/* Hot & Cold Effects */
+/* Hot and Cold Effects with enhanced gradient & smooth animation */
 .output-box.hot {
-  background: linear-gradient(135deg, #dc2626, #f97316);
-  box-shadow: 0px 5px 14px rgba(255, 85, 0, 0.7);
-  animation: pulse 1.5s infinite alternate ease-in-out;
+  background: linear-gradient(135deg, #ff3e3e, #ff7b00);
+  box-shadow: 0px 4px 12px rgba(255, 85, 0, 0.6);
+  animation: pulse 1.2s infinite alternate;
 }
 
 .output-box.cold {
   background: linear-gradient(135deg, #2563eb, #38bdf8);
-  box-shadow: 0px 5px 14px rgba(0, 85, 255, 0.7);
-  animation: pulse 1.5s infinite alternate ease-in-out;
+  box-shadow: 0px 4px 12px rgba(0, 85, 255, 0.6);
+  animation: pulse 1.2s infinite alternate;
 }
 
-/* Extreme Hot & Cold Effects */
+/* Extreme Hot and Cold Effects */
 .output-box.extreme-hot {
-  background: linear-gradient(135deg, #b91c1c, #ef4444);
-  box-shadow: 0px 7px 18px rgba(255, 0, 0, 0.9);
-  animation: pulse 1s infinite alternate ease-in-out;
+  background: linear-gradient(135deg, #b91c1c, #ff2e2e);
+  box-shadow: 0px 6px 20px rgba(255, 0, 0, 0.8);
+  animation: pulse 0.8s infinite alternate;
 }
 
 .output-box.extreme-cold {
   background: linear-gradient(135deg, #1e40af, #60a5fa);
-  box-shadow: 0px 7px 18px rgba(0, 150, 255, 0.9);
-  animation: pulse 1s infinite alternate ease-in-out;
+  box-shadow: 0px 6px 20px rgba(0, 150, 255, 0.8);
+  animation: pulse 0.8s infinite alternate;
+}
+
+/* Subtle Hover Effect */
+.output-box:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-in-out;
 }
 
 /* Pulse Animation */
@@ -330,6 +286,18 @@ button:hover {
   }
   100% {
     transform: scale(1.05);
+  }
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .output-box {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .output-box .description {
+    font-size: 0.85rem;
   }
 }
 
