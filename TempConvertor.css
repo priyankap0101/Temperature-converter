@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -50,7 +50,7 @@ h1 {
 }
 
 h1::after {
-  content: "";
+  content: '';
   display: block;
   width: 50px; /* Slightly reduced width */
   height: 2px; /* Reduced height */
@@ -146,34 +146,35 @@ label:disabled {
 /* Modern & Responsive Button Styling */
 button {
   width: 100%;
-  padding: 0.85em 1.4em; /* Slightly balanced for better proportion */
+  padding: 0.85em 1.4em;
   margin-top: 1rem;
-  border-radius: 28px; /* Soft corners for a modern look */
+  border-radius: 28px;
   border: none;
   font-size: 1.1rem;
   font-weight: 600;
   color: #fff;
   background: linear-gradient(135deg, #4f46e5, #3b82f6);
   cursor: pointer;
-  transition: all 0.25s ease-in-out;
+  transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.3s ease;
   box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2);
   text-transform: uppercase;
-  letter-spacing: 1.6px; /* Slightly reduced for readability */
+  letter-spacing: 1.4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem; /* Space for optional icons */
-  user-select: none; /* Prevent text selection */
-  position: relative; /* To position the ripple effect */
-  overflow: hidden; /* Hide the ripple if it's outside the button */
+  gap: 0.5rem;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  will-change: transform, box-shadow;
 }
 
 /* Hover Effect */
 button:hover {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
-  transform: translateY(-4px) scale(1.04);
-  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.25);
-  filter: brightness(1.1);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.3);
+  filter: brightness(1.2);
 }
 
 /* Active (Click) State */
@@ -186,8 +187,8 @@ button:active {
 /* Focus State (Accessibility) */
 button:focus-visible {
   outline: 3px solid #60a5fa;
-  outline-offset: 3px;
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.35);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.4);
 }
 
 /* Disabled Button */
@@ -196,21 +197,29 @@ button:disabled {
   color: #9ca3af;
   cursor: not-allowed;
   box-shadow: none;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 /* Ripple Effect */
-button:active::after {
-  content: "";
+button::after {
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 300%; /* Adjust the size of the ripple */
-  height: 300%;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.4);
+  display: block;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3); /* Light white color for the ripple */
-  transform: translate(-50%, -50%);
-  animation: ripple 0.6s ease-out;
+  transform: scale(0);
+  opacity: 1;
+  transition: transform 0.5s ease-out, opacity 0.6s ease-out;
+  pointer-events: none;
+}
+
+button:active::after {
+  transform: scale(8);
+  opacity: 0;
 }
 
 @keyframes ripple {
