@@ -261,7 +261,7 @@ button:active::after {
   }
 }
 
-/* Output Box - Glassmorphism Style */
+/* Output Box - Enhanced Glassmorphism Style */
 .output-box {
   margin-top: 1rem;
   display: none; /* Initially hidden */
@@ -269,16 +269,16 @@ button:active::after {
   transform: scale(0.9);
   transition: opacity 0.4s ease-in-out, transform 0.3s ease-in-out,
     box-shadow 0.3s ease-in-out;
-  backdrop-filter: blur(14px); /* Increased for a more premium glass effect */
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 16px;
-  padding: 1.4rem;
+  backdrop-filter: blur(18px) saturate(180%); /* More premium glass effect */
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  padding: 1.6rem;
   text-align: center;
   color: #f1f5f9;
-  text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.35);
-  will-change: transform, opacity, box-shadow; /* Performance boost */
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.35);
+  will-change: transform, opacity, box-shadow; /* Performance optimization */
 }
 
 /* When the output box appears */
@@ -290,44 +290,70 @@ button:active::after {
 
 /* Description Styling */
 .output-box .description {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 500;
   opacity: 0.97;
   color: #e5e7eb;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-  letter-spacing: 0.6px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.7px;
 }
 
 /* Hover Effect for Interactive Feel */
 .output-box:hover {
-  box-shadow: 0px 10px 28px rgba(0, 0, 0, 0.5);
-  transform: scale(1.02);
+  box-shadow: 0px 12px 36px rgba(0, 0, 0, 0.5);
+  transform: scale(1.03);
+  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
 }
 
-/* Hot and Cold Effects with smooth transitions */
+/* Dynamic Temperature Effects */
 .output-box.hot {
-  background: linear-gradient(135deg, #ff3e3e, #ff7b00);
-  box-shadow: 0px 6px 16px rgba(255, 85, 0, 0.7);
-  animation: pulse 1.1s infinite alternate;
+  background: linear-gradient(135deg, #ff4747, #ff8c00);
+  box-shadow: 0px 8px 20px rgba(255, 85, 0, 0.7);
+  animation: pulse 1.1s infinite alternate ease-in-out;
 }
 
 .output-box.cold {
-  background: linear-gradient(135deg, #2563eb, #38bdf8);
-  box-shadow: 0px 6px 16px rgba(0, 85, 255, 0.7);
-  animation: pulse 1.1s infinite alternate;
+  background: linear-gradient(135deg, #2563eb, #3bc9f5);
+  box-shadow: 0px 8px 20px rgba(0, 85, 255, 0.7);
+  animation: pulse 1.1s infinite alternate ease-in-out;
 }
 
 /* Extreme Hot and Cold Effects */
 .output-box.extreme-hot {
-  background: linear-gradient(135deg, #b91c1c, #ff2e2e);
-  box-shadow: 0px 8px 24px rgba(255, 0, 0, 0.85);
-  animation: pulse 0.7s infinite alternate;
+  background: linear-gradient(135deg, #b91c1c, #ff1f1f);
+  box-shadow: 0px 10px 28px rgba(255, 0, 0, 0.85);
+  animation: pulse 0.7s infinite alternate ease-in-out;
 }
 
 .output-box.extreme-cold {
-  background: linear-gradient(135deg, #1e40af, #60a5fa);
-  box-shadow: 0px 8px 24px rgba(0, 150, 255, 0.85);
-  animation: pulse 0.7s infinite alternate;
+  background: linear-gradient(135deg, #1e3a8a, #66b2ff);
+  box-shadow: 0px 10px 28px rgba(0, 150, 255, 0.85);
+  animation: pulse 0.7s infinite alternate ease-in-out;
+}
+
+/* Smooth Pulse Animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0px 10px 28px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0px 12px 34px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .output-box {
+    padding: 1.2rem;
+    font-size: 0.95rem;
+    border-radius: 14px;
+  }
+
+  .output-box .description {
+    font-size: 1rem;
+  }
 }
 
 /* Pulse Animation */
