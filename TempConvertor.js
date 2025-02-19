@@ -4,10 +4,23 @@ function convertTemp() {
   const targetUnit = document.getElementById("targetUnit").value;
   const outputBox = document.getElementById("output");
 
+  if (!inputTemp && inputTemp !== 0) {
+    outputBox.style.display = "none"; // Hide output if input is cleared
+    return;
+  }
+
   if (isNaN(inputTemp)) {
     outputBox.innerHTML =
       '<p class="error-msg">⚠️ Please enter a valid number.</p>';
     outputBox.className = "output-box error";
+    outputBox.style.display = "block";
+    return;
+  }
+
+  if (inputTemp < -273.15 || inputTemp > 1000) {
+    outputBox.innerHTML =
+      '<p class="warning-msg">⚠️ Temperature out of realistic range!</p>';
+    outputBox.className = "output-box warning";
     outputBox.style.display = "block";
     return;
   }
@@ -72,7 +85,11 @@ function convertTemp() {
   outputBox.className = `output-box ${className}`;
   outputBox.style.display = "block";
   outputBox.style.opacity = "0";
+  outputBox.style.transform = "scale(0.9)";
 
   // Smooth transition effect
-  setTimeout(() => (outputBox.style.opacity = "1"), 100);
+  setTimeout(() => {
+    outputBox.style.opacity = "1";
+    outputBox.style.transform = "scale(1)";
+  }, 100);
 }
