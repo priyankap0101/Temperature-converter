@@ -4,28 +4,23 @@ function convertTemp() {
   const targetUnit = document.getElementById("targetUnit").value;
   const outputBox = document.getElementById("output");
 
-  if (!inputTemp && inputTemp !== 0) {
-    outputBox.style.display = "none"; // Hide output if input is cleared
-    return;
-  }
-
-  if (isNaN(inputTemp)) {
-    outputBox.innerHTML =
-      '<p class="error-msg">⚠️ Please enter a valid number.</p>';
+  // Input validation
+  if (isNaN(inputTemp) || inputTemp === "") {
+    outputBox.innerHTML = '<p class="error-msg">⚠️ Please enter a valid number.</p>';
     outputBox.className = "output-box error";
     outputBox.style.display = "block";
     return;
   }
 
+  // Range validation
   if (inputTemp < -273.15 || inputTemp > 1000) {
-    outputBox.innerHTML =
-      '<p class="warning-msg">⚠️ Temperature out of realistic range!</p>';
+    outputBox.innerHTML = '<p class="warning-msg">⚠️ Temperature out of realistic range!</p>';
     outputBox.className = "output-box warning";
     outputBox.style.display = "block";
     return;
   }
 
-  // Temperature conversion logic using a map
+  // Conversion logic
   const conversions = {
     celsius: {
       fahrenheit: (temp) => (temp * 9) / 5 + 32,
@@ -42,9 +37,14 @@ function convertTemp() {
   };
 
   const result =
-    inputUnit === targetUnit
-      ? inputTemp
-      : conversions[inputUnit]?.[targetUnit]?.(inputTemp);
+    inputUnit === targetUnit ? inputTemp : conversions[inputUnit]?.[targetUnit]?.(inputTemp);
+
+  if (result === undefined) {
+    outputBox.innerHTML = '<p class="error-msg">⚠️ Invalid conversion.</p>';
+    outputBox.className = "output-box error";
+    outputBox.style.display = "block";
+    return;
+  }
 
   // Temperature description
   const tempRanges = [
@@ -75,21 +75,18 @@ function convertTemp() {
     (range) => result < range.limit
   );
 
-  // Apply Changes
+  // Apply changes to output box with smooth transition
   outputBox.innerHTML = `
     <p><strong>Converted Temperature:</strong> ${result.toFixed(2)} 
-    ${
-      targetUnit === "celsius" ? "°C" : targetUnit === "fahrenheit" ? "°F" : "K"
-    }<br>${description}</p>
+    ${targetUnit === "celsius" ? "°C" : targetUnit === "fahrenheit" ? "°F" : "K"}<br>${description}</p>
   `;
   outputBox.className = `output-box ${className}`;
   outputBox.style.display = "block";
-  outputBox.style.opacity = "0";
-  outputBox.style.transform = "scale(0.9)";
 
-  // Smooth transition effect
+  // Add smooth transition effect
+  outputBox.classList.add("fade-in");
+  
   setTimeout(() => {
-    outputBox.style.opacity = "1";
-    outputBox.style.transform = "scale(1)";
-  }, 100);
+    outputBox.classList.remove("fade-in");
+  }, 500); // Wait for animation duration
 }
