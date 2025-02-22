@@ -4,23 +4,43 @@ function convertTemp() {
   const targetUnit = document.getElementById("targetUnit").value;
   const outputBox = document.getElementById("output");
 
-  // Input validation
-  if (isNaN(inputTemp) || inputTemp === "") {
-    outputBox.innerHTML = '<p class="error-msg">⚠️ Please enter a valid number.</p>';
-    outputBox.className = "output-box error";
-    outputBox.style.display = "block";
+  // Input validation: Check if the input is a valid finite number
+  if (!Number.isFinite(inputTemp)) {
+    showErrorMessage("⚠️ Please enter a valid number.");
     return;
   }
 
-  // Range validation
+  // Range validation: Check if the temperature is within a realistic range
   if (inputTemp < -273.15 || inputTemp > 1000) {
-    outputBox.innerHTML = '<p class="warning-msg">⚠️ Temperature out of realistic range!</p>';
-    outputBox.className = "output-box warning";
-    outputBox.style.display = "block";
+    showErrorMessage("⚠️ Temperature out of realistic range!");
     return;
   }
 
   // Conversion logic
+  const result = convertTemperature(inputTemp, inputUnit, targetUnit);
+
+  if (result === undefined) {
+    showErrorMessage("⚠️ Invalid conversion.");
+    return;
+  }
+
+  // Temperature description based on the result
+  const { description, className } = getTemperatureDescription(result);
+
+  // Display the result with a smooth transition
+  showResult(result, targetUnit, description, className);
+}
+
+// Function to handle displaying error messages
+function showErrorMessage(message) {
+  const outputBox = document.getElementById("output");
+  outputBox.innerHTML = `<p class="error-msg">${message}</p>`;
+  outputBox.className = "output-box error";
+  outputBox.style.display = "block";
+}
+
+// Function to convert temperatures based on selected units
+function convertTemperature(temp, fromUnit, toUnit) {
   const conversions = {
     celsius: {
       fahrenheit: (temp) => (temp * 9) / 5 + 32,
@@ -36,17 +56,16 @@ function convertTemp() {
     },
   };
 
-  const result =
-    inputUnit === targetUnit ? inputTemp : conversions[inputUnit]?.[targetUnit]?.(inputTemp);
-
-  if (result === undefined) {
-    outputBox.innerHTML = '<p class="error-msg">⚠️ Invalid conversion.</p>';
-    outputBox.className = "output-box error";
-    outputBox.style.display = "block";
-    return;
+  // If the units are the same, no need to convert
+  if (fromUnit === toUnit) {
+    return temp;
   }
 
-  // Temperature description
+  return conversions[fromUnit]?.[toUnit]?.(temp);
+}
+
+// Function to determine the temperature description based on the result
+function getTemperatureDescription(temp) {
   const tempRanges = [
     {
       limit: -30,
@@ -71,22 +90,28 @@ function convertTemp() {
     },
   ];
 
-  const { description, className } = tempRanges.find(
-    (range) => result < range.limit
-  );
+  return tempRanges.find((range) => temp < range.limit);
+}
 
-  // Apply changes to output box with smooth transition
+// Function to display the result with a smooth transition
+function showResult(result, targetUnit, description, className) {
+  const outputBox = document.getElementById("output");
+  const unitSymbol =
+    targetUnit === "celsius" ? "°C" : targetUnit === "fahrenheit" ? "°F" : "K";
+
   outputBox.innerHTML = `
-    <p><strong>Converted Temperature:</strong> ${result.toFixed(2)} 
-    ${targetUnit === "celsius" ? "°C" : targetUnit === "fahrenheit" ? "°F" : "K"}<br>${description}</p>
+    <p><strong>Converted Temperature:</strong> ${result.toFixed(
+      2
+    )} ${unitSymbol}<br>${description}</p>
   `;
+
   outputBox.className = `output-box ${className}`;
   outputBox.style.display = "block";
 
   // Add smooth transition effect
   outputBox.classList.add("fade-in");
-  
+
   setTimeout(() => {
     outputBox.classList.remove("fade-in");
-  }, 500); // Wait for animation duration
+  }, 500); // Duration of the fade-in effect
 }
