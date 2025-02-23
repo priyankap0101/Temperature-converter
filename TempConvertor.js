@@ -4,67 +4,61 @@ function convertTemp() {
   const targetUnit = document.getElementById("targetUnit").value;
   const outputBox = document.getElementById("output");
 
-  // Input validation: Check if the input is a valid finite number
-  if (!Number.isFinite(inputTemp)) {
-    showErrorMessage("⚠️ Please enter a valid number.");
-    return;
+  // Input validation: Ensure a valid finite number
+  if (isNaN(inputTemp) || !Number.isFinite(inputTemp)) {
+    return showError("⚠️ Please enter a valid number.");
   }
 
-  // Range validation: Check if the temperature is within a realistic range
+  // Range validation: Check if temperature is within realistic limits
   if (inputTemp < -273.15 || inputTemp > 1000) {
-    showErrorMessage("⚠️ Temperature out of realistic range!");
-    return;
+    return showError("⚠️ Temperature out of realistic range!");
   }
 
-  // Conversion logic
+  // Perform conversion
   const result = convertTemperature(inputTemp, inputUnit, targetUnit);
 
   if (result === undefined) {
-    showErrorMessage("⚠️ Invalid conversion.");
-    return;
+    return showError("⚠️ Invalid conversion.");
   }
 
-  // Temperature description based on the result
+  // Determine the temperature description
   const { description, className } = getTemperatureDescription(result);
 
-  // Display the result with a smooth transition
+  // Display the result with animation
   showResult(result, targetUnit, description, className);
 }
 
 // Function to handle displaying error messages
-function showErrorMessage(message) {
+function showError(message) {
   const outputBox = document.getElementById("output");
   outputBox.innerHTML = `<p class="error-msg">${message}</p>`;
   outputBox.className = "output-box error";
   outputBox.style.display = "block";
 }
 
-// Function to convert temperatures based on selected units
+// Function to convert temperatures between different units
 function convertTemperature(temp, fromUnit, toUnit) {
+  if (fromUnit === toUnit) return temp; // No conversion needed
+
   const conversions = {
     celsius: {
-      fahrenheit: (temp) => (temp * 9) / 5 + 32,
-      kelvin: (temp) => temp + 273.15,
+      fahrenheit: (t) => (t * 9) / 5 + 32,
+      kelvin: (t) => t + 273.15,
     },
     fahrenheit: {
-      celsius: (temp) => ((temp - 32) * 5) / 9,
-      kelvin: (temp) => ((temp - 32) * 5) / 9 + 273.15,
+      celsius: (t) => ((t - 32) * 5) / 9,
+      kelvin: (t) => ((t - 32) * 5) / 9 + 273.15,
     },
     kelvin: {
-      celsius: (temp) => temp - 273.15,
-      fahrenheit: (temp) => ((temp - 273.15) * 9) / 5 + 32,
+      celsius: (t) => t - 273.15,
+      fahrenheit: (t) => ((t - 273.15) * 9) / 5 + 32,
     },
   };
-
-  // If the units are the same, no need to convert
-  if (fromUnit === toUnit) {
-    return temp;
-  }
 
   return conversions[fromUnit]?.[toUnit]?.(temp);
 }
 
-// Function to determine the temperature description based on the result
+// Function to determine temperature description
 function getTemperatureDescription(temp) {
   const tempRanges = [
     {
@@ -77,7 +71,11 @@ function getTemperatureDescription(temp) {
       description: "🧥 Cold, wear warm clothes.",
       className: "cold",
     },
-    { limit: 25, description: "🌤️ Pleasant temperature.", className: "" },
+    {
+      limit: 25,
+      description: "🌤️ Pleasant temperature.",
+      className: "pleasant",
+    },
     {
       limit: 40,
       description: "☀️ Warm, comfortable weather.",
@@ -90,28 +88,25 @@ function getTemperatureDescription(temp) {
     },
   ];
 
-  return tempRanges.find((range) => temp < range.limit);
+  return tempRanges.find((range) => temp < range.limit) || {};
 }
 
-// Function to display the result with a smooth transition
+// Function to display the converted temperature with a smooth effect
 function showResult(result, targetUnit, description, className) {
   const outputBox = document.getElementById("output");
-  const unitSymbol =
-    targetUnit === "celsius" ? "°C" : targetUnit === "fahrenheit" ? "°F" : "K";
+  const unitSymbols = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
+  const unitSymbol = unitSymbols[targetUnit] || targetUnit;
 
   outputBox.innerHTML = `
     <p><strong>Converted Temperature:</strong> ${result.toFixed(
       2
-    )} ${unitSymbol}<br>${description}</p>
+    )} ${unitSymbol}</p>
+    <p>${description}</p>
   `;
 
-  outputBox.className = `output-box ${className}`;
+  outputBox.className = `output-box ${className} fade-in`;
   outputBox.style.display = "block";
 
-  // Add smooth transition effect
-  outputBox.classList.add("fade-in");
-
-  setTimeout(() => {
-    outputBox.classList.remove("fade-in");
-  }, 500); // Duration of the fade-in effect
+  // Remove fade-in effect after animation
+  setTimeout(() => outputBox.classList.remove("fade-in"), 500);
 }
