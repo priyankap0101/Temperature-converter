@@ -2,7 +2,7 @@ function convertTemp() {
   const inputTemp = parseFloat(document.getElementById("inputTemp").value);
   const inputUnit = document.getElementById("inputUnit").value;
   const targetUnit = document.getElementById("targetUnit").value;
-  const outputBox = document.getElementById("output");
+  const outputElement = document.getElementById("output");
 
   // Input validation: Ensure a valid finite number
   if (isNaN(inputTemp) || !Number.isFinite(inputTemp)) {
@@ -16,7 +16,6 @@ function convertTemp() {
 
   // Perform conversion
   const result = convertTemperature(inputTemp, inputUnit, targetUnit);
-
   if (result === undefined) {
     return showError("⚠️ Invalid conversion.");
   }
@@ -28,12 +27,12 @@ function convertTemp() {
   showResult(result, targetUnit, description, className);
 }
 
-// Function to handle displaying error messages
+// Function to display error messages
 function showError(message) {
-  const outputBox = document.getElementById("output");
-  outputBox.innerHTML = `<p class="error-msg">${message}</p>`;
-  outputBox.className = "output-box error";
-  outputBox.style.display = "block";
+  const outputElement = document.getElementById("output");
+  outputElement.textContent = message;
+  outputElement.className = "output-box error";
+  outputElement.style.display = "block";
 }
 
 // Function to convert temperatures between different units
@@ -93,20 +92,20 @@ function getTemperatureDescription(temp) {
 
 // Function to display the converted temperature with a smooth effect
 function showResult(result, targetUnit, description, className) {
-  const outputBox = document.getElementById("output");
-  const unitSymbols = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
-  const unitSymbol = unitSymbols[targetUnit] || targetUnit;
+  const outputElement = document.getElementById("output");
+  const unitMap = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
+  const unitSymbol = unitMap[targetUnit] || targetUnit;
 
-  outputBox.innerHTML = `
+  outputElement.innerHTML = `
     <p><strong>Converted Temperature:</strong> ${result.toFixed(
       2
     )} ${unitSymbol}</p>
     <p>${description}</p>
   `;
 
-  outputBox.className = `output-box ${className} fade-in`;
-  outputBox.style.display = "block";
+  outputElement.className = `output-box ${className} fade-in`;
+  outputElement.style.display = "block";
 
   // Remove fade-in effect after animation
-  setTimeout(() => outputBox.classList.remove("fade-in"), 500);
+  setTimeout(() => outputElement.classList.remove("fade-in"), 500);
 }
