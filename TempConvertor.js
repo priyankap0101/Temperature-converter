@@ -2,42 +2,50 @@ function convertTemp() {
   const inputTemp = parseFloat(document.getElementById("inputTemp").value);
   const inputUnit = document.getElementById("inputUnit").value;
   const targetUnit = document.getElementById("targetUnit").value;
-  const outputElement = document.getElementById("output");
 
-  // Input validation: Ensure a valid finite number
-  if (isNaN(inputTemp) || !Number.isFinite(inputTemp)) {
+  // Validate input
+  if (!isValidTemperature(inputTemp))
     return showError("⚠️ Please enter a valid number.");
-  }
-
-  // Range validation: Check if temperature is within realistic limits
-  if (inputTemp < -273.15 || inputTemp > 1000) {
+  if (!isWithinRange(inputTemp))
     return showError("⚠️ Temperature out of realistic range!");
-  }
 
   // Perform conversion
   const result = convertTemperature(inputTemp, inputUnit, targetUnit);
-  if (result === undefined) {
-    return showError("⚠️ Invalid conversion.");
-  }
+  if (result === undefined) return showError("⚠️ Invalid conversion.");
 
-  // Determine the temperature description
+  // Get temperature description
   const { description, className } = getTemperatureDescription(result);
 
-  // Display the result with animation
+  // Display the result
   showResult(result, targetUnit, description, className);
 }
 
-// Function to display error messages
+// 🔹 Function to validate temperature input
+function isValidTemperature(temp) {
+  return !isNaN(temp) && Number.isFinite(temp);
+}
+
+// 🔹 Function to check if temperature is within realistic range
+function isWithinRange(temp) {
+  return temp >= -273.15 && temp <= 1000;
+}
+
+// 🔹 Function to handle error messages
 function showError(message) {
+  updateOutput(message, "error-msg", "error");
+}
+
+// 🔹 Function to update the output display
+function updateOutput(content, extraClass = "", baseClass = "") {
   const outputElement = document.getElementById("output");
-  outputElement.textContent = message;
-  outputElement.className = "output-box error";
+  outputElement.innerHTML = `<p class="${extraClass}">${content}</p>`;
+  outputElement.className = `output-box ${baseClass}`;
   outputElement.style.display = "block";
 }
 
-// Function to convert temperatures between different units
+// 🔹 Function to convert temperature between units
 function convertTemperature(temp, fromUnit, toUnit) {
-  if (fromUnit === toUnit) return temp; // No conversion needed
+  if (fromUnit === toUnit) return temp;
 
   const conversions = {
     celsius: {
@@ -57,7 +65,7 @@ function convertTemperature(temp, fromUnit, toUnit) {
   return conversions[fromUnit]?.[toUnit]?.(temp);
 }
 
-// Function to determine temperature description
+// 🔹 Function to determine temperature description
 function getTemperatureDescription(temp) {
   const tempRanges = [
     {
@@ -90,22 +98,20 @@ function getTemperatureDescription(temp) {
   return tempRanges.find((range) => temp < range.limit) || {};
 }
 
-// Function to display the converted temperature with a smooth effect
+// 🔹 Function to display converted temperature with animation
 function showResult(result, targetUnit, description, className) {
-  const outputElement = document.getElementById("output");
-  const unitMap = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
-  const unitSymbol = unitMap[targetUnit] || targetUnit;
+  const unitSymbols = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
+  const unitSymbol = unitSymbols[targetUnit] || targetUnit;
 
-  outputElement.innerHTML = `
-    <p><strong>Converted Temperature:</strong> ${result.toFixed(
+  updateOutput(
+    `<p><strong>Converted Temperature:</strong> ${result.toFixed(
       2
-    )} ${unitSymbol}</p>
-    <p>${description}</p>
-  `;
+    )} ${unitSymbol}</p><p>${description}</p>`,
+    "",
+    className
+  );
 
-  outputElement.className = `output-box ${className} fade-in`;
-  outputElement.style.display = "block";
-
-  // Remove fade-in effect after animation
+  const outputElement = document.getElementById("output");
+  outputElement.classList.add("fade-in");
   setTimeout(() => outputElement.classList.remove("fade-in"), 500);
 }
