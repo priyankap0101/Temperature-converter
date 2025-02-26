@@ -1,41 +1,37 @@
 function convertTemp() {
-  const inputTemp = parseFloat(document.getElementById("inputTemp").value);
+  const inputElement = document.getElementById("inputTemp");
+  const inputTemp = parseFloat(inputElement.value.trim());
   const inputUnit = document.getElementById("inputUnit").value;
   const targetUnit = document.getElementById("targetUnit").value;
 
-  // Validate input
-  if (!isValidTemperature(inputTemp))
-    return showError("⚠️ Please enter a valid number.");
-  if (!isWithinRange(inputTemp))
-    return showError("⚠️ Temperature out of realistic range!");
+  if (!validateInput(inputTemp)) return;
 
-  // Perform conversion
   const result = convertTemperature(inputTemp, inputUnit, targetUnit);
   if (result === undefined) return showError("⚠️ Invalid conversion.");
 
-  // Get temperature description
   const { description, className } = getTemperatureDescription(result);
-
-  // Display the result
   showResult(result, targetUnit, description, className);
 }
 
-// 🔹 Function to validate temperature input
-function isValidTemperature(temp) {
-  return !isNaN(temp) && Number.isFinite(temp);
+// 🔹 Validate user input
+function validateInput(temp) {
+  if (isNaN(temp) || !Number.isFinite(temp)) {
+    showError("⚠️ Please enter a valid number.");
+    return false;
+  }
+  if (temp < -273.15 || temp > 1000) {
+    showError("⚠️ Temperature out of realistic range!");
+    return false;
+  }
+  return true;
 }
 
-// 🔹 Function to check if temperature is within realistic range
-function isWithinRange(temp) {
-  return temp >= -273.15 && temp <= 1000;
-}
-
-// 🔹 Function to handle error messages
+// 🔹 Handle error messages
 function showError(message) {
   updateOutput(message, "error-msg", "error");
 }
 
-// 🔹 Function to update the output display
+// 🔹 Update output display
 function updateOutput(content, extraClass = "", baseClass = "") {
   const outputElement = document.getElementById("output");
   outputElement.innerHTML = `<p class="${extraClass}">${content}</p>`;
@@ -43,7 +39,7 @@ function updateOutput(content, extraClass = "", baseClass = "") {
   outputElement.style.display = "block";
 }
 
-// 🔹 Function to convert temperature between units
+// 🔹 Convert temperature between units
 function convertTemperature(temp, fromUnit, toUnit) {
   if (fromUnit === toUnit) return temp;
 
@@ -65,7 +61,7 @@ function convertTemperature(temp, fromUnit, toUnit) {
   return conversions[fromUnit]?.[toUnit]?.(temp);
 }
 
-// 🔹 Function to determine temperature description
+// 🔹 Get temperature description
 function getTemperatureDescription(temp) {
   const tempRanges = [
     {
@@ -98,15 +94,13 @@ function getTemperatureDescription(temp) {
   return tempRanges.find((range) => temp < range.limit) || {};
 }
 
-// 🔹 Function to display converted temperature with animation
+// 🔹 Display result with animation
 function showResult(result, targetUnit, description, className) {
   const unitSymbols = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
-  const unitSymbol = unitSymbols[targetUnit] || targetUnit;
-
   updateOutput(
-    `<p><strong>Converted Temperature:</strong> ${result.toFixed(
-      2
-    )} ${unitSymbol}</p><p>${description}</p>`,
+    `<p><strong>Converted Temperature:</strong> ${result.toFixed(2)} ${
+      unitSymbols[targetUnit]
+    }</p><p>${description}</p>`,
     "",
     className
   );
