@@ -1,16 +1,24 @@
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .getElementById("inputTemp")
+    .addEventListener("input", debounce(handleLiveValidation, 300));
+  document.getElementById("resetBtn").addEventListener("click", resetForm);
+  loadHistory(); // Load history from local storage
+});
+
+let history = JSON.parse(localStorage.getItem("conversionHistory")) || []; // Retrieve stored history
+
 function convertTemp() {
   const inputElement = document.getElementById("inputTemp");
   const inputTemp = inputElement.value.trim();
   const inputUnit = document.getElementById("inputUnit").value;
   const targetUnit = document.getElementById("targetUnit").value;
 
-  const messageBox = document.getElementById("message"); // Message below input
-  const outputElement = document.getElementById("output"); // Output box
-
-  // 🔹 If no input, show message inside form and hide output
+  // Validate input
   if (!inputTemp) {
     showMessage("ℹ️ Please enter a temperature.", "info-msg");
     hideOutput();
+    inputElement.focus();
     return;
   }
 
@@ -22,22 +30,51 @@ function convertTemp() {
 
   const { description, className } = getTemperatureDescription(result);
   showResult(result, targetUnit, description, className);
+
+  saveToHistory(parsedTemp, inputUnit, result, targetUnit);
 }
 
-// 🔹 Show a small message inside the form
+// 🔹 Debounced Live Validation (Prevents Excessive Calls)
+function debounce(func, delay) {
+  let timer;
+  return function () {
+    clearTimeout(timer);
+    timer = setTimeout(() => func.apply(this, arguments), delay);
+  };
+}
+
+// 🔹 Live Validation (Prevents Invalid Input)
+function handleLiveValidation() {
+  const inputTemp = this.value.trim();
+  if (!inputTemp) {
+    showMessage("ℹ️ Please enter a temperature.", "info-msg");
+    hideOutput();
+    return;
+  }
+  if (isNaN(inputTemp) || inputTemp.match(/[^\d.-]/)) {
+    showMessage("⚠️ Enter a valid numeric value.", "error-msg");
+    hideOutput();
+  }
+}
+
+// 🔹 Show Message with Fade-out Effect
 function showMessage(message, className = "") {
   const messageBox = document.getElementById("message");
   messageBox.innerHTML = `<p class="${className}">${message}</p>`;
-  messageBox.style.display = "block"; // Show the message box
+  messageBox.style.display = "block";
+
+  setTimeout(() => {
+    messageBox.style.opacity = "0";
+    setTimeout(() => (messageBox.style.display = "none"), 500);
+  }, 2000);
 }
 
-// 🔹 Hide output completely
+// 🔹 Hide Output Completely
 function hideOutput() {
-  const outputElement = document.getElementById("output");
-  outputElement.style.display = "none"; // Hide output box
+  document.getElementById("output").style.display = "none";
 }
 
-// 🔹 Validate user input
+// 🔹 Validate Input Temperature
 function validateInput(temp) {
   if (isNaN(temp) || !Number.isFinite(temp)) {
     showError("⚠️ Please enter a valid number.");
@@ -50,13 +87,13 @@ function validateInput(temp) {
   return true;
 }
 
-// 🔹 Handle error messages
+// 🔹 Show Error Message
 function showError(message) {
   showMessage(message, "error-msg");
-  hideOutput(); // Hide output when there's an error
+  hideOutput();
 }
 
-// 🔹 Convert temperature between units
+// 🔹 Convert Temperature Between Units
 function convertTemperature(temp, fromUnit, toUnit) {
   if (fromUnit === toUnit) return temp;
 
@@ -78,12 +115,12 @@ function convertTemperature(temp, fromUnit, toUnit) {
   return conversions[fromUnit]?.[toUnit]?.(temp);
 }
 
-// 🔹 Get temperature description
+// 🔹 Get Temperature Description for Styling
 function getTemperatureDescription(temp) {
   const tempRanges = [
     {
       limit: -30,
-      description: "❄️ Dangerously Cold! Stay indoors!",
+      description: "❄️ Dangerously Cold!",
       className: "extreme-cold",
     },
     {
@@ -111,23 +148,68 @@ function getTemperatureDescription(temp) {
   return tempRanges.find((range) => temp < range.limit) || {};
 }
 
-// 🔹 Display result with animation
+// 🔹 Display Result with Animation
 function showResult(result, targetUnit, description, className) {
   const unitSymbols = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
   const outputElement = document.getElementById("output");
-  const messageBox = document.getElementById("message");
-
-  // Clear any previous messages
-  messageBox.style.display = "none";
 
   outputElement.innerHTML = `
     <p><strong>Converted Temperature:</strong> ${result.toFixed(2)} ${
     unitSymbols[targetUnit]
   }</p>
-    <p>${description}</p>`;
+    <p>${description}</p>
+  `;
   outputElement.className = `output-box ${className}`;
-  outputElement.style.display = "block"; // Show output box
+  outputElement.style.display = "block";
 
   outputElement.classList.add("fade-in");
   setTimeout(() => outputElement.classList.remove("fade-in"), 500);
+}
+
+// 🔹 Save Conversion History (With Local Storage)
+function saveToHistory(inputTemp, inputUnit, result, targetUnit) {
+  if (history.length >= 5) history.shift(); // Keep only last 5 conversions
+  history.push(
+    `${inputTemp}° ${inputUnit.toUpperCase()} → ${result.toFixed(
+      2
+    )}° ${targetUnit.toUpperCase()}`
+  );
+
+  localStorage.setItem("conversionHistory", JSON.stringify(history)); // Save history
+
+  updateHistoryUI();
+}
+
+// 🔹 Load History from Local Storage
+function loadHistory() {
+  updateHistoryUI();
+}
+
+// 🔹 Update History UI with Slide Effect
+function updateHistoryUI() {
+  const historyElement = document.getElementById("history");
+  historyElement.innerHTML =
+    history.length > 0
+      ? "<h3>History:</h3><ul>" +
+        history.map((entry) => `<li class="slide-in">${entry}</li>`).join("") +
+        "</ul>"
+      : "<h3>No history yet.</h3>";
+
+  // Add animation class
+  setTimeout(() => {
+    document
+      .querySelectorAll(".slide-in")
+      .forEach((el) => el.classList.add("visible"));
+  }, 100);
+}
+
+// 🔹 Reset Form (Also Clears Local Storage)
+function resetForm() {
+  document.getElementById("inputTemp").value = "";
+  document.getElementById("message").style.display = "none";
+  document.getElementById("output").style.display = "none";
+  document.getElementById("history").innerHTML = "<h3>No history yet.</h3>";
+  history = [];
+  localStorage.removeItem("conversionHistory");
+  document.getElementById("inputTemp").focus();
 }

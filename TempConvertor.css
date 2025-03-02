@@ -269,15 +269,18 @@ button:active::after {
   transform: scale(0.9);
   transition: opacity 0.4s ease-in-out, transform 0.3s ease-in-out,
     box-shadow 0.3s ease-in-out, backdrop-filter 0.4s ease-in-out;
-  backdrop-filter: blur(25px) saturate(220%); /* Enhanced glass effect */
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.35);
-  border-radius: 22px;
+
+  backdrop-filter: blur(30px) saturate(250%); /* Stronger glass effect */
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
   padding: 2rem;
   text-align: center;
   color: #f8fafc;
-  text-shadow: 0px 2px 12px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 14px 40px rgba(0, 0, 0, 0.45);
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+
+  /* Softer box shadow for a floating effect */
+  box-shadow: 0px 12px 35px rgba(0, 0, 0, 0.4);
   will-change: transform, opacity, box-shadow, backdrop-filter;
 }
 
@@ -288,14 +291,108 @@ button:active::after {
   transform: scale(1);
 }
 
-/* Description Styling */
+/* 🟢 Glassmorphism Effect for Output Box */
+.output-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(14px);
+  box-shadow: 4px 4px 20px rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+/* 🌟 Improved Description Text */
 .output-box .description {
-  font-size: 1.2rem;
+  font-size: 1.4rem; /* Slightly larger text */
+  font-weight: 600; /* More prominent weight */
+  opacity: 0.95;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(90deg, #ffcc00, #ff6600);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowText 1.5s infinite alternate;
+}
+
+/* ✨ Glow Effect for Description */
+@keyframes glowText {
+  0% {
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+  }
+  100% {
+    text-shadow: 0 0 16px rgba(255, 165, 0, 0.8);
+  }
+}
+
+/* 📌 Stylish Output Box Text */
+.output-box p {
+  font-size: 1.3rem;
   font-weight: 500;
-  opacity: 0.98;
-  color: #e5e7eb;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.35);
-  letter-spacing: 0.9px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff, #bbbbbb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* 🔥 Vibrant Gradient Result Text */
+.output-box .result {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff0000, #ff7300);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 3px 3px 15px rgba(255, 0, 0, 0.8);
+  animation: bounce 1.5s infinite alternate;
+}
+
+/* 🎨 Dynamic Colors for Temperature */
+.extreme-cold {
+  color: #00c3ff;
+  text-shadow: 0px 0px 12px rgba(0, 195, 255, 0.8);
+}
+.cold {
+  color: #0097a7;
+  text-shadow: 0px 0px 10px rgba(0, 151, 167, 0.7);
+}
+.pleasant {
+  color: #28a745;
+  text-shadow: 0px 0px 10px rgba(40, 167, 69, 0.7);
+}
+.hot {
+  color: #ff6a00;
+  text-shadow: 0px 0px 12px rgba(255, 106, 0, 0.7);
+}
+.extreme-hot {
+  color: #ff0000;
+  text-shadow: 0px 0px 15px rgba(255, 0, 0, 0.9);
+}
+
+/* 🎭 Floating & Fade-In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 🏀 Bouncing Effect for Result */
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
 }
 
 /* Hover Effect for a Dynamic Feel */
@@ -313,7 +410,7 @@ button:active::after {
 }
 
 .output-box.cold {
-  background: linear-gradient(135deg, #1c85ff, #50e6ff);
+  background: linear-gradient(135deg, #06458e, #012148);
   box-shadow: 0px 12px 26px rgba(0, 85, 255, 0.8);
   animation: pulse 1s infinite alternate ease-in-out;
 }
@@ -329,31 +426,6 @@ button:active::after {
   background: linear-gradient(135deg, #10285a, #55aaff);
   box-shadow: 0px 14px 32px rgba(0, 120, 255, 0.95);
   animation: pulse 0.75s infinite alternate ease-in-out;
-}
-
-/* Smooth Pulse Animation */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.55);
-  }
-  100% {
-    transform: scale(1.07);
-    box-shadow: 0px 16px 42px rgba(0, 0, 0, 0.65);
-  }
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .output-box {
-    padding: 1.5rem;
-    font-size: 1rem;
-    border-radius: 18px;
-  }
-
-  .output-box .description {
-    font-size: 1.1rem;
-  }
 }
 
 /* Subtle Hover Effect */
@@ -386,18 +458,6 @@ button:active::after {
   }
 }
 
-/* Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-  .output-box {
-    padding: 1rem;
-    font-size: 0.9rem;
-  }
-
-  .output-box .description {
-    font-size: 0.85rem;
-  }
-}
-
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -410,28 +470,6 @@ button:active::after {
   }
 }
 
-/* Responsive Design */
-@media (max-width: 480px) {
-  .container {
-    padding: 1.5rem;
-  }
-
-  h1 {
-    font-size: 1.6rem;
-  }
-
-  input,
-  select,
-  button {
-    font-size: 0.9rem;
-    padding: 0.7rem;
-  }
-
-  .output-box {
-    font-size: 1rem;
-    padding: 1rem;
-  }
-}
 /* General Message Box Styling */
 .message-box {
   font-size: 20px;
