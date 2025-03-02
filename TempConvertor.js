@@ -1,53 +1,71 @@
-// 🔹 Main function to handle temperature conversion
 function convertTemp() {
   const inputElement = document.getElementById("inputTemp");
-  const inputTemp = parseFloat(inputElement.value.trim());
+  const inputTemp = inputElement.value.trim();
   const inputUnit = document.getElementById("inputUnit").value;
   const targetUnit = document.getElementById("targetUnit").value;
 
-  if (!validateInput(inputTemp)) return;
+  const outputElement = document.getElementById("output");
 
-  if (inputUnit === targetUnit) {
-    return showError("⚠️ Choose a different target unit!");
+  // 🔹 If no input, show a message but hide the output box
+  if (!inputTemp) {
+    showSmallMessage("ℹ️ Please enter a temperature to convert.");
+    return;
   }
 
-  const convertedTemp = convertTemperature(inputTemp, inputUnit, targetUnit);
-  if (convertedTemp === undefined) return showError("⚠️ Invalid conversion.");
+  const parsedTemp = parseFloat(inputTemp);
+  if (!validateInput(parsedTemp)) return;
 
-  displayResult(convertedTemp, targetUnit);
+  const result = convertTemperature(parsedTemp, inputUnit, targetUnit);
+  if (result === undefined) return showError("⚠️ Invalid conversion.");
+
+  const { description, className } = getTemperatureDescription(result);
+  showResult(result, targetUnit, description, className);
+}
+
+// 🔹 Show a small guidance message when no input is provided
+function showSmallMessage(message) {
+  const outputElement = document.getElementById("output");
+  outputElement.style.display = "none"; // Hide output box completely
+  alert(message); // Show message in an alert box instead
 }
 
 // 🔹 Validate user input
 function validateInput(temp) {
   if (isNaN(temp) || !Number.isFinite(temp)) {
-    return showError("⚠️ Please enter a valid numeric value.");
+    showError("⚠️ Please enter a valid number.");
+    return false;
   }
   if (temp < -273.15 || temp > 1000) {
-    return showError("⚠️ Temperature is out of realistic range!");
+    showError("⚠️ Temperature out of realistic range!");
+    return false;
   }
   return true;
 }
 
-// 🔹 Display error messages with animation
+// 🔹 Handle error messages
 function showError(message) {
-  updateOutput(`<p class="error-msg">${message}</p>`, "error");
+  updateOutput(message, "error-msg", "error");
 }
 
-// 🔹 Update output display with smooth animation
-function updateOutput(content, className = "") {
+// 🔹 Update output display
+function updateOutput(content, extraClass = "", baseClass = "") {
   const outputElement = document.getElementById("output");
-  outputElement.innerHTML = content;
-  outputElement.className = `output-box ${className}`;
-  outputElement.style.display = "block";
 
-  // Apply fade-in effect
-  outputElement.classList.add("fade-in");
-  setTimeout(() => outputElement.classList.remove("fade-in"), 500);
+  if (!content) {
+    outputElement.style.display = "none"; // Hide output when no content
+    return;
+  }
+
+  outputElement.innerHTML = `<p class="${extraClass}">${content}</p>`;
+  outputElement.className = `output-box ${baseClass}`;
+  outputElement.style.display = "block";
 }
 
-// 🔹 Convert temperature between different units
+// 🔹 Convert temperature between units
 function convertTemperature(temp, fromUnit, toUnit) {
-  const conversionMap = {
+  if (fromUnit === toUnit) return temp;
+
+  const conversions = {
     celsius: {
       fahrenheit: (t) => (t * 9) / 5 + 32,
       kelvin: (t) => t + 273.15,
@@ -62,46 +80,55 @@ function convertTemperature(temp, fromUnit, toUnit) {
     },
   };
 
-  return conversionMap[fromUnit]?.[toUnit]?.(temp);
+  return conversions[fromUnit]?.[toUnit]?.(temp);
 }
 
-// 🔹 Get temperature description and styling
+// 🔹 Get temperature description
 function getTemperatureDescription(temp) {
-  const descriptions = [
+  const tempRanges = [
     {
       limit: -30,
-      text: "❄️ Dangerously Cold! Stay Indoors!",
+      description: "❄️ Dangerously Cold! Stay indoors!",
       className: "extreme-cold",
     },
     {
-      limit: 0,
-      text: "🥶 Freezing! Wear heavy layers.",
-      className: "freezing",
+      limit: 10,
+      description: "🧥 Cold, wear warm clothes.",
+      className: "cold",
     },
-    { limit: 10, text: "🧥 Cold, dress warmly.", className: "cold" },
-    { limit: 25, text: "🌤️ Pleasant temperature.", className: "pleasant" },
-    { limit: 35, text: "☀️ Warm but comfortable.", className: "warm" },
-    { limit: 40, text: "🥵 Hot! Stay cool.", className: "hot" },
+    {
+      limit: 25,
+      description: "🌤️ Pleasant temperature.",
+      className: "pleasant",
+    },
+    {
+      limit: 40,
+      description: "☀️ Warm, comfortable weather.",
+      className: "hot",
+    },
     {
       limit: Infinity,
-      text: "🔥 Extreme Heat! Stay Hydrated!",
+      description: "🔥 Extremely Hot! Stay Hydrated.",
       className: "extreme-hot",
     },
   ];
 
-  return descriptions.find((range) => temp < range.limit) || {};
+  return tempRanges.find((range) => temp < range.limit) || {};
 }
 
-// 🔹 Display conversion result with dynamic styling
-function displayResult(result, targetUnit) {
+// 🔹 Display result with animation
+function showResult(result, targetUnit, description, className) {
   const unitSymbols = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
-  const { text, className } = getTemperatureDescription(result);
-
   updateOutput(
     `<p><strong>Converted Temperature:</strong> ${result.toFixed(2)} ${
       unitSymbols[targetUnit]
     }</p>
-    <p>${text}</p>`,
+     <p>${description}</p>`,
+    "",
     className
   );
+
+  const outputElement = document.getElementById("output");
+  outputElement.classList.add("fade-in");
+  setTimeout(() => outputElement.classList.remove("fade-in"), 500);
 }
