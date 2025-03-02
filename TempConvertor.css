@@ -432,3 +432,19 @@ button:active::after {
     padding: 1rem;
   }
 }
+.message-box {
+  color: #333;
+  font-size: 14px;
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.info-msg {
+  color: #007bff;
+}
+
+.error-msg {
+  color: #d9534f;
+  font-weight: bold;
+}

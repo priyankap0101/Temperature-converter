@@ -4,11 +4,13 @@ function convertTemp() {
   const inputUnit = document.getElementById("inputUnit").value;
   const targetUnit = document.getElementById("targetUnit").value;
 
-  const outputElement = document.getElementById("output");
+  const messageBox = document.getElementById("message"); // Message below input
+  const outputElement = document.getElementById("output"); // Output box
 
-  // 🔹 If no input, show a message but hide the output box
+  // 🔹 If no input, show message inside form and hide output
   if (!inputTemp) {
-    showSmallMessage("ℹ️ Please enter a temperature to convert.");
+    showMessage("ℹ️ Please enter a temperature.", "info-msg");
+    hideOutput();
     return;
   }
 
@@ -22,11 +24,17 @@ function convertTemp() {
   showResult(result, targetUnit, description, className);
 }
 
-// 🔹 Show a small guidance message when no input is provided
-function showSmallMessage(message) {
+// 🔹 Show a small message inside the form
+function showMessage(message, className = "") {
+  const messageBox = document.getElementById("message");
+  messageBox.innerHTML = `<p class="${className}">${message}</p>`;
+  messageBox.style.display = "block"; // Show the message box
+}
+
+// 🔹 Hide output completely
+function hideOutput() {
   const outputElement = document.getElementById("output");
-  outputElement.style.display = "none"; // Hide output box completely
-  alert(message); // Show message in an alert box instead
+  outputElement.style.display = "none"; // Hide output box
 }
 
 // 🔹 Validate user input
@@ -44,21 +52,8 @@ function validateInput(temp) {
 
 // 🔹 Handle error messages
 function showError(message) {
-  updateOutput(message, "error-msg", "error");
-}
-
-// 🔹 Update output display
-function updateOutput(content, extraClass = "", baseClass = "") {
-  const outputElement = document.getElementById("output");
-
-  if (!content) {
-    outputElement.style.display = "none"; // Hide output when no content
-    return;
-  }
-
-  outputElement.innerHTML = `<p class="${extraClass}">${content}</p>`;
-  outputElement.className = `output-box ${baseClass}`;
-  outputElement.style.display = "block";
+  showMessage(message, "error-msg");
+  hideOutput(); // Hide output when there's an error
 }
 
 // 🔹 Convert temperature between units
@@ -119,16 +114,20 @@ function getTemperatureDescription(temp) {
 // 🔹 Display result with animation
 function showResult(result, targetUnit, description, className) {
   const unitSymbols = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
-  updateOutput(
-    `<p><strong>Converted Temperature:</strong> ${result.toFixed(2)} ${
-      unitSymbols[targetUnit]
-    }</p>
-     <p>${description}</p>`,
-    "",
-    className
-  );
-
   const outputElement = document.getElementById("output");
+  const messageBox = document.getElementById("message");
+
+  // Clear any previous messages
+  messageBox.style.display = "none";
+
+  outputElement.innerHTML = `
+    <p><strong>Converted Temperature:</strong> ${result.toFixed(2)} ${
+    unitSymbols[targetUnit]
+  }</p>
+    <p>${description}</p>`;
+  outputElement.className = `output-box ${className}`;
+  outputElement.style.display = "block"; // Show output box
+
   outputElement.classList.add("fade-in");
   setTimeout(() => outputElement.classList.remove("fade-in"), 500);
 }
