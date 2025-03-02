@@ -263,6 +263,7 @@ button:active::after {
 
 /* Output Box - Ultimate Glassmorphism Style */
 .output-box {
+  font-size: 2rem;
   margin-top: 1rem;
   display: none; /* Initially hidden */
   opacity: 0;
@@ -342,22 +343,24 @@ button:active::after {
 
 /* 🔥 Vibrant Gradient Result Text */
 .output-box .result {
-  font-size: 1.8rem;
+  font-size: 2.8rem;
   font-weight: 700;
   background: linear-gradient(135deg, #ff0000, #ff7300);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 3px 3px 15px rgba(255, 0, 0, 0.8);
   animation: bounce 1.5s infinite alternate;
+  -webkit-animation: bounce 1.5s infinite alternate;
 }
 
 /* 🎨 Dynamic Colors for Temperature */
 .extreme-cold {
-  color: #00c3ff;
-  text-shadow: 0px 0px 12px rgba(0, 195, 255, 0.8);
+  font-size: 2.8rem;
+  color: #f84141;
+  /* text-shadow: 0px 0px 12px rgba(0, 195, 255, 0.8); */
 }
 .cold {
-  color: #0097a7;
+  color: #fff82c;
   text-shadow: 0px 0px 10px rgba(0, 151, 167, 0.7);
 }
 .pleasant {
@@ -365,11 +368,11 @@ button:active::after {
   text-shadow: 0px 0px 10px rgba(40, 167, 69, 0.7);
 }
 .hot {
-  color: #ff6a00;
+  color: #000000;
   text-shadow: 0px 0px 12px rgba(255, 106, 0, 0.7);
 }
 .extreme-hot {
-  color: #ff0000;
+  color: #ffffff;
   text-shadow: 0px 0px 15px rgba(255, 0, 0, 0.9);
 }
 
@@ -423,7 +426,7 @@ button:active::after {
 }
 
 .output-box.extreme-cold {
-  background: linear-gradient(135deg, #10285a, #55aaff);
+  background: linear-gradient(135deg, #10285a, #00060c);
   box-shadow: 0px 14px 32px rgba(0, 120, 255, 0.95);
   animation: pulse 0.75s infinite alternate ease-in-out;
 }

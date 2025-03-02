@@ -154,7 +154,7 @@ function showResult(result, targetUnit, description, className) {
   const outputElement = document.getElementById("output");
 
   outputElement.innerHTML = `
-    <p><strong>Converted Temperature:</strong> ${result.toFixed(2)} ${
+    ${result.toFixed(2)} ${
     unitSymbols[targetUnit]
   }</p>
     <p>${description}</p>
