@@ -411,6 +411,16 @@ button:active::after {
   box-shadow: 0px 12px 26px rgba(9, 82, 115, 0.8);
   animation: pulse 1s infinite alternate ease-in-out;
 }
+/* 🌿 Pleasant Temperature Box */
+.output-box.pleasant {
+  background: linear-gradient(
+    135deg,
+    #00b894,
+    #55efc4
+  ); /* Greenish soothing tones */
+  box-shadow: 0px 12px 26px rgba(0, 184, 148, 0.7);
+  animation: pulse 1s infinite alternate ease-in-out;
+}
 
 .output-box.cold {
   background: linear-gradient(135deg, #06458e, #012148);
