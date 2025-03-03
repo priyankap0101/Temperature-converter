@@ -14,7 +14,6 @@ function convertTemp() {
   const inputUnit = document.getElementById("inputUnit").value;
   const targetUnit = document.getElementById("targetUnit").value;
 
-  // Validate input
   if (!inputTemp) {
     showMessage("ℹ️ Please enter a temperature.", "info-msg");
     hideOutput();
@@ -54,6 +53,8 @@ function handleLiveValidation() {
   if (isNaN(inputTemp) || inputTemp.match(/[^\d.-]/)) {
     showMessage("⚠️ Enter a valid numeric value.", "error-msg");
     hideOutput();
+  } else {
+    document.getElementById("output").style.display = "block"; // Ensure result stays visible
   }
 }
 
@@ -62,6 +63,7 @@ function showMessage(message, className = "") {
   const messageBox = document.getElementById("message");
   messageBox.innerHTML = `<p class="${className}">${message}</p>`;
   messageBox.style.display = "block";
+  messageBox.style.opacity = "1"; // Ensure visibility
 
   setTimeout(() => {
     messageBox.style.opacity = "0";
@@ -145,7 +147,12 @@ function getTemperatureDescription(temp) {
     },
   ];
 
-  return tempRanges.find((range) => temp < range.limit) || {};
+  return (
+    tempRanges.find((range) => temp < range.limit) || {
+      description: "🌡️ Moderate temperature.",
+      className: "moderate",
+    }
+  );
 }
 
 // 🔹 Display Result with Animation
@@ -154,13 +161,12 @@ function showResult(result, targetUnit, description, className) {
   const outputElement = document.getElementById("output");
 
   outputElement.innerHTML = `
-    ${result.toFixed(2)} ${
-    unitSymbols[targetUnit]
-  }</p>
-    <p>${description}</p>
+    <p class="temp-result">${result.toFixed(2)} ${unitSymbols[targetUnit]}</p>
+    <p class="temp-description">${description}</p>
   `;
   outputElement.className = `output-box ${className}`;
   outputElement.style.display = "block";
+  outputElement.style.opacity = "1"; // Ensure it stays visible
 
   outputElement.classList.add("fade-in");
   setTimeout(() => outputElement.classList.remove("fade-in"), 500);

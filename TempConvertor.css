@@ -368,8 +368,8 @@ button:active::after {
   text-shadow: 0px 0px 10px rgba(40, 167, 69, 0.7);
 }
 .hot {
-  color: #000000;
-  text-shadow: 0px 0px 12px rgba(255, 106, 0, 0.7);
+  color: #ffffff;
+  text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
 }
 .extreme-hot {
   color: #ffffff;
@@ -407,8 +407,8 @@ button:active::after {
 
 /* Dynamic Temperature Effects */
 .output-box.hot {
-  background: linear-gradient(135deg, #ff3a3a, #ff8a00);
-  box-shadow: 0px 12px 26px rgba(255, 85, 0, 0.8);
+  background: linear-gradient(135deg, #04607c, #620672);
+  box-shadow: 0px 12px 26px rgba(9, 82, 115, 0.8);
   animation: pulse 1s infinite alternate ease-in-out;
 }
 
