@@ -21,13 +21,13 @@ body {
 /* Container */
 .container {
   background: rgba(31, 41, 55, 0.9);
-  border-radius: 12px; /* Slightly reduced radius */
-  padding: 24px; /* Reduced padding */
+  border-radius: 12px;
+  padding: 24px;
   max-width: 450px;
   width: 100%;
   text-align: center;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px); /* Slightly reduced blur */
+  backdrop-filter: blur(12px);
   border: 2px solid rgba(255, 255, 255, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -39,8 +39,8 @@ body {
 
 /* Title Styling */
 h1 {
-  font-size: 1.5rem; /* Reduced font size */
-  margin-bottom: 1rem; /* Reduced margin */
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
   color: #60a5fa;
   font-weight: bold;
   letter-spacing: 0.07em;
@@ -52,20 +52,20 @@ h1 {
 h1::after {
   content: '';
   display: block;
-  width: 50px; /* Slightly reduced width */
-  height: 2px; /* Reduced height */
+  width: 50px;
+  height: 2px;
   background: #3b82f6;
-  margin: 0.5rem auto 0; /* Adjusted margin */
+  margin: 0.5rem auto 0;
   border-radius: 3px;
 }
 
-/* Input Fields (Reduced) */
+/* Input Fields */
 input,
 select {
   width: 100%;
-  padding: 10px; /* Reduced padding */
-  margin: 0.5rem 0; /* Reduced margin */
-  border-radius: 8px; /* Reduced radius */
+  padding: 10px;
+  margin: 0.5rem 0;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: linear-gradient(
     135deg,
@@ -73,7 +73,7 @@ select {
     rgba(255, 255, 255, 0.05)
   );
   color: #f3f4f6;
-  font-size: 0.95rem; /* Slightly smaller font size */
+  font-size: 0.95rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -86,60 +86,65 @@ select:focus {
   outline: none;
 }
 
-select {
-  appearance: none;
-  cursor: pointer;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")
-    no-repeat right 12px center;
-  background-size: 14px;
+/* Labels and Dropdowns - Side by Side */
+.unit-selection {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 1rem 0;
 }
 
-select option {
-  color: black;
-  background-color: white;
-}
-
-/* Base label styling */
-label {
-  display: block;
+.unit-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   text-align: left;
-  margin-bottom: 12px; /* Maintains spacing for clean layout */
-  font-size: 1.1rem; /* Retains readability with a modern size */
-  color: #e2e8f0; /* Softer tone for dark backgrounds */
-  font-weight: 700; /* Emphasizes importance */
-  letter-spacing: 0.7px; /* Ensures text clarity */
-  line-height: 1.5; /* Consistent spacing between lines */
-  transition: color 0.25s ease, transform 0.25s ease; /* Slightly faster transitions for better UX */
 }
 
-/* Hover state */
-label:hover {
-  color: #3b82f6; /* Bright, attention-grabbing color */
-  transform: translateX(3px); /* Subtle movement for a smoother effect */
-  cursor: pointer; /* Reinforces interactivity */
-  text-shadow: 0 2px 4px rgba(59, 130, 246, 0.4); /* Softer glow for subtlety */
+.unit-box label {
+  font-size: 1rem;
+  color: #e2e8f0;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-/* Focus state for accessibility */
-label:focus-within {
-  color: #2563eb; /* Darker blue for a strong focus indication */
-  text-shadow: 0 2px 6px rgba(37, 99, 235, 0.6); /* More pronounced glow effect */
-  outline: none; /* Avoid default browser outline */
+/* Convert Button */
+button {
+  width: 100%;
+  padding: 10px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-/* Optional: Label for disabled or inactive states */
-label:disabled {
-  color: #64748b; /* Muted tone for disabled labels */
-  text-shadow: none; /* Removes glow effect */
-  cursor: not-allowed; /* Indicates non-interactive state */
-  opacity: 0.6; /* Visual feedback for disabled state */
+button:hover {
+  background: #2563eb;
+  transform: scale(1.05);
 }
 
-/* Media query for responsive scaling */
-@media (max-width: 640px) {
-  label {
-    font-size: 1rem; /* Adjust size for smaller screens */
-    margin-bottom: 10px; /* Slightly reduce spacing for tighter layouts */
+/* Output Box */
+.output-box {
+  margin-top: 1rem;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f3f4f6;
+  text-align: center;
+  min-height: 40px;
+}
+
+/* Media Query for Mobile */
+@media (max-width: 480px) {
+  .unit-selection {
+    flex-direction: column;
+    gap: 5px;
   }
 }
 
