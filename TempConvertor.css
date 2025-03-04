@@ -325,13 +325,18 @@ button:active::after {
 
   backdrop-filter: blur(30px) saturate(250%); /* Stronger glass effect */
   background: rgba(255, 255, 255, 0.12);
-  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 20px;
   padding: 2rem;
   text-align: center;
   color: #f8fafc;
   text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 12px 35px rgba(0, 0, 0, 0.4);
+
+  /* 🟢 Neon Border Effect */
+  position: relative;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ff6b6b, #ffa502, #1e90ff) 1;
+  overflow: hidden;
   will-change: transform, opacity, box-shadow, backdrop-filter;
 }
 
@@ -345,112 +350,14 @@ button:active::after {
 
 /* ✨ Text Styles */
 .output-box p {
-  font-size: 1.4rem;
-  font-weight: 500;
-  font-family: 'Poppins', sans-serif;
-  text-align: center;
-  background: linear-gradient(135deg, #ffffff, #bbbbbb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.3);
-}
-
-/* 🔥 Vibrant Gradient Result Text */
-.output-box .result {
   font-size: 2.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #ff0000, #ff7300);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 3px 3px 15px rgba(255, 0, 0, 0.8);
-  animation: bounce 1.5s infinite alternate;
-}
-
-/* 🌟 Enhanced Description */
-.output-box .description {
-  font-size: 1.5rem; /* More prominent */
-  font-weight: 700; /* Bolder text */
-  opacity: 0.98;
-  letter-spacing: 1.2px;
+  font-weight: bolder;
   font-family: 'Poppins', sans-serif;
   text-align: center;
-  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(90deg, #ffcc00, #ff6600);
+  color: white;
+  background: linear-gradient(45deg, #ff6b6b, #ffa502, #1e90ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: glowText 1.5s infinite alternate;
-}
-
-/* ✨ Glow Effect for Description */
-@keyframes glowText {
-  0% {
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
-  }
-  100% {
-    text-shadow: 0 0 16px rgba(255, 165, 0, 0.8);
-  }
-}
-
-/* 🔥 Temperature-Based Effects */
-.extreme-cold {
-  font-size: 2rem;
-  color: #00c3ff;
-  text-shadow: 0px 0px 12px rgba(0, 195, 255, 0.8);
-}
-.cold {
-  color: #ffffff;
-  text-shadow: 0px 0px 10px rgba(0, 151, 167, 0.7);
-}
-.pleasant {
-  color: #ffffff;
-  text-shadow: 0px 0px 10px rgba(40, 167, 69, 0.7);
-}
-.hot {
-  color: #ffffff;
-  text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
-}
-.extreme-hot {
-  color: #fff;
-  text-shadow: 0px 0px 15px rgba(255, 0, 0, 0.9);
-}
-
-/* 🎨 Dynamic Backgrounds */
-.output-box.pleasant {
-  background: linear-gradient(135deg, #38a169, #00c896);
-  box-shadow: 0px 12px 26px rgba(0, 184, 148, 0.7);
-  animation: pulse 1s infinite alternate ease-in-out;
-}
-.output-box.hot {
-  background: linear-gradient(135deg, #ff7f50, #ff4500);
-  box-shadow: 0px 12px 26px rgba(255, 69, 0, 0.7);
-  animation: pulse 1s infinite alternate ease-in-out;
-}
-.output-box.cold {
-  background: linear-gradient(135deg, #4682b4, #1e3a5f);
-  box-shadow: 0px 12px 26px rgba(0, 85, 255, 0.8);
-  animation: pulse 1s infinite alternate ease-in-out;
-}
-.output-box.extreme-hot {
-  background: linear-gradient(135deg, #b10000, #ff1a1a);
-  box-shadow: 0px 14px 32px rgba(255, 0, 0, 0.95);
-  animation: pulse 0.75s infinite alternate ease-in-out;
-}
-.output-box.extreme-cold {
-  background: linear-gradient(135deg, #0a2e54, #0c0c52);
-  box-shadow: 0px 14px 32px rgba(0, 120, 255, 0.95);
-  animation: pulse 0.75s infinite alternate ease-in-out;
-}
-
-/* 🎭 Floating & Fade-In Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 /* 🔄 Smooth Pulse Animation */
@@ -469,11 +376,12 @@ button:active::after {
   }
 }
 
-/* ✨ Subtle Hover Effect */
+/* ✨ 3D Hover Effect */
 .output-box:hover {
-  transform: scale(1.02);
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transform: scale(1.06);
+  box-shadow: 0px 15px 40px rgba(255, 165, 0, 0.5);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  animation: glowText 1.5s infinite alternate;
 }
 
 /* 🎭 Click Interaction */
@@ -481,6 +389,35 @@ button:active::after {
   transform: scale(0.98);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* ✨ Glow Effect for Border */
+@keyframes glowBorder {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(255, 165, 0, 0.8);
+  }
+}
+
+.output-box:hover {
+  animation: glowBorder 1.5s infinite alternate ease-in-out;
+}
+
+/* 🌟 Mobile Responsive */
+@media (max-width: 768px) {
+  .output-box {
+    font-size: 1.5rem;
+    padding: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .output-box {
+    font-size: 1.3rem;
+    padding: 1.5rem;
+  }
 }
 
 /* General Message Box Styling */
