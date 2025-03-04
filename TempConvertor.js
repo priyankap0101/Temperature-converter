@@ -2,11 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("inputTemp")
     .addEventListener("input", debounce(handleLiveValidation, 300));
+  document.getElementById("convertBtn").addEventListener("click", convertTemp);
   document.getElementById("resetBtn").addEventListener("click", resetForm);
-  loadHistory(); // Load history from local storage
+  loadHistory();
 });
 
-let history = JSON.parse(localStorage.getItem("conversionHistory")) || []; // Retrieve stored history
+let history = JSON.parse(localStorage.getItem("conversionHistory")) || [];
 
 function convertTemp() {
   const inputElement = document.getElementById("inputTemp");
@@ -27,13 +28,10 @@ function convertTemp() {
   const result = convertTemperature(parsedTemp, inputUnit, targetUnit);
   if (result === undefined) return showError("⚠️ Invalid conversion.");
 
-  const { description, className } = getTemperatureDescription(result);
-  showResult(result, targetUnit, description, className);
-
+  showResult(result, targetUnit);
   saveToHistory(parsedTemp, inputUnit, result, targetUnit);
 }
 
-// 🔹 Debounced Live Validation (Prevents Excessive Calls)
 function debounce(func, delay) {
   let timer;
   return function () {
@@ -42,7 +40,6 @@ function debounce(func, delay) {
   };
 }
 
-// 🔹 Live Validation (Prevents Invalid Input)
 function handleLiveValidation() {
   const inputTemp = this.value.trim();
   if (!inputTemp) {
@@ -54,16 +51,15 @@ function handleLiveValidation() {
     showMessage("⚠️ Enter a valid numeric value.", "error-msg");
     hideOutput();
   } else {
-    document.getElementById("output").style.display = "block"; // Ensure result stays visible
+    document.getElementById("output").style.display = "block";
   }
 }
 
-// 🔹 Show Message with Fade-out Effect
 function showMessage(message, className = "") {
   const messageBox = document.getElementById("message");
   messageBox.innerHTML = `<p class="${className}">${message}</p>`;
   messageBox.style.display = "block";
-  messageBox.style.opacity = "1"; // Ensure visibility
+  messageBox.style.opacity = "1";
 
   setTimeout(() => {
     messageBox.style.opacity = "0";
@@ -71,12 +67,10 @@ function showMessage(message, className = "") {
   }, 2000);
 }
 
-// 🔹 Hide Output Completely
 function hideOutput() {
   document.getElementById("output").style.display = "none";
 }
 
-// 🔹 Validate Input Temperature
 function validateInput(temp) {
   if (isNaN(temp) || !Number.isFinite(temp)) {
     showError("⚠️ Please enter a valid number.");
@@ -89,13 +83,11 @@ function validateInput(temp) {
   return true;
 }
 
-// 🔹 Show Error Message
 function showError(message) {
   showMessage(message, "error-msg");
   hideOutput();
 }
 
-// 🔹 Convert Temperature Between Units
 function convertTemperature(temp, fromUnit, toUnit) {
   if (fromUnit === toUnit) return temp;
 
@@ -117,99 +109,46 @@ function convertTemperature(temp, fromUnit, toUnit) {
   return conversions[fromUnit]?.[toUnit]?.(temp);
 }
 
-// 🔹 Get Temperature Description for Styling
-function getTemperatureDescription(temp) {
-  const tempRanges = [
-    {
-      limit: -30,
-      description: "❄️ Dangerously Cold!",
-      className: "extreme-cold",
-    },
-    {
-      limit: 10,
-      description: "🧥 Cold, wear warm clothes.",
-      className: "cold",
-    },
-    {
-      limit: 25,
-      description: "🌤️ Pleasant temperature.",
-      className: "pleasant",
-    },
-    {
-      limit: 40,
-      description: "☀️ Warm, comfortable weather.",
-      className: "hot",
-    },
-    {
-      limit: Infinity,
-      description: "🔥 Extremely Hot! Stay Hydrated.",
-      className: "extreme-hot",
-    },
-  ];
-
-  return (
-    tempRanges.find((range) => temp < range.limit) || {
-      description: "🌡️ Moderate temperature.",
-      className: "moderate",
-    }
-  );
-}
-
-// 🔹 Display Result with Animation
-function showResult(result, targetUnit, description, className) {
+function showResult(result, targetUnit) {
   const unitSymbols = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
   const outputElement = document.getElementById("output");
 
-  outputElement.innerHTML = `
-    <p class="temp-result">${result.toFixed(2)} ${unitSymbols[targetUnit]}</p>
-    <p class="temp-description">${description}</p>
-  `;
-  outputElement.className = `output-box ${className}`;
+  outputElement.innerHTML = `<p class="temp-result">${result.toFixed(2)} ${
+    unitSymbols[targetUnit]
+  }</p>`;
   outputElement.style.display = "block";
-  outputElement.style.opacity = "1"; // Ensure it stays visible
+  outputElement.style.opacity = "1";
 
   outputElement.classList.add("fade-in");
   setTimeout(() => outputElement.classList.remove("fade-in"), 500);
 }
 
-// 🔹 Save Conversion History (With Local Storage)
 function saveToHistory(inputTemp, inputUnit, result, targetUnit) {
-  if (history.length >= 5) history.shift(); // Keep only last 5 conversions
+  if (history.length >= 5) history.shift();
   history.push(
     `${inputTemp}° ${inputUnit.toUpperCase()} → ${result.toFixed(
       2
     )}° ${targetUnit.toUpperCase()}`
   );
 
-  localStorage.setItem("conversionHistory", JSON.stringify(history)); // Save history
-
+  localStorage.setItem("conversionHistory", JSON.stringify(history));
   updateHistoryUI();
 }
 
-// 🔹 Load History from Local Storage
 function loadHistory() {
   updateHistoryUI();
 }
 
-// 🔹 Update History UI with Slide Effect
 function updateHistoryUI() {
   const historyElement = document.getElementById("history");
   historyElement.innerHTML =
     history.length > 0
       ? "<h3>History:</h3><ul>" +
-        history.map((entry) => `<li class="slide-in">${entry}</li>`).join("") +
+        history.map((entry) => `<li>${entry}</li>`).join("") +
         "</ul>"
       : "<h3>No history yet.</h3>";
-
-  // Add animation class
-  setTimeout(() => {
-    document
-      .querySelectorAll(".slide-in")
-      .forEach((el) => el.classList.add("visible"));
-  }, 100);
 }
 
-// 🔹 Reset Form (Also Clears Local Storage)
 function resetForm() {
   document.getElementById("inputTemp").value = "";
   document.getElementById("message").style.display = "none";
