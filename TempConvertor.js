@@ -122,39 +122,3 @@ function showResult(result, targetUnit) {
   outputElement.classList.add("fade-in");
   setTimeout(() => outputElement.classList.remove("fade-in"), 500);
 }
-
-function saveToHistory(inputTemp, inputUnit, result, targetUnit) {
-  if (history.length >= 5) history.shift();
-  history.push(
-    `${inputTemp}° ${inputUnit.toUpperCase()} → ${result.toFixed(
-      2
-    )}° ${targetUnit.toUpperCase()}`
-  );
-
-  localStorage.setItem("conversionHistory", JSON.stringify(history));
-  updateHistoryUI();
-}
-
-function loadHistory() {
-  updateHistoryUI();
-}
-
-function updateHistoryUI() {
-  const historyElement = document.getElementById("history");
-  historyElement.innerHTML =
-    history.length > 0
-      ? "<h3>History:</h3><ul>" +
-        history.map((entry) => `<li>${entry}</li>`).join("") +
-        "</ul>"
-      : "<h3>No history yet.</h3>";
-}
-
-function resetForm() {
-  document.getElementById("inputTemp").value = "";
-  document.getElementById("message").style.display = "none";
-  document.getElementById("output").style.display = "none";
-  document.getElementById("history").innerHTML = "<h3>No history yet.</h3>";
-  history = [];
-  localStorage.removeItem("conversionHistory");
-  document.getElementById("inputTemp").focus();
-}
