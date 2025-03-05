@@ -313,54 +313,52 @@ button:active::after {
     border-radius: 24px;
   }
 }
-/* 🌟 Ultimate Glassmorphism Output Box */
+/* 🌟 Premium Glassmorphism Output Box */
 .output-box {
   font-size: 2rem;
   margin-top: 1rem;
   display: none; /* Initially hidden */
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 0.4s ease-in-out, transform 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out, backdrop-filter 0.4s ease-in-out;
+  transition: opacity 0.6s ease-in-out, transform 0.4s ease-in-out,
+    box-shadow 0.4s ease-in-out, backdrop-filter 0.6s ease-in-out;
 
-  backdrop-filter: blur(30px) saturate(250%); /* Stronger glass effect */
+  /* 🔥 Enhanced Glass Effect */
+  backdrop-filter: blur(35px) saturate(220%);
   background: rgba(255, 255, 255, 0.12);
-  border-radius: 20px;
+  border-radius: 18px;
   padding: 2rem;
   text-align: center;
-  color: #f8fafc;
-  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 12px 35px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.35);
 
-  /* 🟢 Neon Border Effect */
+  /* 🎨 Dynamic Gradient Border */
   position: relative;
   border: 2px solid transparent;
-  border-image: linear-gradient(45deg, #ff6b6b, #ffa502, #1e90ff) 1;
+  border-image: linear-gradient(45deg, #ff6b6b, #ffa502, #1e90ff, #32ff7e) 1;
   overflow: hidden;
   will-change: transform, opacity, box-shadow, backdrop-filter;
 }
 
-/* 🌈 Appear Animation */
+/* 🌈 Smooth Entry Animation */
 .output-box.show {
   display: block;
   opacity: 1;
   transform: scale(1);
-  animation: fadeIn 0.6s ease-in-out;
+  animation: fadeIn 0.7s ease-in-out, floatEffect 3s infinite ease-in-out;
 }
 
-/* ✨ Text Styles */
+/* 🎨 Stylish Gradient Text */
 .output-box p {
-  font-size: 2.8rem;
-  font-weight: bolder;
+  font-size: 3rem;
+  font-weight: 700;
   font-family: 'Poppins', sans-serif;
   text-align: center;
   color: white;
-  background: linear-gradient(45deg, #ff6b6b, #ffa502, #1e90ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
-/* 🔄 Smooth Pulse Animation */
+/* 🔄 Gentle Pulse Animation */
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -376,36 +374,89 @@ button:active::after {
   }
 }
 
-/* ✨ 3D Hover Effect */
+/* 🚀 Futuristic Hover Effect */
 .output-box:hover {
-  transform: scale(1.06);
-  box-shadow: 0px 15px 40px rgba(255, 165, 0, 0.5);
+  transform: scale(1) rotateX(5deg);
+  box-shadow: 0px 20px 55px rgba(255, 165, 0, 0.5);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  animation: glowText 1.5s infinite alternate;
+  animation: glowText 1.8s infinite alternate;
+  -webkit-transform: scale(1) rotateX(5deg);
+  -moz-transform: scale(1) rotateX(5deg);
+  -ms-transform: scale(1) rotateX(5deg);
+  -o-transform: scale(1) rotateX(5deg);
+  -webkit-transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  -moz-transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  -ms-transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  -o-transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-/* 🎭 Click Interaction */
+/* 🎭 Click Depth Effect */
 .output-box:active {
   transform: scale(0.98);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-/* ✨ Glow Effect for Border */
+/* ✨ Dynamic Glow Effect */
 @keyframes glowBorder {
   0% {
-    box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+    box-shadow: 0 0 18px rgba(255, 165, 0, 0.4);
   }
   100% {
-    box-shadow: 0 0 25px rgba(255, 165, 0, 0.8);
+    box-shadow: 0 0 35px rgba(255, 165, 0, 0.9);
   }
 }
 
 .output-box:hover {
-  animation: glowBorder 1.5s infinite alternate ease-in-out;
+  animation: glowBorder 1.8s infinite alternate ease-in-out;
 }
 
-/* 🌟 Mobile Responsive */
+/* 💎 Smooth Bounce Entry */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 🚀 Floating Effect for a Futuristic Feel */
+@keyframes floatEffect {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* 🏆 Advanced 3D Glass Reflection */
+.output-box::before {
+  content: '';
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 100%
+  );
+  border-radius: 18px;
+  z-index: -1;
+}
+
+/* 📱 Fully Responsive */
 @media (max-width: 768px) {
   .output-box {
     font-size: 1.5rem;
