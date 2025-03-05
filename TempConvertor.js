@@ -39,7 +39,6 @@ function debounce(func, delay) {
     timer = setTimeout(() => func.apply(this, arguments), delay);
   };
 }
-
 function handleLiveValidation() {
   const inputTemp = this.value.trim();
   if (!inputTemp) {
@@ -50,8 +49,7 @@ function handleLiveValidation() {
   if (isNaN(inputTemp) || inputTemp.match(/[^\d.-]/)) {
     showMessage("⚠️ Enter a valid numeric value.", "error-msg");
     hideOutput();
-  } else {
-    document.getElementById("output").style.display = "block";
+    return;
   }
 }
 
