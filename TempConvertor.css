@@ -15,7 +15,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 16px; /* Reduced padding */
+  padding: 16px;
 }
 
 /* Container */
@@ -37,7 +37,7 @@ body {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7);
 }
 
-/* ✨ Stunning Animated Title */
+/* ✨ Animated Title */
 h1 {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
@@ -53,7 +53,6 @@ h1 {
   font-family: 'Poppins', sans-serif;
 }
 
-/* 🔥 Neon Glow Effect */
 h1::before {
   content: attr(data-title);
   position: absolute;
@@ -67,7 +66,6 @@ h1::before {
   animation: flicker 2s infinite alternate ease-in-out;
 }
 
-/* 🌀 Dynamic Underline */
 h1::after {
   content: '';
   display: block;
@@ -80,7 +78,6 @@ h1::after {
   opacity: 0.7;
 }
 
-/* 🌈 Hover Effects */
 h1:hover {
   transform: scale(1.08);
   text-shadow: 0 5px 12px rgba(0, 0, 0, 0.6);
@@ -91,17 +88,12 @@ h1:hover::after {
   opacity: 1;
 }
 
-/* 🎭 Flickering Light Effect */
 @keyframes flicker {
-  0% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
 }
 
-/* Input Fields */
+/* Input Fields & Select */
 input,
 select {
   width: 100%;
@@ -109,7 +101,7 @@ select {
   margin: 0.5rem 0;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1); /* Dark background */
+  background: rgba(255, 255, 255, 0.1);
   color: #f3f4f6;
   font-size: 0.95rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -117,7 +109,6 @@ select {
   cursor: pointer;
 }
 
-/* Input and Select Focus Effect */
 input:focus,
 select:focus {
   border-color: #60a5fa;
@@ -126,7 +117,7 @@ select:focus {
   outline: none;
 }
 
-/* Labels and Dropdowns - Side by Side */
+/* Label + Dropdown Layout */
 .unit-selection {
   display: flex;
   justify-content: space-between;
@@ -134,7 +125,6 @@ select:focus {
   margin: 1rem 0;
 }
 
-/* Individual Box Styling */
 .unit-box {
   flex: 1;
   display: flex;
@@ -143,7 +133,6 @@ select:focus {
   position: relative;
 }
 
-/* Label Styling */
 .unit-box label {
   font-size: 1rem;
   color: #e2e8f0;
@@ -151,34 +140,17 @@ select:focus {
   margin-bottom: 5px;
 }
 
-/* Custom Dropdown Styling */
+/* Custom Dropdown */
 select {
   appearance: none;
-  background-color: rgba(255, 255, 255, 0.1); /* Dark dropdown background */
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #f3f4f6;
-  font-size: 0.95rem;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding-right: 35px; /* Space for custom arrow */
+  padding-right: 35px;
 }
 
-/* Dropdown Hover & Focus */
-select:hover,
-select:focus {
-  border-color: #60a5fa;
-  background-color: rgba(255, 255, 255, 0.15); /* Slightly lighter on hover */
-}
-
-/* Dropdown List Background */
 select option {
-  background-color: #1e293b; /* Dark background for dropdown list */
+  background-color: #1e293b;
   color: #f3f4f6;
 }
 
-/* Custom Dropdown Arrow */
 .unit-box::after {
   content: '▼';
   font-size: 0.8rem;
@@ -190,138 +162,7 @@ select option {
   pointer-events: none;
 }
 
-/* Mobile Optimization */
-@media (max-width: 768px) {
-  .unit-selection {
-    flex-direction: column;
-    gap: 8px;
-  }
-}
-
-/* 🚀 Futuristic Glassmorphism Button */
-button {
-  padding: 16px;
-  background: linear-gradient(135deg, #3b82f6, #1e40af);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-
-  letter-spacing: 0.08em;
-  transition: all 0.3s ease-in-out;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0px 10px 25px rgba(59, 130, 246, 0.4);
-  backdrop-filter: blur(14px) saturate(150%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 🟢 Hover Effects */
-button:hover {
-  background: linear-gradient(135deg, #2563eb, #1e3a8a);
-  transform: scale(1.08);
-  box-shadow: 0px 15px 40px rgba(59, 130, 246, 0.6);
-}
-
-/* 🏆 Click Interaction */
-button:active {
-  transform: scale(0.95);
-  box-shadow: 0px 5px 15px rgba(59, 130, 246, 0.3);
-}
-
-button:hover::before {
-  opacity: 1;
-}
-
-/* ✨ Subtle Glow Effect */
-@keyframes glow {
-  0% {
-    box-shadow: 0px 5px 20px rgba(59, 130, 246, 0.5);
-  }
-  100% {
-    box-shadow: 0px 10px 40px rgba(59, 130, 246, 0.7);
-  }
-}
-
-button:hover {
-  animation: glow 1.5s infinite alternate ease-in-out;
-}
-
-/* 🎭 Ripple Effect */
-button::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
-  background: rgba(255, 255, 255, 0.2);
-  transition: width 0.4s ease-in-out, height 0.4s ease-in-out, opacity 0.3s;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-}
-
-button:hover::after {
-  width: 0;
-  height: 0;
-  opacity: 1;
-}
-
-/* 🟢 Loading Animation */
-button.loading {
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-button.loading::after {
-  content: '⏳';
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Modern Output Box with Gradient Border & Transparent BG */
-.output-box {
-  margin-top: 1rem;
-  padding: 12px 18px;
-  background: transparent;
-  border: 2px solid;
-  border-image: linear-gradient(135deg, #4fc3f7, #81d4fa) 1;
-  border-radius: 12px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #ffffff;
-  text-align: center;
-  min-height: 44px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-  transition: border-color 0.3s ease, transform 0.3s ease;
-}
-
-.output-box:hover {
-  transform: scale(1.02);
-  border-image: linear-gradient(135deg, #29b6f6, #4dd0e1) 1;
-}
-
-/* Media Query for Mobile */
-@media (max-width: 480px) {
-  .unit-selection {
-    flex-direction: column;
-    gap: 5px;
-  }
-}
-
-/* Modern & Responsive Button Styling */
+/* Button Styling */
 button {
   width: 100%;
   padding: 0.85em 1.4em;
@@ -341,328 +182,94 @@ button {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  user-select: none;
   position: relative;
   overflow: hidden;
+  user-select: none;
   will-change: transform, box-shadow;
 }
 
-/* Hover Effect */
 button:hover {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 12px 24px rgba(59, 130, 246, 0.3);
   filter: brightness(1.2);
+  animation: glow 1.5s infinite alternate ease-in-out;
 }
 
-/* Active (Click) State */
 button:active {
   transform: translateY(1px) scale(0.98);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-  filter: brightness(1);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
-/* Focus State (Accessibility) */
-button:focus-visible {
-  outline: 3px solid #60a5fa;
-  outline-offset: 4px;
-  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.4);
+@keyframes glow {
+  0% {
+    box-shadow: 0px 5px 20px rgba(59, 130, 246, 0.5);
+  }
+  100% {
+    box-shadow: 0px 10px 40px rgba(59, 130, 246, 0.7);
+  }
 }
 
-/* Disabled Button */
-button:disabled {
-  background: #e5e7eb;
-  color: #9ca3af;
-  cursor: not-allowed;
-  box-shadow: none;
-  opacity: 0.5;
-}
-
-/* Ripple Effect */
 button::after {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 20px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.4);
-  display: block;
+  background: rgba(255, 255, 255, 0.2);
+  transition: width 0.4s, height 0.4s, opacity 0.3s;
   border-radius: 50%;
-  transform: scale(0);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+button:hover::after {
+  width: 0;
+  height: 0;
   opacity: 1;
-  transition: transform 0.5s ease-out, opacity 0.6s ease-out;
+}
+
+button.loading {
   pointer-events: none;
+  opacity: 0.7;
 }
 
-button:active::after {
-  transform: scale(8);
-  opacity: 0;
+button.loading::after {
+  content: '⏳';
+  animation: spin 1s linear infinite;
 }
 
-@keyframes ripple {
-  to {
-    width: 0;
-    height: 0;
-    opacity: 0;
-  }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  button {
-    font-size: 1rem; /* Adjust font-size for smaller screens */
-    padding: 0.75em 1.2em; /* Reduce padding for smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  button {
-    font-size: 0.95rem; /* Slightly smaller text for mobile */
-    padding: 0.7em 1em; /* Further reduce padding for mobile */
-  }
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  button {
-    font-size: 1rem;
-    padding: 0.75em 1.2em;
-  }
-}
-
-@media (max-width: 480px) {
-  button {
-    font-size: 0.95rem;
-    padding: 0.7em 1.1em;
-    border-radius: 24px;
-  }
-}
-/* 🌟 Premium Glassmorphism Output Box */
+/* Output Box */
 .output-box {
-  font-size: 2rem;
   margin-top: 1rem;
-  display: none; /* Initially hidden */
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.6s ease-in-out, transform 0.4s ease-in-out,
-    box-shadow 0.4s ease-in-out, backdrop-filter 0.6s ease-in-out;
-
-  /* 🚀 Enhanced Glassmorphism */
-  backdrop-filter: blur(45px) saturate(300%);
-  background: rgba(255, 255, 255, 0.18);
-  border-radius: 20px;
-  padding: 2rem;
-  text-align: center;
+  padding: 12px 18px;
+  background: transparent;
+  font-size: 1.2rem;
+  font-weight: 600;
   color: #ffffff;
-  text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6);
-  box-shadow: 0px 14px 50px rgba(0, 0, 0, 0.45);
-
-  /* 🌈 Animated Gradient Border */
-  position: relative;
-  border: 2px solid transparent;
-  overflow: hidden;
-  will-change: transform, opacity, box-shadow, backdrop-filter;
-}
-
-/* 🔥 Smooth Gradient Border Animation */
-.output-box::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(45deg, #ff6b6b, #ffa502, #1e90ff, #32ff7e);
-  border-radius: inherit;
-  z-index: -1;
-  opacity: 0.85;
-  animation: rotateBorder 5s linear infinite;
-}
-
-/* 🌟 Border Animation */
-@keyframes rotateBorder {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
-  }
-}
-
-/* 🌈 Smooth Entry Animation */
-.output-box.show {
-  display: block;
-  opacity: 1;
-  transform: scale(1);
-  animation: fadeIn 0.7s ease-in-out, floatEffect 4s infinite ease-in-out;
-}
-
-/* 🎨 Vibrant Gradient Text */
-.output-box p {
-  font-size: 3rem;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
   text-align: center;
-  background: linear-gradient(90deg, #ff6b6b, #ffa502, #1e90ff, #32ff7e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
+  min-height: 44px;
 }
 
-/* 🌊 Elegant Floating Animation */
-@keyframes floatEffect {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-/* ✨ Interactive Glow on Hover */
 .output-box:hover {
-  box-shadow: 0px 18px 60px rgba(255, 107, 107, 0.45);
-  transform: scale(1.03);
-  transition: all 0.3s ease-in-out;
+  transform: scale(1.02);
+  border-image: linear-gradient(135deg, #29b6f6, #4dd0e1) 1;
 }
 
-/* 📱 Responsive Design */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .output-box {
-    padding: 1.5rem;
-    font-size: 1.6rem;
-  }
-
-  .output-box p {
-    font-size: 2.5rem;
-  }
-}
-
-/* 🔄 Gentle Pulse Animation */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.9;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* 🚀 Futuristic Hover Effect */
-.output-box:hover {
-  transform: scale(1) rotateX(5deg);
-  box-shadow: 0px 20px 55px rgba(255, 165, 0, 0.5);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  animation: glowText 1.8s infinite alternate;
-  -webkit-transform: scale(1) rotateX(5deg);
-  -moz-transform: scale(1) rotateX(5deg);
-  -ms-transform: scale(1) rotateX(5deg);
-  -o-transform: scale(1) rotateX(5deg);
-  -webkit-transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  -moz-transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  -ms-transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  -o-transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-/* 🎭 Click Depth Effect */
-.output-box:active {
-  transform: scale(0.98);
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-/* ✨ Dynamic Glow Effect */
-@keyframes glowBorder {
-  0% {
-    box-shadow: 0 0 18px rgba(255, 165, 0, 0.4);
-  }
-  100% {
-    box-shadow: 0 0 35px rgba(255, 165, 0, 0.9);
-  }
-}
-
-.output-box:hover {
-  animation: glowBorder 1.8s infinite alternate ease-in-out;
-}
-
-/* 💎 Smooth Bounce Entry */
-@keyframes bounceIn {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* 🚀 Floating Effect for a Futuristic Feel */
-@keyframes floatEffect {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-/* 🏆 Advanced 3D Glass Reflection */
-.output-box::before {
-  content: '';
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  width: 90%;
-  height: 90%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.1) 0%,
-    transparent 100%
-  );
-  border-radius: 18px;
-  z-index: -1;
-}
-
-/* 📱 Fully Responsive */
-@media (max-width: 768px) {
-  .output-box {
-    font-size: 1.5rem;
-    padding: 1.8rem;
+  .unit-selection {
+    flex-direction: column;
+    gap: 8px;
   }
 }
 
 @media (max-width: 480px) {
-  .output-box {
-    font-size: 1.3rem;
-    padding: 1.5rem;
+  .unit-selection {
+    gap: 5px;
   }
-}
-
-/* General Message Box Styling */
-.message-box {
-  font-size: 20px;
-  margin-top: 8px;
-  padding: 10px 12px;
-
-  display: inline-block;
-
-  text-align: center;
-  font-weight: 500;
-
-  transition: all 0.3s ease-in-out;
-  opacity: 0;
-  transform: translateY(-8px);
-  animation: fadeIn 0.4s ease-in-out forwards;
 }
