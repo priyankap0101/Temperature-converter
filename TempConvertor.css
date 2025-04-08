@@ -291,17 +291,26 @@ button.loading::after {
   }
 }
 
-/* Output Box */
+/* Modern Output Box with Gradient Border & Transparent BG */
 .output-box {
   margin-top: 1rem;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  padding: 12px 18px;
+  background: transparent;
+  border: 2px solid;
+  border-image: linear-gradient(135deg, #4fc3f7, #81d4fa) 1;
+  border-radius: 12px;
   font-size: 1.2rem;
-  font-weight: bold;
-  color: #f3f4f6;
+  font-weight: 600;
+  color: #ffffff;
   text-align: center;
-  min-height: 40px;
+  min-height: 44px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.output-box:hover {
+  transform: scale(1.02);
+  border-image: linear-gradient(135deg, #29b6f6, #4dd0e1) 1;
 }
 
 /* Media Query for Mobile */
@@ -436,48 +445,46 @@ button:active::after {
   display: none; /* Initially hidden */
   opacity: 0;
   transform: scale(0.9);
-  transition: 
-    opacity 0.6s ease-in-out, 
-    transform 0.4s ease-in-out, 
-    box-shadow 0.4s ease-in-out, 
-    backdrop-filter 0.6s ease-in-out;
+  transition: opacity 0.6s ease-in-out, transform 0.4s ease-in-out,
+    box-shadow 0.4s ease-in-out, backdrop-filter 0.6s ease-in-out;
 
-  /* 🔥 Enhanced Glass Effect */
-  backdrop-filter: blur(40px) saturate(250%);
-  background: rgba(255, 255, 255, 0.15);
+  /* 🚀 Enhanced Glassmorphism */
+  backdrop-filter: blur(45px) saturate(300%);
+  background: rgba(255, 255, 255, 0.18);
   border-radius: 20px;
   padding: 2rem;
   text-align: center;
   color: #ffffff;
-  text-shadow: 0px 3px 12px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 12px 45px rgba(0, 0, 0, 0.4);
+  text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 14px 50px rgba(0, 0, 0, 0.45);
 
-  /* 🌈 Dynamic Animated Gradient Border */
+  /* 🌈 Animated Gradient Border */
   position: relative;
   border: 2px solid transparent;
-  border-radius: 20px;
   overflow: hidden;
   will-change: transform, opacity, box-shadow, backdrop-filter;
 }
-  
-/* 🔥 Animated Border Effect */
+
+/* 🔥 Smooth Gradient Border Animation */
 .output-box::before {
-  content: "";
+  content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
+  inset: -2px;
   background: linear-gradient(45deg, #ff6b6b, #ffa502, #1e90ff, #32ff7e);
   border-radius: inherit;
   z-index: -1;
-  animation: rotateBorder 6s linear infinite;
+  opacity: 0.85;
+  animation: rotateBorder 5s linear infinite;
 }
 
 /* 🌟 Border Animation */
 @keyframes rotateBorder {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
 }
 
 /* 🌈 Smooth Entry Animation */
@@ -488,7 +495,7 @@ button:active::after {
   animation: fadeIn 0.7s ease-in-out, floatEffect 4s infinite ease-in-out;
 }
 
-/* 🎨 Stylish Gradient Text */
+/* 🎨 Vibrant Gradient Text */
 .output-box p {
   font-size: 3rem;
   font-weight: 700;
@@ -500,17 +507,25 @@ button:active::after {
   display: inline-block;
 }
 
-/* 🌊 Smooth Floating Animation */
+/* 🌊 Elegant Floating Animation */
 @keyframes floatEffect {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
   }
 }
 
-/* 📱 Responsive Adjustments */
+/* ✨ Interactive Glow on Hover */
+.output-box:hover {
+  box-shadow: 0px 18px 60px rgba(255, 107, 107, 0.45);
+  transform: scale(1.03);
+  transition: all 0.3s ease-in-out;
+}
+
+/* 📱 Responsive Design */
 @media (max-width: 768px) {
   .output-box {
     padding: 1.5rem;
@@ -521,7 +536,6 @@ button:active::after {
     font-size: 2.5rem;
   }
 }
-
 
 /* 🔄 Gentle Pulse Animation */
 @keyframes pulse {
