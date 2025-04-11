@@ -243,34 +243,41 @@ button.loading::after {
   100% { transform: rotate(360deg); }
 }
 
-/* Modern Output Box */
+/* Modern Glassmorphic Output Box */
 .output-box {
   margin-top: 2rem;
-  padding: 14px 20px;
-  font-size: 2.1rem;
+  padding: 16px 24px;
+  font-size: 2rem;
   font-weight: 600;
   color: #ffffff;
   text-align: center;
-  min-height: 48px;
-  background: rgba(255, 255, 255, 0.05); /* semi-transparent for glassmorphism */
-  border: 2px solid transparent;
-  border-radius: 12px;
-  backdrop-filter: blur(8px); /* adds the blur effect */
-  -webkit-backdrop-filter: blur(8px);
-  border-image: linear-gradient(135deg, #29b6f6, #4dd0e1) 1;
-  border-image-slice: 1;
-  transition: 
-    transform 0.3s ease, 
-    border 0.3s ease, 
-    box-shadow 0.3s ease, 
-    background 0.3s ease;
+  min-height: 56px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow: 0 8px 24px rgba(41, 182, 246, 0.15),
+              0 4px 12px rgba(77, 208, 225, 0.1);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    border 0.3s ease;
 }
 
 .output-box:hover {
-  transform: scale(1.04);
-  box-shadow: 0 6px 20px rgba(77, 208, 225, 0.25);
-  background: rgba(255, 255, 255, 0.08); /* slightly more visible on hover */
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 12px 32px rgba(41, 182, 246, 0.25),
+              0 6px 20px rgba(77, 208, 225, 0.2);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
