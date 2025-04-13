@@ -242,68 +242,69 @@ button.loading::after {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-/* Refined Premium Glassmorphic Output Box */
+/* Ultra Refined Premium Glassmorphic Output Box */
 .output-box {
   margin-top: 2rem;
-  padding: 20px 30px;
-  font-size: 3rem;
-  font-weight: bolder;
+  padding: 22px 32px;
+  font-size: 2.6rem;
+  font-weight: 700;
   color: #ffffff;
   text-align: center;
-  min-height: 60px;
+  min-height: 64px;
   
-  /* Glass Effect */
-  background: rgba(255, 255, 255, 0.08); /* Slightly darker for more contrast */
-  border-radius: 18px; /* Smooth, modern rounded corners */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border to define the shape */
-  backdrop-filter: blur(18px); /* Strong blur for a deep glass effect */
-  -webkit-backdrop-filter: blur(18px);
-  
-  /* Subtle Shadow for Depth */
+  /* Enhanced Glass Effect */
+  background: rgba(255, 255, 255, 0.06); /* Slightly dimmer for contrast */
+  border-radius: 20px;
+  border: 1.2px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* Dynamic Depth with Layered Shadows */
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.1), /* Soft, natural shadow */
-    0 4px 16px rgba(77, 208, 225, 0.15), /* Light blue shadow for a cool effect */
-    inset 0 0 12px rgba(255, 255, 255, 0.15); /* Inner glow effect for depth */
-    
+    0 6px 20px rgba(0, 0, 0, 0.12),
+    0 8px 32px rgba(77, 208, 225, 0.18),
+    inset 0 0 10px rgba(255, 255, 255, 0.1),
+    inset 0 0 3px rgba(255, 255, 255, 0.08);
+
   transition:
-    transform 0.3s ease-in-out,
-    background 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out,
-    border 0.3s ease-in-out,
-    color 0.3s ease-in-out;
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    border 0.3s ease,
+    color 0.3s ease;
 }
 
-/* Hover Effect - More Interactive */
+/* Hover Interaction */
 .output-box:hover {
-  transform: scale(1.06); /* Slightly larger scale on hover */
-  background: rgba(255, 255, 255, 0.12); /* Slightly brighter background on hover */
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.11);
+  color: #ffe84c;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+
   box-shadow:
-    0 14px 40px rgba(0, 0, 0, 0.2), /* More pronounced outer shadow */
-    0 6px 24px rgba(77, 208, 225, 0.25), /* Increased blue shadow */
-    inset 0 0 18px rgba(255, 255, 255, 0.2); /* Stronger inner glow */
-  color: #f6ec29; /* Highlight text with blue on hover */
-  border: 1px solid rgba(255, 255, 255, 0.5); /* More noticeable border on hover */
-  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, color 0.25s ease-out;
+    0 10px 38px rgba(0, 0, 0, 0.2),
+    0 6px 26px rgba(77, 208, 225, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
-/* Focused State - Enhances Accessibility */
+/* Accessibility Focus Style */
 .output-box:focus-within {
   outline: none;
-  border: 1.5px solid rgba(41, 182, 246, 0.8); /* Blue border on focus */
+  border: 1.6px solid rgba(41, 182, 246, 0.8);
   box-shadow:
-    0 6px 24px rgba(41, 182, 246, 0.2); /* Subtle blue glow around focus */
+    0 0 0 3px rgba(41, 182, 246, 0.3),
+    0 8px 24px rgba(41, 182, 246, 0.15);
 }
 
-/* Content Inside the Box */
+/* Content Styling */
 .output-box .converted-temperature {
-  font-size: 2.2rem; /* Larger text for better visibility */
+  font-size: 2.4rem;
   font-weight: bold;
-  color: inherit; /* Ensures the text color is the same as the hover state color */
-  transition: color 0.3s ease-in-out;
+  color: inherit;
+  transition: color 0.3s ease;
 }
 
-
+/* Ensure Inner Elements Appear Above Effects */
 .output-box > * {
   position: relative;
   z-index: 1;
