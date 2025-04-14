@@ -242,72 +242,137 @@ button.loading::after {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-/* Ultra Refined Premium Glassmorphic Output Box */
+/* ⚡ Ultra-Luxury Glassmorphic Output Box */
 .output-box {
   margin-top: 2rem;
-  padding: 22px 32px;
-  font-size: 2.6rem;
+  padding: clamp(24px, 5vw, 36px);
+  font-size: clamp(2rem, 4vw, 2.6rem);
   font-weight: 700;
   color: #ffffff;
   text-align: center;
   min-height: 64px;
-  
-  /* Enhanced Glass Effect */
-  background: rgba(255, 255, 255, 0.06); /* Slightly dimmer for contrast */
-  border-radius: 20px;
-  border: 1.2px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  line-height: 1.5;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: default;
 
-  /* Dynamic Depth with Layered Shadows */
+  /* Premium Glass Background */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+  border: 1.4px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+
+  /* Multi-layer Shadow + Subtle Ambient Glow */
   box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.12),
-    0 8px 32px rgba(77, 208, 225, 0.18),
-    inset 0 0 10px rgba(255, 255, 255, 0.1),
-    inset 0 0 3px rgba(255, 255, 255, 0.08);
+    0 8px 28px rgba(0, 0, 0, 0.2),
+    0 12px 40px rgba(41, 182, 246, 0.16),
+    inset 0 0 20px rgba(255, 255, 255, 0.04);
 
   transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    box-shadow 0.3s ease,
-    border 0.3s ease,
-    color 0.3s ease;
+    transform 0.35s ease,
+    background 0.35s ease,
+    border 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-/* Hover Interaction */
+/* Floating Light Trail Overlay */
+.output-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  animation: floatLight 10s linear infinite;
+  z-index: 0;
+}
+
+/* Gradient Border Ring */
+.output-box::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1.5px;
+  background: linear-gradient(130deg, #ffe84c, #4dd0e1, #ffe84c);
+  background-size: 300% 300%;
+  animation: borderShift 6s ease-in-out infinite;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hover Effects: Active Glow & Scale */
 .output-box:hover {
   transform: scale(1.05);
-  background: rgba(255, 255, 255, 0.11);
-  color: #ffe84c;
-  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #fff59d;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.6px solid rgba(255, 255, 255, 0.35);
 
   box-shadow:
-    0 10px 38px rgba(0, 0, 0, 0.2),
-    0 6px 26px rgba(77, 208, 225, 0.3),
-    inset 0 0 20px rgba(255, 255, 255, 0.2);
+    0 14px 38px rgba(0, 0, 0, 0.25),
+    0 10px 30px rgba(255, 255, 255, 0.15),
+    inset 0 0 30px rgba(255, 255, 255, 0.12);
 }
 
-/* Accessibility Focus Style */
+/* Click Press Feedback */
+.output-box:active {
+  transform: scale(0.97);
+  transition: transform 0.2s ease;
+}
+
+/* Focus State for Accessibility */
 .output-box:focus-within {
   outline: none;
-  border: 1.6px solid rgba(41, 182, 246, 0.8);
+  border: 1.8px solid rgba(41, 182, 246, 0.9);
   box-shadow:
-    0 0 0 3px rgba(41, 182, 246, 0.3),
-    0 8px 24px rgba(41, 182, 246, 0.15);
+    0 0 0 4px rgba(41, 182, 246, 0.4),
+    0 14px 34px rgba(41, 182, 246, 0.18);
 }
 
-/* Content Styling */
+/* Inner Temperature Text */
 .output-box .converted-temperature {
-  font-size: 2.4rem;
+  font-size: clamp(2.2rem, 4vw, 2.6rem);
   font-weight: bold;
   color: inherit;
+  z-index: 1;
+  position: relative;
   transition: color 0.3s ease;
 }
 
-/* Ensure Inner Elements Appear Above Effects */
+/* Content Always Above Glow Layers */
 .output-box > * {
   position: relative;
   z-index: 1;
+}
+
+/* === Animations === */
+@keyframes floatLight {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  50% {
+    transform: translate(25%, 25%) scale(1.2);
+  }
+  100% {
+    transform: translate(0%, 0%) scale(1);
+  }
+}
+
+@keyframes borderShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Responsive Design */
