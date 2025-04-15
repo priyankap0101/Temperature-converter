@@ -162,86 +162,102 @@ select option {
   pointer-events: none;
 }
 
-/* Button Styling */
+/* Premium Glassy Gradient Button Styling */
 button {
   width: 100%;
-  padding: 0.85em 1.4em;
-  margin-top: 1rem;
-  border-radius: 28px;
+  padding: 0.9em 1.6em;
+  margin-top: 1.2rem;
+  border-radius: 30px;
   border: none;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
   background: linear-gradient(135deg, #4f46e5, #3b82f6);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.3s ease;
-  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2);
   text-transform: uppercase;
-  letter-spacing: 1.4px;
+  letter-spacing: 1.5px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
   position: relative;
   overflow: hidden;
   user-select: none;
-  will-change: transform, box-shadow;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    filter 0.3s ease;
+  will-change: transform, box-shadow, filter;
 }
 
 button:hover {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.3);
-  filter: brightness(1.2);
-  animation: glow 1.5s infinite alternate ease-in-out;
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.35);
+  filter: brightness(1.15);
+  animation: glowPulse 1.6s infinite alternate ease-in-out;
 }
 
 button:active {
-  transform: translateY(1px) scale(0.98);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  transform: translateY(1px) scale(0.96);
+  box-shadow: 0 5px 14px rgba(59, 130, 246, 0.25);
 }
 
-@keyframes glow {
+@keyframes glowPulse {
   0% {
-    box-shadow: 0px 5px 20px rgba(59, 130, 246, 0.5);
+    box-shadow: 0 5px 18px rgba(59, 130, 246, 0.4);
   }
   100% {
-    box-shadow: 0px 10px 40px rgba(59, 130, 246, 0.7);
+    box-shadow: 0 10px 36px rgba(59, 130, 246, 0.6);
   }
 }
 
+/* Ripple Effect */
 button::after {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transition: width 0.4s, height 0.4s, opacity 0.3s;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
+  transition: width 0.4s ease, height 0.4s ease, opacity 0.3s ease;
 }
 
 button:hover::after {
-  width: 0;
-  height: 0;
+  width: 200%;
+  height: 500%;
   opacity: 1;
 }
 
+/* Loading State */
 button.loading {
   pointer-events: none;
   opacity: 0.7;
+  position: relative;
 }
 
 button.loading::after {
   content: '⏳';
   animation: spin 1s linear infinite;
+  font-size: 1.2rem;
+  position: absolute;
+  right: 1.2rem;
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
 /* ⚡ Ultra-Luxury Glassmorphic Output Box */
 .output-box {
   margin-top: 2rem;
