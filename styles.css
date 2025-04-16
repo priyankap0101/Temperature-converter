@@ -11,23 +11,25 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  transition: background 0.3s ease;
 }
 
 .container {
   background: #e0e5ec;
   padding: 3rem 2rem;
   border-radius: 2rem;
-  box-shadow: 10px 10px 30px #babecc, -10px -10px 30px #ffffff;
+  box-shadow: 10px 10px 30px rgba(186, 190, 204, 0.6), -10px -10px 30px rgba(255, 255, 255, 0.8);
   width: 90%;
   max-width: 450px;
-  transition: 0.3s;
+  transition: 0.3s ease;
   text-align: center;
 }
 
 .container h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #3b82f6;
   margin-bottom: 2rem;
+  font-weight: bold;
 }
 
 .input-section {
@@ -43,43 +45,70 @@ select {
   border-radius: 1rem;
   border: none;
   background: #e0e5ec;
-  box-shadow: inset 5px 5px 10px #c1c7d0,
-              inset -5px -5px 10px #ffffff;
+  box-shadow: inset 5px 5px 15px rgba(193, 199, 208, 0.5),
+              inset -5px -5px 15px rgba(255, 255, 255, 0.7);
   font-size: 1rem;
   color: #333;
-  transition: 0.2s;
+  transition: 0.3s ease;
 }
 
 input:focus,
 select:focus {
   outline: none;
-  box-shadow: inset 3px 3px 6px #babec5,
-              inset -3px -3px 6px #fff;
+  box-shadow: inset 3px 3px 8px rgba(186, 190, 197, 0.6),
+              inset -3px -3px 8px rgba(255, 255, 255, 0.9);
 }
 
 .unit-selectors {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 button {
   margin-top: 2rem;
   width: 100%;
   padding: 1rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
   border-radius: 2rem;
   border: none;
-  color: #ffffff;
-  background: linear-gradient(145deg, #3b82f6, #6366f1);
-  box-shadow: 5px 5px 15px #babecc, -5px -5px 15px #ffffff;
+  color: #0d28c0;
+  background: #e0e5ec;
+  box-shadow: 
+    6px 6px 15px rgba(186, 190, 204, 0.6), 
+    -6px -6px 15px rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
+/* Neumorphic Hover Effect */
 button:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
+  box-shadow: 
+    6px 6px 20px rgba(186, 190, 204, 0.7), 
+    -6px -6px 20px rgba(255, 255, 255, 0.9);
+}
+
+/* Neumorphic Active Effect */
+button:active {
+  transform: scale(0.98);
+  box-shadow: 
+    inset 2px 2px 6px rgba(186, 190, 204, 0.6),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.6);
+}
+
+/* Neumorphic Focus Effect */
+button:focus {
+  outline: none;
+  box-shadow: 
+    0 0 0 2px rgba(0, 0, 0, 0.4),
+    0 0 3px rgba(56, 103, 214, 0.5);
+}
+
+/* Neumorphic Transition Effect */
+button {
+  transition: all 0.3s ease-in-out;
 }
 
 .result-box {
@@ -88,8 +117,32 @@ button:hover {
   border-radius: 1rem;
   background: #e0e5ec;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #10b981;
-  box-shadow: inset 6px 6px 12px #c1c7d0,
-              inset -6px -6px 12px #ffffff;
+  box-shadow: inset 6px 6px 12px rgba(193, 199, 208, 0.5),
+              inset -6px -6px 12px rgba(255, 255, 255, 0.7);
+}
+
+.message-box {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #f87171;
+  background: #e0e5ec;
+  border-radius: 1rem;
+  box-shadow: inset 5px 5px 15px rgba(193, 199, 208, 0.4),
+              inset -5px -5px 15px rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .container {
+    padding: 2rem 1.5rem;
+  }
+
+  .unit-selectors {
+    flex-direction: column;
+  }
 }
