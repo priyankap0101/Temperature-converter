@@ -1,122 +1,33 @@
-document.addEventListener("DOMContentLoaded", () => {
-  document
-    .getElementById("inputTemp")
-    .addEventListener("input", debounce(handleLiveValidation, 300));
-  document.getElementById("convertBtn").addEventListener("click", convertTemp);
-  document.getElementById("resetBtn").addEventListener("click", resetForm);
-  loadHistory();
-});
-
-let history = JSON.parse(localStorage.getItem("conversionHistory")) || [];
-
 function convertTemp() {
-  const inputElement = document.getElementById("inputTemp");
-  const inputTemp = inputElement.value.trim();
-  const inputUnit = document.getElementById("inputUnit").value;
-  const targetUnit = document.getElementById("targetUnit").value;
+  const input = parseFloat(document.getElementById('tempInput').value);
+  const from = document.getElementById('fromUnit').value;
+  const to = document.getElementById('toUnit').value;
+  const resultBox = document.getElementById('result');
 
-  if (!inputTemp) {
-    showMessage("ℹ️ Please enter a temperature.", "info-msg");
-    hideOutput();
-    inputElement.focus();
+  if (isNaN(input)) {
+    resultBox.textContent = "Please enter a valid number";
+    resultBox.style.color = "#ef4444";
     return;
   }
 
-  const parsedTemp = parseFloat(inputTemp);
-  if (!validateInput(parsedTemp)) return;
+  let output;
 
-  const result = convertTemperature(parsedTemp, inputUnit, targetUnit);
-  if (result === undefined) return showError("⚠️ Invalid conversion.");
-
-  showResult(result, targetUnit);
-  saveToHistory(parsedTemp, inputUnit, result, targetUnit);
-}
-
-function debounce(func, delay) {
-  let timer;
-  return function () {
-    clearTimeout(timer);
-    timer = setTimeout(() => func.apply(this, arguments), delay);
-  };
-}
-function handleLiveValidation() {
-  const inputTemp = this.value.trim();
-  if (!inputTemp) {
-    showMessage("ℹ️ Please enter a temperature.", "info-msg");
-    hideOutput();
-    return;
+  if (from === to) {
+    output = input;
+  } else if (from === "C" && to === "F") {
+    output = (input * 9/5) + 32;
+  } else if (from === "C" && to === "K") {
+    output = input + 273.15;
+  } else if (from === "F" && to === "C") {
+    output = (input - 32) * 5/9;
+  } else if (from === "F" && to === "K") {
+    output = (input - 32) * 5/9 + 273.15;
+  } else if (from === "K" && to === "C") {
+    output = input - 273.15;
+  } else if (from === "K" && to === "F") {
+    output = (input - 273.15) * 9/5 + 32;
   }
-  if (isNaN(inputTemp) || inputTemp.match(/[^\d.-]/)) {
-    showMessage("⚠️ Enter a valid numeric value.", "error-msg");
-    hideOutput();
-    return;
-  }
-}
 
-function showMessage(message, className = "") {
-  const messageBox = document.getElementById("message");
-  messageBox.innerHTML = `<p class="${className}">${message}</p>`;
-  messageBox.style.display = "block";
-  messageBox.style.opacity = "1";
-
-  setTimeout(() => {
-    messageBox.style.opacity = "0";
-    setTimeout(() => (messageBox.style.display = "none"), 500);
-  }, 2000);
-}
-
-function hideOutput() {
-  document.getElementById("output").style.display = "none";
-}
-
-function validateInput(temp) {
-  if (isNaN(temp) || !Number.isFinite(temp)) {
-    showError("⚠️ Please enter a valid number.");
-    return false;
-  }
-  if (temp < -273.15 || temp > 1000) {
-    showError("⚠️ Temperature out of realistic range!");
-    return false;
-  }
-  return true;
-}
-
-function showError(message) {
-  showMessage(message, "error-msg");
-  hideOutput();
-}
-
-function convertTemperature(temp, fromUnit, toUnit) {
-  if (fromUnit === toUnit) return temp;
-
-  const conversions = {
-    celsius: {
-      fahrenheit: (t) => (t * 9) / 5 + 32,
-      kelvin: (t) => t + 273.15,
-    },
-    fahrenheit: {
-      celsius: (t) => ((t - 32) * 5) / 9,
-      kelvin: (t) => ((t - 32) * 5) / 9 + 273.15,
-    },
-    kelvin: {
-      celsius: (t) => t - 273.15,
-      fahrenheit: (t) => ((t - 273.15) * 9) / 5 + 32,
-    },
-  };
-
-  return conversions[fromUnit]?.[toUnit]?.(temp);
-}
-
-function showResult(result, targetUnit) {
-  const unitSymbols = { celsius: "°C", fahrenheit: "°F", kelvin: "K" };
-  const outputElement = document.getElementById("output");
-
-  outputElement.innerHTML = `<p class="temp-result">${result.toFixed(2)} ${
-    unitSymbols[targetUnit]
-  }</p>`;
-  outputElement.style.display = "block";
-  outputElement.style.opacity = "1";
-
-  outputElement.classList.add("fade-in");
-  setTimeout(() => outputElement.classList.remove("fade-in"), 500);
+  resultBox.textContent = `${input}°${from} = ${output.toFixed(2)}°${to}`;
+  resultBox.style.color = "#10b981";
 }

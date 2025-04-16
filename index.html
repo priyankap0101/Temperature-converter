@@ -8,44 +8,31 @@
   </head>
   <body>
     <div class="container">
-      <h1>Temperature Converter</h1>
-
-      <div class="converter">
-        <!-- Input field for temperature -->
-        <input type="number" id="inputTemp" placeholder="Enter temperature" />
-
-        <!-- Flex container for labels and dropdowns -->
-        <div class="unit-selection">
-          <div class="unit-box">
-            <label for="inputUnit">From:</label>
-            <select id="inputUnit">
-              <option value="celsius">Celsius (°C)</option>
-              <option value="fahrenheit">Fahrenheit (°F)</option>
-              <option value="kelvin">Kelvin (K)</option>
-            </select>
-          </div>
-
-          <div class="unit-box">
-            <label for="targetUnit">To:</label>
-            <select id="targetUnit">
-              <option value="celsius">Celsius (°C)</option>
-              <option value="fahrenheit">Fahrenheit (°F)</option>
-              <option value="kelvin">Kelvin (K)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Convert button -->
-        <button onclick="convertTemp()">Convert</button>
-
-        <div id="message" class="message-box" style="display: none"></div>
-
-        <!-- Output section (Initially hidden) -->
-        <div id="output" class="output-box" style="display: none;">
-          <span id="converted-temperature"></span>
+      <h1>🌡️ Temperature Converter</h1>
+    
+      <div class="input-section">
+        <input type="number" id="tempInput" placeholder="Enter temperature" />
+    
+        <div class="unit-selectors">
+          <select id="fromUnit">
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+            <option value="K">Kelvin</option>
+          </select>
+    
+          <select id="toUnit">
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+            <option value="K">Kelvin</option>
+          </select>
         </div>
       </div>
+    
+      <button onclick="convertTemp()">Convert</button>
+    
+      <div class="result-box" id="result">Result will appear here</div>
     </div>
+    
     <script src="./main.js"></script>
   </body>
 </html>
