@@ -4,19 +4,18 @@ function convertTemp() {
   const toUnit = document.getElementById('toUnit').value;
   const resultBox = document.getElementById('result');
 
+  // Hide the result box initially
+  resultBox.style.display = "none"; 
+
   // Check if the input is a valid number
   if (isNaN(input)) {
-      resultBox.textContent = "Please enter a valid number.";
-      resultBox.style.color = "#ef4444";
-      resultBox.style.display = "block"; // Show the result box
+      showResult("Please enter a valid number.", "#ef4444");
       return;
   }
 
   // Check for invalid Kelvin values (Kelvin cannot be negative)
   if (fromUnit === "K" && input < 0) {
-      resultBox.textContent = "Temperature in Kelvin cannot be negative.";
-      resultBox.style.color = "#ef4444";
-      resultBox.style.display = "block"; // Show the result box
+      showResult("Temperature in Kelvin cannot be negative.", "#ef4444");
       return;
   }
 
@@ -38,21 +37,23 @@ function convertTemp() {
 
   // If the fromUnit and toUnit are the same, return the same value
   if (fromUnit === toUnit) {
-      resultBox.textContent = `Both units are the same: ${input}°${fromUnit}`;
-      resultBox.style.color = "#10b981";
-      resultBox.style.display = "block"; // Show the result box
+      showResult(`Both units are the same: ${input}°${fromUnit}`, "#10b981");
       return;
   }
 
   // Check if a valid conversion exists
   if (conversionFormulas[fromUnit] && conversionFormulas[fromUnit][toUnit]) {
       const output = conversionFormulas[fromUnit][toUnit](input);
-      resultBox.textContent = `${input}°${fromUnit} = ${output.toFixed(2)}°${toUnit}`;
-      resultBox.style.color = "#10b981"; // Green for valid conversion
-      resultBox.style.display = "block"; // Show the result box
+      showResult(`${input}°${fromUnit} = ${output.toFixed(2)}°${toUnit}`, "#1D4ED8"); // Blue for valid conversion
   } else {
-      resultBox.textContent = "Invalid conversion units selected.";
-      resultBox.style.color = "#ef4444"; // Red for error
-      resultBox.style.display = "block"; // Show the result box
+      showResult("Invalid conversion units selected.", "#ef4444");
   }
+}
+
+// Function to display the result in the result box
+function showResult(message, color) {
+  const resultBox = document.getElementById('result');
+  resultBox.textContent = message;
+  resultBox.style.color = color;
+  resultBox.style.display = "block"; // Show the result box
 }
