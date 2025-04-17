@@ -8,6 +8,7 @@ function convertTemp() {
   if (isNaN(input)) {
       resultBox.textContent = "Please enter a valid number.";
       resultBox.style.color = "#ef4444";
+      resultBox.style.display = "block"; // Show the result box
       return;
   }
 
@@ -15,6 +16,7 @@ function convertTemp() {
   if (fromUnit === "K" && input < 0) {
       resultBox.textContent = "Temperature in Kelvin cannot be negative.";
       resultBox.style.color = "#ef4444";
+      resultBox.style.display = "block"; // Show the result box
       return;
   }
 
@@ -38,6 +40,7 @@ function convertTemp() {
   if (fromUnit === toUnit) {
       resultBox.textContent = `Both units are the same: ${input}°${fromUnit}`;
       resultBox.style.color = "#10b981";
+      resultBox.style.display = "block"; // Show the result box
       return;
   }
 
@@ -46,8 +49,10 @@ function convertTemp() {
       const output = conversionFormulas[fromUnit][toUnit](input);
       resultBox.textContent = `${input}°${fromUnit} = ${output.toFixed(2)}°${toUnit}`;
       resultBox.style.color = "#10b981"; // Green for valid conversion
+      resultBox.style.display = "block"; // Show the result box
   } else {
       resultBox.textContent = "Invalid conversion units selected.";
       resultBox.style.color = "#ef4444"; // Red for error
+      resultBox.style.display = "block"; // Show the result box
   }
 }
