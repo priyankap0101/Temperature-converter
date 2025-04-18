@@ -18,17 +18,18 @@ body {
   background: #e0e5ec;
   padding: 3rem 2rem;
   border-radius: 2rem;
-  box-shadow: 10px 10px 30px rgba(186, 190, 204, 0.6), -10px -10px 30px rgba(255, 255, 255, 0.8);
+  box-shadow: 10px 10px 30px rgba(186, 190, 204, 0.6),
+              -10px -10px 30px rgba(255, 255, 255, 0.8);
   width: 90%;
   max-width: 450px;
   transition: 0.3s ease;
   text-align: center;
 }
+
 .container h1 {
   position: relative;
   font-size: 2rem;
   font-weight: bolder;
-  text-align: center;
   margin-bottom: 2.5rem;
   background: linear-gradient(90deg, #3b82f6, #6366f1);
   -webkit-background-clip: text;
@@ -40,7 +41,6 @@ body {
   opacity: 0;
 }
 
-/* Animated underline */
 .container h1::after {
   content: "";
   position: absolute;
@@ -54,7 +54,6 @@ body {
   animation: underlineSlide 1s ease-out forwards;
 }
 
-/* Fade-in animation */
 @keyframes fadeInUp {
   from {
     transform: translateY(20px);
@@ -66,7 +65,6 @@ body {
   }
 }
 
-/* Underline slide-in animation */
 @keyframes underlineSlide {
   from {
     width: 0;
@@ -77,7 +75,6 @@ body {
     opacity: 1;
   }
 }
-
 
 .input-section {
   display: flex;
@@ -122,40 +119,25 @@ button {
   border: none;
   color: #0d28c0;
   background: #e0e5ec;
-  box-shadow: 
-    6px 6px 15px rgba(186, 190, 204, 0.6), 
+  box-shadow:
+    6px 6px 15px rgba(186, 190, 204, 0.6),
     -6px -6px 15px rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Neumorphic Hover Effect */
 button:hover {
   transform: scale(1.03);
-  box-shadow: 
-    6px 6px 20px rgba(186, 190, 204, 0.7), 
+  box-shadow:
+    6px 6px 20px rgba(186, 190, 204, 0.7),
     -6px -6px 20px rgba(255, 255, 255, 0.9);
 }
 
-/* Neumorphic Active Effect */
 button:active {
   transform: scale(0.98);
-  box-shadow: 
+  box-shadow:
     inset 2px 2px 6px rgba(186, 190, 204, 0.6),
     inset -2px -2px 6px rgba(255, 255, 255, 0.6);
-}
-
-/* Neumorphic Focus Effect */
-button:focus {
-  outline: none;
-  box-shadow: 
-    0 0 0 2px rgba(0, 0, 0, 0.4),
-    0 0 3px rgba(56, 103, 214, 0.5);
-}
-
-/* Neumorphic Transition Effect */
-button {
-  transition: all 0.3s ease-in-out;
 }
 
 .result-box {
@@ -165,8 +147,8 @@ button {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(14px) saturate(180%);
   -webkit-backdrop-filter: blur(14px) saturate(180%);
-  font-size: 1.85rem;
-  font-weight: 900;
+  font-size: 1.35rem;
+  font-weight: bolder;
   color: #1540ff;
   text-align: center;
   letter-spacing: 0.6px;
@@ -180,7 +162,6 @@ button {
   animation: resultReveal 1s ease-out both;
 }
 
-/* Entry animation */
 @keyframes resultReveal {
   0% {
     opacity: 0;
@@ -194,7 +175,6 @@ button {
   }
 }
 
-/* Hover feedback */
 .result-box:hover {
   transform: scale(1.02);
   box-shadow:
@@ -216,7 +196,6 @@ button {
   text-align: center;
 }
 
-/* Responsive Design */
 @media (max-width: 480px) {
   .container {
     padding: 2rem 1.5rem;
