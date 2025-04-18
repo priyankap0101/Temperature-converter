@@ -205,3 +205,28 @@ button:active {
     flex-direction: column;
   }
 }
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.form-group label i {
+  font-size: 1.2rem;
+  color: #5a5aff;
+}
+
+.icon-heading {
+  margin-right: 10px;
+  color: #4d88ff;
+}
+
+.icon-btn {
+  margin-right: 8px;
+}
+
+.result-box i {
+  margin-right: 8px;
+  color: #4CAF50;
+}
