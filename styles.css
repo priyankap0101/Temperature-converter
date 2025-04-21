@@ -1,82 +1,88 @@
 :root {
-  --bg-color: #e6ebf3;
-  --text: #2e2e2e;
-  --accent: #6366f1;
-  --accent-2: #3b82f6;
-  --glass-bg: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.25);
-  --inner-shadow-light: rgba(255, 255, 255, 0.6);
-  --inner-shadow-dark: rgba(174, 180, 190, 0.4);
+  --bg-color: #e2e8f0;
+  --text-color: #1e293b;
+  --primary: #4f46e5;
+  --primary-light: #6366f1;
+  --glass: rgba(255, 255, 255, 0.25);
+  --border-glass: rgba(255, 255, 255, 0.35);
+  --shadow-light: rgba(255, 255, 255, 0.6);
+  --shadow-dark: rgba(0, 0, 0, 0.1);
+  --radius: 1.5rem;
+  --transition: 0.3s ease;
 }
 
 body {
   margin: 0;
+  padding: 1rem;
   font-family: 'Inter', sans-serif;
   background: var(--bg-color);
-  color: var(--text);
+  color: var(--text-color);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   min-height: 100vh;
-  padding: 1rem;
   overflow: hidden;
 }
 
 .container {
-  background: var(--bg-color);
-  border-radius: 2rem;
+  background: var(--glass);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-glass);
   padding: 2.5rem 2rem;
-  max-width: 420px;
+  max-width: 400px;
   width: 100%;
-  box-shadow:
-    inset 6px 6px 12px var(--inner-shadow-dark),
-    inset -6px -6px 12px var(--inner-shadow-light),
-    0 10px 25px rgba(0, 0, 0, 0.06);
-  animation: float 5s ease-in-out infinite;
-  transition: all 0.3s ease-in-out;
+  box-shadow: 0 16px 32px var(--shadow-dark), inset 1px 1px 2px var(--shadow-light);
+  animation: fadeUp 0.7s ease both;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .container h1 {
   font-size: 2rem;
-  font-weight: 800;
   text-align: center;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  margin-bottom: 2rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 2rem;
-  animation: fadeInUp 0.6s ease both;
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .input-section {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.5rem;
+}
+
+.input-group {
+  position: relative;
 }
 
 input,
 select {
-  width: 100%;
-  padding: 0.75rem 1rem;
+  /* width: 100%; */
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-color);
   font-size: 1rem;
-  border: 1px solid var(--glass-border);
-  border-radius: 1.25rem;
-  background: var(--glass-bg);
-  backdrop-filter: blur(14px);
-  color: var(--text);
-  box-shadow:
-    inset 2px 2px 6px rgba(255, 255, 255, 0.25),
-    inset -2px -2px 6px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 2px 2px 5px var(--shadow-light), inset -2px -2px 6px var(--shadow-dark);
+  transition: all var(--transition);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 input::placeholder,
@@ -84,67 +90,72 @@ select::placeholder {
   color: rgba(0, 0, 0, 0.4);
 }
 
-input:focus,
-select:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
-}
-
 button {
-  background: linear-gradient(to right, var(--accent), var(--accent-2));
-  color: white;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
   border: none;
-  border-radius: 2rem;
-  padding: 0.75rem 2rem;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 1rem;
-  box-shadow: 0 6px 14px rgba(99, 102, 241, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  position: relative;
 }
 
 button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.25), transparent, rgba(255,255,255,0.1));
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+button:hover::after {
+  left: 100%;
 }
 
 .result-box,
 .message-box {
-  margin-top: 1.75rem;
-  padding: 1rem 1.25rem;
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  border-radius: 1rem;
-  border: 1px solid var(--glass-border);
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--text);
-  box-shadow:
-    inset 1px 1px 4px rgba(255, 255, 255, 0.2),
-    inset -1px -1px 4px rgba(0, 0, 0, 0.05);
-  animation: fadeInUp 0.6s ease both;
+  margin-top: 2rem;
+  padding: 1rem 1.2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-color);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.05);
+  animation: fadeUp 0.5s ease both;
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 1.8rem 1.5rem;
+    padding: 2rem 1.2rem;
   }
 
   .container h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   input,
-  select {
-    font-size: 0.95rem;
-    padding: 0.65rem 0.9rem;
-  }
-
+  select,
   button {
     font-size: 0.95rem;
-    padding: 0.65rem 1.5rem;
+    padding: 0.8rem 1.2rem;
   }
 
   .result-box,
