@@ -3,8 +3,8 @@
   --text: #2e2e2e;
   --accent: #6366f1;
   --accent-2: #3b82f6;
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.25);
   --inner-shadow-light: rgba(255, 255, 255, 0.6);
   --inner-shadow-dark: rgba(174, 180, 190, 0.4);
 }
@@ -25,13 +25,13 @@ body {
 .container {
   background: var(--bg-color);
   border-radius: 2rem;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   max-width: 420px;
   width: 100%;
   box-shadow:
     inset 6px 6px 12px var(--inner-shadow-dark),
     inset -6px -6px 12px var(--inner-shadow-light),
-    0 8px 20px rgba(0, 0, 0, 0.05);
+    0 10px 25px rgba(0, 0, 0, 0.06);
   animation: float 5s ease-in-out infinite;
   transition: all 0.3s ease-in-out;
 }
@@ -48,7 +48,7 @@ body {
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   animation: fadeInUp 0.6s ease both;
 }
 
@@ -71,19 +71,24 @@ select {
   border: 1px solid var(--glass-border);
   border-radius: 1.25rem;
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
   color: var(--text);
   box-shadow:
-    inset 2px 2px 6px rgba(255, 255, 255, 0.3),
-    inset -2px -2px 6px rgba(0, 0, 0, 0.05);
+    inset 2px 2px 6px rgba(255, 255, 255, 0.25),
+    inset -2px -2px 6px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
+}
+
+input::placeholder,
+select::placeholder {
+  color: rgba(0, 0, 0, 0.4);
 }
 
 input:focus,
 select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
 }
 
 button {
@@ -93,6 +98,7 @@ button {
   border-radius: 2rem;
   padding: 0.75rem 2rem;
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   margin-top: 1rem;
   box-shadow: 0 6px 14px rgba(99, 102, 241, 0.25);
@@ -100,30 +106,30 @@ button {
 }
 
 button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(99, 102, 241, 0.4);
 }
 
 .result-box,
 .message-box {
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
   padding: 1rem 1.25rem;
   background: var(--glass-bg);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   border-radius: 1rem;
   border: 1px solid var(--glass-border);
   font-weight: 600;
   font-size: 1.1rem;
   color: var(--text);
   box-shadow:
-    inset 1px 1px 3px rgba(255, 255, 255, 0.2),
-    inset -1px -1px 3px rgba(0, 0, 0, 0.04);
+    inset 1px 1px 4px rgba(255, 255, 255, 0.2),
+    inset -1px -1px 4px rgba(0, 0, 0, 0.05);
   animation: fadeInUp 0.6s ease both;
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 1.5rem;
+    padding: 1.8rem 1.5rem;
   }
 
   .container h1 {
@@ -139,5 +145,10 @@ button:hover {
   button {
     font-size: 0.95rem;
     padding: 0.65rem 1.5rem;
+  }
+
+  .result-box,
+  .message-box {
+    font-size: 1rem;
   }
 }
