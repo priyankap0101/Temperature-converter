@@ -4,79 +4,63 @@ function convertTemp() {
     const fromUnit = document.getElementById('fromUnit').value;
     const toUnit = document.getElementById('toUnit').value;
     const resultBox = document.getElementById('result');
-
+  
     resultBox.textContent = "";
-    resultBox.style.display = "none";
-
-    if (isNaN(input) || input === "") {
-        showResult("Please enter a valid number.", "#ef4444", "error");
-        return;
+    resultBox.className = "result"; // Reset to base class
+  
+    if (isNaN(input)) {
+      return showResult("Please enter a valid number.", "error");
     }
-
-
+  
     if (fromUnit === "K" && input < 0) {
-        showResult("Temperature in Kelvin cannot be negative.", "#ef4444", "error");
-        return;
+      return showResult("Temperature in Kelvin cannot be negative.", "error");
     }
-
-
-    if (input < -273.15 && fromUnit === "C" || input < -459.67 && fromUnit === "F") {
-        showResult("Temperature cannot be below absolute zero.", "#ef4444", "error");
-        return;
+  
+    if ((fromUnit === "C" && input < -273.15) || (fromUnit === "F" && input < -459.67)) {
+      return showResult("Temperature cannot be below absolute zero.", "error");
     }
-
+  
     const conversionFormulas = {
-        "C": {
-            "F": (temp) => (temp * 9 / 5) + 32,
-            "K": (temp) => temp + 273.15
-        },
-        "F": {
-            "C": (temp) => (temp - 32) * 5 / 9,
-            "K": (temp) => (temp - 32) * 5 / 9 + 273.15
-        },
-        "K": {
-            "C": (temp) => temp - 273.15,
-            "F": (temp) => (temp - 273.15) * 9 / 5 + 32
-        }
+      C: {
+        F: (temp) => (temp * 9 / 5) + 32,
+        K: (temp) => temp + 273.15
+      },
+      F: {
+        C: (temp) => (temp - 32) * 5 / 9,
+        K: (temp) => (temp - 32) * 5 / 9 + 273.15
+      },
+      K: {
+        C: (temp) => temp - 273.15,
+        F: (temp) => (temp - 273.15) * 9 / 5 + 32
+      }
     };
-
+  
     if (fromUnit === toUnit) {
-        showResult(`Both units are the same: ${input}°${fromUnit}`, "#10b981", "success");
-        return;
+      return showResult(`Both units are the same: ${input}°${fromUnit}`, "success");
     }
-
-    if (conversionFormulas[fromUnit] && conversionFormulas[fromUnit][toUnit]) {
-        try {
-            const output = conversionFormulas[fromUnit][toUnit](input);
-            showResult(`${input}°${fromUnit} = ${output.toFixed(2)}°${toUnit}`, "#1D4ED8", "info");
-        } catch (error) {
-            console.error("Conversion error:", error);
-            showResult("An error occurred during the conversion. Please try again.", "#ef4444", "error");
-        }
-    } else {
-        showResult("Invalid conversion units selected.", "#ef4444", "error");
+  
+    try {
+      const output = conversionFormulas[fromUnit]?.[toUnit];
+      if (output) {
+        const converted = output(input).toFixed(2);
+        showResult(`${input}°${fromUnit} = ${converted}°${toUnit}`, "info");
+      } else {
+        showResult("Invalid conversion units selected.", "error");
+      }
+    } catch (err) {
+      console.error("Conversion Error:", err);
+      showResult("Something went wrong. Please try again.", "error");
     }
-}
-
-function showResult(message, color, type) {
+  }
+  
+  function showResult(message, type = "info") {
     const resultBox = document.getElementById('result');
+  
+    resultBox.className = `result ${type}`;
     resultBox.textContent = message;
-
-    resultBox.classList.remove('success', 'error', 'info');
-
-    if (type === 'success') {
-        resultBox.classList.add('success');
-    } else if (type === 'error') {
-        resultBox.classList.add('error');
-    } else {
-        resultBox.classList.add('info');
-    }
-
-    resultBox.style.color = color;
     resultBox.style.display = "block";
-
-
-    setTimeout(() => {
-        resultBox.style.opacity = 1;
-    }, 100);
-}
+  
+    // Trigger fade-in (if using CSS animation)
+    resultBox.classList.add("show");
+  }
+  
