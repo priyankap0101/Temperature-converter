@@ -34,9 +34,9 @@ body {
 }
 
 h1 {
-  font-size: 28px;
+  font-size: 2rem;
   color: #5b54f2;
-  font-weight: 800;
+  font-weight: bolder;
   margin-bottom: 28px;
   line-height: 1.4;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -66,7 +66,7 @@ input:focus,
 select:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.65);
-  box-shadow: 0 0 14px rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.6);
   transform: scale(1.03);
 }
 
@@ -78,7 +78,7 @@ button {
   border-radius: 25px;
   background: linear-gradient(135deg, #5b54f2, #7f5af0);
   color: white;
-  font-size: 17px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -92,7 +92,7 @@ button {
 button:hover {
   background: linear-gradient(135deg, #4f46e5, #6d28d9);
   transform: translateY(-3px);
-  box-shadow: 0 7px 20px rgba(91, 84, 242, 0.5);
+  box-shadow: 0 7px 22px rgba(91, 84, 242, 0.55);
 }
 
 button:active {
@@ -101,18 +101,34 @@ button:active {
 }
 
 .result {
-  margin-top: 22px;
-  font-size: 18px;
-  font-weight: 500;
-  color: #333;
+  display: none;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  margin-top: 22px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .result.show {
+  display: block;
   opacity: 1;
   transform: translateY(0);
+}
+
+.result.success {
+  color: #10b981;
+  text-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+}
+
+.result.error {
+  color: #ef4444;
+  text-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+}
+
+.result.info {
+  color: #1d4ed8;
+  text-shadow: 0 0 6px rgba(29, 78, 216, 0.5);
 }
 
 /* 🔁 Responsive Tweaks */
@@ -123,36 +139,13 @@ button:active {
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 1.8rem;
   }
 
   input,
   select,
   button {
-    font-size: 15px;
+    font-size: 1rem;
     padding: 13px;
   }
-}
-.result {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  margin-top: 20px;
-  font-weight: 600;
-}
-
-.result.show {
-  opacity: 1;
-}
-
-.result.success {
-  color: #10b981; /* Green */
-}
-
-.result.error {
-  color: #ef4444; /* Red */
-}
-
-.result.info {
-  color: #1d4ed8; /* Blue */
 }

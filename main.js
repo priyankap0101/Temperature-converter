@@ -6,7 +6,7 @@ function convertTemp() {
     const resultBox = document.getElementById('result');
   
     resultBox.textContent = "";
-    resultBox.className = "result"; // Reset to base class
+    resultBox.className = "result"; 
   
     if (isNaN(input)) {
       return showResult("Please enter a valid number.", "error");
@@ -60,7 +60,7 @@ function convertTemp() {
     resultBox.textContent = message;
     resultBox.style.display = "block";
   
-    // Trigger fade-in (if using CSS animation)
+    
     resultBox.classList.add("show");
   }
   
