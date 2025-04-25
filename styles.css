@@ -11,7 +11,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--font-main);
+  font-family: var(--font-main, sans-serif);
 }
 
 body {
@@ -26,11 +26,11 @@ body {
 .container {
   background: var(--bg-color);
   border-radius: 25px;
-  box-shadow: 10px 10px 25px var(--shadow-dark), -10px -10px 25px var(--shadow-light);
-  padding: 40px 30px;
   max-width: 370px;
   width: 100%;
+  padding: 40px 30px;
   text-align: center;
+  box-shadow: 10px 10px 25px var(--shadow-dark), -10px -10px 25px var(--shadow-light);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -43,9 +43,9 @@ h1 {
   font-size: 1.6rem;
   font-weight: 800;
   color: #2e2e2e;
+  text-align: center;
   margin-bottom: 28px;
   letter-spacing: 0.6px;
-  text-align: center;
   position: relative;
   padding-bottom: 12px;
 }
@@ -54,8 +54,8 @@ h1::after {
   content: "";
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
   bottom: 0;
+  transform: translateX(-50%);
   width: 60px;
   height: 3px;
   background: linear-gradient(90deg, var(--primary), #7c3aed);
@@ -74,9 +74,9 @@ select {
   margin: 12px 0;
   border: none;
   border-radius: 20px;
+  font-size: 16px;
   background: var(--bg-color);
   color: #333;
-  font-size: 16px;
   box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
   transition: all 0.3s ease;
 }
@@ -87,22 +87,22 @@ input::placeholder {
 
 input:focus,
 select:focus {
-  outline: none;
   background: #e7ebf2;
-  box-shadow: inset 4px 4px 6px var(--shadow-dark), inset -4px -4px 6px var(--shadow-light);
+  outline: none;
   transform: scale(1.02);
+  box-shadow: inset 4px 4px 6px var(--shadow-dark), inset -4px -4px 6px var(--shadow-light);
 }
 
 button {
   width: 100%;
   padding: 15px;
   margin-top: 18px;
+  font-size: 1rem;
+  font-weight: 600;
   border: none;
   border-radius: 25px;
   background: var(--bg-color);
   color: var(--primary);
-  font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
   box-shadow: 6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
   transition: all 0.3s ease;
@@ -123,7 +123,6 @@ button:active {
   display: none;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
   margin-top: 22px;
   font-size: 18px;
   font-weight: 600;
@@ -131,6 +130,7 @@ button:active {
   border-radius: 18px;
   padding: 12px 16px;
   box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .result.show {
