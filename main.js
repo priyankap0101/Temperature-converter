@@ -49,6 +49,6 @@ function convertTemperature() {
   }
 
   const formattedUnit = toUnit.charAt(0).toUpperCase() + toUnit.slice(1);
-  resultText.textContent = `🌡️ ${result.toFixed(2)}° ${formattedUnit}`;
+  resultText.textContent = `${result.toFixed(2)}° ${formattedUnit}`;
   resultText.style.display = "block"; // Show the box only now
 }
