@@ -11,7 +11,6 @@ function convertTemperature() {
 
   let result;
 
-  // Convert the temperature to Celsius first
   if (fromUnit === "celsius") {
     result = temperature;
   } else if (fromUnit === "fahrenheit") {
@@ -20,7 +19,6 @@ function convertTemperature() {
     result = temperature - 273.15;
   }
 
-  // Then from Celsius to the target unit
   if (toUnit === "celsius") {
     result = result;
   } else if (toUnit === "fahrenheit") {
@@ -29,5 +27,5 @@ function convertTemperature() {
     result = result + 273.15;
   }
 
-  resultText.textContent = `Result: ${result.toFixed(2)}° ${toUnit.charAt(0).toUpperCase() + toUnit.slice(1)}`;
+  resultText.textContent = ` ${result.toFixed(2)}° ${toUnit.charAt(0).toUpperCase() + toUnit.slice(1)}`;
 }

@@ -89,8 +89,23 @@ input, select {
 }
 
 .result {
-  margin-top: 1rem;
-  font-size: 1.1rem;
-  font-weight: 500;
+  margin-top: 2rem;
+  padding: 2rem 2.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
   color: #333;
+  background: #e6e9ef;
+  border-radius: 20px;
+  box-shadow:
+    8px 8px 16px rgba(163, 177, 198, 0.6),
+    -8px -8px 16px rgba(255, 255, 255, 0.8);
+  transition: all 0.4s ease;
+  letter-spacing: 0.5px;
+}
+
+.result:hover {
+  box-shadow:
+    inset 8px 8px 16px rgba(163, 177, 198, 0.6),
+    inset -8px -8px 16px rgba(255, 255, 255, 0.9);
+  background: #dfe3ea;
 }
