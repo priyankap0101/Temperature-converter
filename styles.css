@@ -87,6 +87,19 @@ input, select {
 .convert-btn:hover {
   background: #d3d8e0;
 }
+#resultText {
+  display: none; /* hidden initially */
+  margin-top: 2rem;
+  padding: 2rem 2.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  background: #e6e9ef;
+  border-radius: 20px;
+  box-shadow:
+    8px 8px 16px rgba(163, 177, 198, 0.6),
+    -8px -8px 16px rgba(255, 255, 255, 0.8);
+  transition: all 0.4s ease;
 
 .result {
   margin-top: 2rem;
