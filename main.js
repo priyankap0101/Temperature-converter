@@ -10,14 +10,16 @@ function convertTemperature() {
   // Handle result display
   function showResult(message, type = "info") {
     resultEl.textContent = message;
-    resultEl.style.display = "block";
+    resultEl.style.display = "block"; // Ensure the element is displayed
     resultEl.setAttribute("aria-live", "polite");
-    resultEl.className = `result ${type}`;
+    resultEl.className = `result ${type} show`; // Add 'show' class to trigger fade-in
 
-    // Trigger smooth fade-in
+    // Reset opacity and visibility for smooth fade-in effect
     resultEl.style.opacity = 0;
+    resultEl.style.visibility = "hidden"; // Ensure it's hidden initially
     requestAnimationFrame(() => {
-      resultEl.style.opacity = 1;
+      resultEl.style.opacity = 1; // Fade-in
+      resultEl.style.visibility = "visible"; // Make the element visible
     });
   }
 

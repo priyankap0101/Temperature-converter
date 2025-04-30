@@ -87,8 +87,8 @@ input, select {
 .convert-btn:hover {
   background: #d3d8e0;
 }
-#resultText,
-.result {
+#resultText {
+  display: none; /* Completely removed from layout initially */
   margin-top: 1.6rem;
   padding: 1.2rem 1.7rem;
   border-radius: 20px;
@@ -99,20 +99,20 @@ input, select {
   line-height: 1.6;
   box-shadow: inset 7px 7px 15px #c3c9e1, inset -7px -7px 15px #ffffff;
   opacity: 0;
+  transform: translateY(10px);
   transition: all 0.4s ease;
   pointer-events: none;
 }
 
-/* Show result with fade-in */
-#resultText.show,
-.result.show {
+#resultText.show {
+  display: block; /* Only takes up space when shown */
   opacity: 1;
   pointer-events: auto;
+  transform: translateY(0);
 }
 
 /* Success State */
-#resultText.success,
-.result.success {
+#resultText.success {
   color: #388e3c;
   background: linear-gradient(145deg, #d9f7d1, #c1e9c0);
   box-shadow: inset 7px 7px 15px #b7c7b3, inset -7px -7px 15px #ffffff;
@@ -121,22 +121,10 @@ input, select {
 }
 
 /* Error State */
-#resultText.error,
-.result.error {
+#resultText.error {
   color: #d32f2f;
   background: linear-gradient(145deg, #fdd8d8, #f8a1a1);
   box-shadow: inset 7px 7px 15px #f1c2c2, inset -7px -7px 15px #ffffff;
   border-left: 6px solid #e53935;
   transform: scale(1.02);
-}
-
-/* Transition effects for smooth appearance */
-#resultText,
-.result {
-  transform: translateY(10px);
-}
-
-#resultText.show,
-.result.show {
-  transform: translateY(0);
 }
