@@ -4,32 +4,39 @@ function convertTemperature() {
   const toUnit = document.getElementById('toUnit').value;
   const resultEl = document.getElementById('resultText');
 
-  const input = inputEl.value.trim();
-  const temperature = parseFloat(input);
+  const rawInput = inputEl.value.trim();
+  const temperature = parseFloat(rawInput);
 
-  // Handle result display
-  function showResult(message, type = "info") {
+  // Show result with animation
+  const showResult = (message, type = "info") => {
     resultEl.textContent = message;
-    resultEl.style.display = "block"; // Ensure the element is displayed
+    resultEl.className = `result ${type} show`;
     resultEl.setAttribute("aria-live", "polite");
-    resultEl.className = `result ${type} show`; // Add 'show' class to trigger fade-in
+    resultEl.style.display = "block";
 
-    // Reset opacity and visibility for smooth fade-in effect
-    resultEl.style.opacity = 0;
-    resultEl.style.visibility = "hidden"; // Ensure it's hidden initially
     requestAnimationFrame(() => {
-      resultEl.style.opacity = 1; // Fade-in
-      resultEl.style.visibility = "visible"; // Make the element visible
+      resultEl.style.opacity = "1";
+      resultEl.style.visibility = "visible";
+      resultEl.style.transform = "translateY(0)";
     });
-  }
+  };
 
-  // Input validation
-  if (!input || isNaN(temperature)) {
-    showResult("⚠️ Please enter a valid number.", "error");
+  // Clear and hide result area
+  const hideResult = () => {
+    resultEl.textContent = "";
+    resultEl.className = "result";
+    resultEl.style.opacity = "0";
+    resultEl.style.visibility = "hidden";
+    resultEl.style.transform = "translateY(10px)";
+  };
+
+  // Early exit on invalid input
+  if (!rawInput || isNaN(temperature)) {
+    showResult("⚠️ Please enter a valid numeric value.", "error");
     return;
   }
 
-  // Conversion maps
+  // Conversion logic maps
   const toCelsius = {
     celsius: t => t,
     fahrenheit: t => (t - 32) * 5 / 9,
@@ -48,10 +55,33 @@ function convertTemperature() {
     return;
   }
 
-  // Perform conversion
-  const tempCelsius = toCelsius[fromUnit](temperature);
-  const converted = fromCelsius[toUnit](tempCelsius);
-  const unitLabel = toUnit.charAt(0).toUpperCase() + toUnit.slice(1);
+  // Absolute zero check (Kelvin cannot be below 0)
+  if (fromUnit === 'kelvin' && temperature < 0) {
+    showResult("⚠️ Temperature in Kelvin cannot be below 0 K.", "error");
+    return;
+  }
 
-  showResult(`🌡️ ${converted.toFixed(2)}° ${unitLabel}`, "success");
+  // Same unit shortcut
+  if (fromUnit === toUnit) {
+    showResult(`ℹ️ ${temperature.toFixed(2)}° ${capitalize(toUnit)} (no conversion needed)`, "success");
+    return;
+  }
+
+  // Perform conversion
+  const celsiusValue = toCelsius[fromUnit](temperature);
+  const convertedValue = fromCelsius[toUnit](celsiusValue);
+  const unitName = capitalize(toUnit);
+
+  // Absolute zero check for converted temperature
+  if (toUnit === 'kelvin' && convertedValue < 0) {
+    showResult("⚠️ Result in Kelvin cannot be below 0 K.", "error");
+    return;
+  }
+
+  showResult(`🌡️ ${convertedValue.toFixed(2)}° ${unitName}`, "success");
+}
+
+// Utility to capitalize first letter
+function capitalize(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }
