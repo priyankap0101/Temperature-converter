@@ -87,42 +87,56 @@ input, select {
 .convert-btn:hover {
   background: #d3d8e0;
 }
-#resultText {
-  margin-top: 1rem;
-  padding: 0.8rem 1.2rem;
-  border-radius: 12px;
-  box-shadow: inset 4px 4px 10px #d1d9e6, inset -4px -4px 10px #ffffff;
-  background: #e0e5ec;
-  font-size: 1.1rem;
-  font-weight: 500;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-#resultText.success {
-  color: #333;
-}
-
-#resultText.error {
-  color: #e63946;
-  box-shadow: inset 4px 4px 10px #ffcccc, inset -4px -4px 10px #ffffff;
-}
+#resultText,
 .result {
-  margin-top: 1rem;
-  padding: 0.9rem 1.2rem;
-  border-radius: 12px;
-  font-size: 1.1rem;
+  margin-top: 1.6rem;
+  padding: 1.2rem 1.7rem;
+  border-radius: 20px;
+  font-size: 1.2rem;
   font-weight: 500;
+  color: #2f3542;
   background: #e0e5ec;
-  box-shadow: inset 4px 4px 10px #cbd3e0, inset -4px -4px 10px #fff;
-  transition: opacity 0.3s ease;
+  line-height: 1.6;
+  box-shadow: inset 7px 7px 15px #c3c9e1, inset -7px -7px 15px #ffffff;
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none;
 }
 
+/* Show result with fade-in */
+#resultText.show,
+.result.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Success State */
+#resultText.success,
 .result.success {
-  color: #2d3436;
+  color: #388e3c;
+  background: linear-gradient(145deg, #d9f7d1, #c1e9c0);
+  box-shadow: inset 7px 7px 15px #b7c7b3, inset -7px -7px 15px #ffffff;
+  border-left: 6px solid #43a047;
+  transform: scale(1.02);
 }
 
+/* Error State */
+#resultText.error,
 .result.error {
-  color: #d63031;
-  box-shadow: inset 4px 4px 10px #ffcccc, inset -4px -4px 10px #fff;
+  color: #d32f2f;
+  background: linear-gradient(145deg, #fdd8d8, #f8a1a1);
+  box-shadow: inset 7px 7px 15px #f1c2c2, inset -7px -7px 15px #ffffff;
+  border-left: 6px solid #e53935;
+  transform: scale(1.02);
+}
+
+/* Transition effects for smooth appearance */
+#resultText,
+.result {
+  transform: translateY(10px);
+}
+
+#resultText.show,
+.result.show {
+  transform: translateY(0);
 }
