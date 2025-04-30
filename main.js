@@ -1,48 +1,55 @@
 function convertTemperature() {
-  const inputField = document.getElementById('temperatureInput');
+  const inputEl = document.getElementById('temperatureInput');
   const fromUnit = document.getElementById('fromUnit').value;
   const toUnit = document.getElementById('toUnit').value;
-  const resultText = document.getElementById('resultText');
+  const resultEl = document.getElementById('resultText');
 
-  const input = inputField.value.trim();
+  const input = inputEl.value.trim();
   const temperature = parseFloat(input);
 
-  // Utility: Show result box with optional emoji and fade-in effect
-  function showMessage(message, isError = false) {
-    resultText.textContent = message;
-    resultText.style.display = "block";
-    resultText.style.color = isError ? "#e63946" : "#333";
-    resultText.style.opacity = 0;
-    setTimeout(() => {
-      resultText.style.opacity = 1;
-    }, 10); // triggers fade-in
+  // Handle result display
+  function showResult(message, type = "info") {
+    resultEl.textContent = message;
+    resultEl.style.display = "block";
+    resultEl.setAttribute("aria-live", "polite");
+    resultEl.className = `result ${type}`;
+
+    // Trigger smooth fade-in
+    resultEl.style.opacity = 0;
+    requestAnimationFrame(() => {
+      resultEl.style.opacity = 1;
+    });
   }
 
+  // Input validation
   if (!input || isNaN(temperature)) {
-    showMessage("⚠️ Please enter a valid number.", true);
+    showResult("⚠️ Please enter a valid number.", "error");
     return;
   }
 
+  // Conversion maps
   const toCelsius = {
-    celsius: temp => temp,
-    fahrenheit: temp => (temp - 32) * 5 / 9,
-    kelvin: temp => temp - 273.15,
+    celsius: t => t,
+    fahrenheit: t => (t - 32) * 5 / 9,
+    kelvin: t => t - 273.15,
   };
 
   const fromCelsius = {
-    celsius: temp => temp,
-    fahrenheit: temp => (temp * 9 / 5) + 32,
-    kelvin: temp => temp + 273.15,
+    celsius: t => t,
+    fahrenheit: t => (t * 9 / 5) + 32,
+    kelvin: t => t + 273.15,
   };
 
+  // Unit validation
   if (!(fromUnit in toCelsius) || !(toUnit in fromCelsius)) {
-    showMessage("⚠️ Invalid conversion units selected.", true);
+    showResult("⚠️ Invalid unit selection.", "error");
     return;
   }
 
-  const celsius = toCelsius[fromUnit](temperature);
-  const converted = fromCelsius[toUnit](celsius);
-  const formattedUnit = toUnit.charAt(0).toUpperCase() + toUnit.slice(1);
+  // Perform conversion
+  const tempCelsius = toCelsius[fromUnit](temperature);
+  const converted = fromCelsius[toUnit](tempCelsius);
+  const unitLabel = toUnit.charAt(0).toUpperCase() + toUnit.slice(1);
 
-  showMessage(`🌡️ ${converted.toFixed(2)}° ${formattedUnit}`);
+  showResult(`🌡️ ${converted.toFixed(2)}° ${unitLabel}`, "success");
 }
