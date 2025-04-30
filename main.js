@@ -1,54 +1,45 @@
 function convertTemperature() {
-  const input = document.getElementById('temperatureInput').value.trim();
+  const inputField = document.getElementById('temperatureInput');
   const fromUnit = document.getElementById('fromUnit').value;
   const toUnit = document.getElementById('toUnit').value;
   const resultText = document.getElementById('resultText');
 
+  const input = inputField.value.trim();
   const temperature = parseFloat(input);
 
-  if (input === "" || isNaN(temperature)) {
+  // Utility: Display result box
+  function showMessage(message) {
+    resultText.textContent = message;
     resultText.style.display = "block";
-    resultText.textContent = "⚠️ Please enter a valid number.";
+  }
+
+  if (!input || isNaN(temperature)) {
+    showMessage("⚠️ Please enter a valid number.");
     return;
   }
 
-  let celsius;
+  // Convert to Celsius
+  const toCelsius = {
+    celsius: (temp) => temp,
+    fahrenheit: (temp) => (temp - 32) * 5 / 9,
+    kelvin: (temp) => temp - 273.15,
+  };
 
-  switch (fromUnit) {
-    case "celsius":
-      celsius = temperature;
-      break;
-    case "fahrenheit":
-      celsius = (temperature - 32) * 5 / 9;
-      break;
-    case "kelvin":
-      celsius = temperature - 273.15;
-      break;
-    default:
-      resultText.style.display = "block";
-      resultText.textContent = "⚠️ Invalid source unit.";
-      return;
+  // Convert from Celsius
+  const fromCelsius = {
+    celsius: (temp) => temp,
+    fahrenheit: (temp) => (temp * 9 / 5) + 32,
+    kelvin: (temp) => temp + 273.15,
+  };
+
+  if (!toCelsius[fromUnit] || !fromCelsius[toUnit]) {
+    showMessage("⚠️ Invalid conversion units selected.");
+    return;
   }
 
-  let result;
-
-  switch (toUnit) {
-    case "celsius":
-      result = celsius;
-      break;
-    case "fahrenheit":
-      result = (celsius * 9 / 5) + 32;
-      break;
-    case "kelvin":
-      result = celsius + 273.15;
-      break;
-    default:
-      resultText.style.display = "block";
-      resultText.textContent = "⚠️ Invalid target unit.";
-      return;
-  }
+  const celsius = toCelsius[fromUnit](temperature);
+  const converted = fromCelsius[toUnit](celsius);
 
   const formattedUnit = toUnit.charAt(0).toUpperCase() + toUnit.slice(1);
-  resultText.textContent = `${result.toFixed(2)}° ${formattedUnit}`;
-  resultText.style.display = "block"; // Show the box only now
+  showMessage(`🌡️ ${converted.toFixed(2)}° ${formattedUnit}`);
 }

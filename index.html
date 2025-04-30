@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
-<body>
-  <div class="container">
-    <h2>Temperature Converter</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Temperature Converter</h2>
 
-    <input type="number" id="temperatureInput" placeholder="Enter temperature">
+      <input
+        type="number"
+        id="temperatureInput"
+        placeholder="Enter temperature"
+      />
 
-    <div class="units-container">
-      <select id="fromUnit">
-        <option value="celsius">Celsius</option>
-        <option value="fahrenheit">Fahrenheit</option>
-        <option value="kelvin">Kelvin</option>
-      </select>
+      <div class="units-container">
+        <select id="fromUnit">
+          <option value="celsius">Celsius</option>
+          <option value="fahrenheit">Fahrenheit</option>
+          <option value="kelvin">Kelvin</option>
+        </select>
 
-      <select id="toUnit">
-        <option value="celsius">Celsius</option>
-        <option value="fahrenheit">Fahrenheit</option>
-        <option value="kelvin">Kelvin</option>
-      </select>
+        <select id="toUnit">
+          <option value="celsius">Celsius</option>
+          <option value="fahrenheit">Fahrenheit</option>
+          <option value="kelvin">Kelvin</option>
+        </select>
+      </div>
+
+      <button class="convert-btn" onclick="convertTemperature()">
+        Convert🔄
+      </button>
+
+      <div class="result" id="resultText"></div>
     </div>
 
-    <button class="convert-btn" onclick="convertTemperature()">
-       Convert🔄
-    </button>
-
-    <div class="result" id="resultText"></div>
-  </div>
-
-  <script src="./main.js"></script>
-</body>
+    <script src="./main.js"></script>
+  </body>
 </html>
