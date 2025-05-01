@@ -88,7 +88,7 @@ input, select {
   background: #d3d8e0;
 }
 #resultText {
-  display: none; /* Completely removed from layout initially */
+  display: none; 
   margin-top: 1.6rem;
   padding: 1.2rem 1.7rem;
   border-radius: 20px;
@@ -105,24 +105,25 @@ input, select {
 }
 
 #resultText.show {
-  display: block; /* Only takes up space when shown */
+  display: block; 
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-/* Success State */
 #resultText.success {
-  color: #388e3c;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  color: #000000;
   background: linear-gradient(145deg, #d9f7d1, #c1e9c0);
   box-shadow: inset 7px 7px 15px #b7c7b3, inset -7px -7px 15px #ffffff;
   border-left: 6px solid #43a047;
   transform: scale(1.02);
 }
 
-/* Error State */
+
 #resultText.error {
-  color: #d32f2f;
+  color: #570808;
   background: linear-gradient(145deg, #fdd8d8, #f8a1a1);
   box-shadow: inset 7px 7px 15px #f1c2c2, inset -7px -7px 15px #ffffff;
   border-left: 6px solid #e53935;
