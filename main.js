@@ -77,7 +77,7 @@ function convertTemperature() {
     return;
   }
 
-  showResult(`🌡️ ${converted.toFixed(2)}° ${capitalize(toUnit)}`, "success");
+  showResult(`${converted.toFixed(2)}° ${capitalize(toUnit)}`, "success");
 }
 
 // Capitalize first character of a string
