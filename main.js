@@ -7,7 +7,6 @@ function convertTemperature() {
   const rawInput = inputEl.value.trim();
   const temperature = parseFloat(rawInput);
 
-  // Show result with animation
   const showResult = (message, type = "info") => {
     resultEl.textContent = message;
     resultEl.className = `result ${type} show`;
@@ -21,7 +20,6 @@ function convertTemperature() {
     });
   };
 
-  // Hide result box (in case you ever call it)
   const hideResult = () => {
     resultEl.textContent = "";
     resultEl.className = "result";
@@ -30,12 +28,13 @@ function convertTemperature() {
     resultEl.style.transform = "translateY(10px)";
   };
 
-  // Input validation
+  // Validate input
   if (!rawInput || isNaN(temperature)) {
     showResult("⚠️ Please enter a valid numeric temperature.", "error");
     return;
   }
 
+  // Supported units
   const toCelsius = {
     celsius: t => t,
     fahrenheit: t => (t - 32) * 5 / 9,
@@ -48,19 +47,19 @@ function convertTemperature() {
     kelvin: t => t + 273.15,
   };
 
-  // Unit validation
+  // Validate units
   if (!(fromUnit in toCelsius) || !(toUnit in fromCelsius)) {
     showResult("⚠️ Please select valid temperature units.", "error");
     return;
   }
 
-  // Kelvin cannot be below absolute zero
+  // Validate Kelvin input
   if (fromUnit === 'kelvin' && temperature < 0) {
-    showResult("⚠️ Kelvin temperature cannot be below 0 K.", "error");
+    showResult("⚠️ Temperature in Kelvin cannot be below 0 K.", "error");
     return;
   }
 
-  // Same unit, no conversion needed
+  // If no conversion needed
   if (fromUnit === toUnit) {
     showResult(`ℹ️ ${temperature.toFixed(2)}° ${formatUnit(toUnit)} (no conversion needed)`, "success");
     return;
@@ -69,7 +68,7 @@ function convertTemperature() {
   const tempInCelsius = toCelsius[fromUnit](temperature);
   const convertedTemp = fromCelsius[toUnit](tempInCelsius);
 
-  // Check for invalid result
+  // Check converted result for invalid Kelvin
   if (toUnit === 'kelvin' && convertedTemp < 0) {
     showResult("⚠️ Resulting temperature in Kelvin cannot be below 0 K.", "error");
     return;
@@ -78,7 +77,12 @@ function convertTemperature() {
   showResult(`${convertedTemp.toFixed(2)}° ${formatUnit(toUnit)}`, "success");
 }
 
-// Capitalizes first letter and ensures 'Kelvin' is not displayed as 'kelvin'
+// Properly formats unit labels
 function formatUnit(unit) {
-  return unit === "kelvin" ? "Kelvin" : unit.charAt(0).toUpperCase() + unit.slice(1);
+  const unitMap = {
+    celsius: "Celsius",
+    fahrenheit: "Fahrenheit",
+    kelvin: "Kelvin",
+  };
+  return unitMap[unit] || unit.charAt(0).toUpperCase() + unit.slice(1);
 }
