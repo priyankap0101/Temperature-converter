@@ -7,13 +7,13 @@ function convertTemperature() {
   const rawInput = inputEl.value.trim();
   const temperature = parseFloat(rawInput);
 
-  // Display result with fade-in animation
+  // Show result with animation
   const showResult = (message, type = "info") => {
     resultEl.textContent = message;
     resultEl.className = `result ${type} show`;
     resultEl.setAttribute("aria-live", "polite");
-    resultEl.style.display = "block";
 
+    resultEl.style.display = "block";
     requestAnimationFrame(() => {
       resultEl.style.opacity = "1";
       resultEl.style.visibility = "visible";
@@ -21,7 +21,7 @@ function convertTemperature() {
     });
   };
 
-  // Hide result initially
+  // Hide result box (in case you ever call it)
   const hideResult = () => {
     resultEl.textContent = "";
     resultEl.className = "result";
@@ -30,13 +30,12 @@ function convertTemperature() {
     resultEl.style.transform = "translateY(10px)";
   };
 
-  // Validate numeric input
+  // Input validation
   if (!rawInput || isNaN(temperature)) {
-    showResult("⚠️ Please enter a valid number.", "error");
+    showResult("⚠️ Please enter a valid numeric temperature.", "error");
     return;
   }
 
-  // Temperature conversion formulas to and from Celsius
   const toCelsius = {
     celsius: t => t,
     fahrenheit: t => (t - 32) * 5 / 9,
@@ -49,38 +48,37 @@ function convertTemperature() {
     kelvin: t => t + 273.15,
   };
 
-  // Check for valid units
+  // Unit validation
   if (!(fromUnit in toCelsius) || !(toUnit in fromCelsius)) {
-    showResult("⚠️ Invalid temperature unit selected.", "error");
+    showResult("⚠️ Please select valid temperature units.", "error");
     return;
   }
 
-  // Check for physical constraint: Kelvin can't be negative
+  // Kelvin cannot be below absolute zero
   if (fromUnit === 'kelvin' && temperature < 0) {
-    showResult("⚠️ Kelvin temperature cannot be below 0.", "error");
+    showResult("⚠️ Kelvin temperature cannot be below 0 K.", "error");
     return;
   }
 
-  // Skip conversion if units are the same
+  // Same unit, no conversion needed
   if (fromUnit === toUnit) {
-    showResult(`ℹ️ ${temperature.toFixed(2)}° ${capitalize(toUnit)} (no conversion needed)`, "success");
+    showResult(`ℹ️ ${temperature.toFixed(2)}° ${formatUnit(toUnit)} (no conversion needed)`, "success");
     return;
   }
 
-  // Perform conversion
   const tempInCelsius = toCelsius[fromUnit](temperature);
-  const converted = fromCelsius[toUnit](tempInCelsius);
+  const convertedTemp = fromCelsius[toUnit](tempInCelsius);
 
-  // Ensure final Kelvin result is valid
-  if (toUnit === 'kelvin' && converted < 0) {
-    showResult("⚠️ Resulting Kelvin value cannot be below 0.", "error");
+  // Check for invalid result
+  if (toUnit === 'kelvin' && convertedTemp < 0) {
+    showResult("⚠️ Resulting temperature in Kelvin cannot be below 0 K.", "error");
     return;
   }
 
-  showResult(`${converted.toFixed(2)}° ${capitalize(toUnit)}`, "success");
+  showResult(`${convertedTemp.toFixed(2)}° ${formatUnit(toUnit)}`, "success");
 }
 
-// Capitalize first character of a string
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+// Capitalizes first letter and ensures 'Kelvin' is not displayed as 'kelvin'
+function formatUnit(unit) {
+  return unit === "kelvin" ? "Kelvin" : unit.charAt(0).toUpperCase() + unit.slice(1);
 }
