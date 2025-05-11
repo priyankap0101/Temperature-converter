@@ -7,7 +7,6 @@ function convertTemperature() {
   const rawInput = inputEl.value.trim();
   const temperature = parseFloat(rawInput);
 
-  // Unit conversion maps
   const toCelsius = {
     celsius: t => t,
     fahrenheit: t => (t - 32) * 5 / 9,
