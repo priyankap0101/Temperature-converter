@@ -46,7 +46,7 @@ function convertTemperature() {
     resultEl.style.transform = "translateY(10px)";
   };
 
-  // Input validations
+  
   if (!rawInput) return showResult("⚠️ Please enter a temperature value.", "error");
   if (isNaN(temperature)) return showResult("⚠️ Temperature must be a numeric value.", "error");
   if (!toCelsius[fromUnit] || !fromCelsius[toUnit])
@@ -59,7 +59,7 @@ function convertTemperature() {
     return showResult(`ℹ️ ${temperature.toFixed(2)}° ${formatUnit(toUnit)} (no conversion needed)`, "success");
   }
 
-  // Perform conversion
+  
   const tempInCelsius = toCelsius[fromUnit](temperature);
   const convertedTemp = fromCelsius[toUnit](tempInCelsius);
 
