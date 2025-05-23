@@ -36,7 +36,7 @@ h2::after {
   content: "";
   display: block;
   width: 60px;
-  height: 3px;
+  height: 2px;
   background: #7a5ef9;
   margin: 10px auto 0;
   border-radius: 5px;
