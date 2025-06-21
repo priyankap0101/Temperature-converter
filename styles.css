@@ -116,7 +116,7 @@ input, select {
 }
 
 #resultText.success {
-  font-weight: bolder;
+  font-weight: 600;
   font-size: 1.3rem;
   color: #000000;
   background: linear-gradient(145deg, #d9f7d1, #c1e9c0);
