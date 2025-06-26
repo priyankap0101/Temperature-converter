@@ -130,7 +130,7 @@ input, select {
 #resultText.error {
   color: #570808;
   background: linear-gradient(145deg, #fdd8d8, #f8a1a1);
-  box-shadow: inset 7px 7px 15px #f1c2c2,
+  box-shadow: inset 6px 7px 15px #f1c2c2,
    inset -7px -7px 15px #ffffff;
   border-left: 6px solid #e53935;
   transform: scale(1.02);
