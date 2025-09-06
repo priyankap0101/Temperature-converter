@@ -5,7 +5,6 @@ A sleek, responsive web application to convert temperatures between Celsius, Fah
 ## Features
 
 - 🔁 Convert between Celsius, Fahrenheit, and Kelvin
-- ✅ Real-time conversion with input validation
-- 🎨 Neumorphic UI with success/error feedback
+- ✅ Real-time conversion with input validation
 - 💡 Beginner-friendly, clean code structure
 - 📱 Fully responsive and lightweight
