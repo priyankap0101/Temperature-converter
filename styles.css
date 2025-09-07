@@ -60,7 +60,7 @@ input, select {
 .units-container {
   display: flex;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .units-container select {
