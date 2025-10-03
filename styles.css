@@ -21,7 +21,7 @@ body {
   box-shadow: 4px 4px 14px #c1c8d0,
    -8px -8px 16px #ffffff;
   width: 80%;
-  max-width: 700px;
+  max-width: 750px;
   text-align: center;
 }
 
@@ -135,4 +135,5 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
