@@ -43,7 +43,7 @@ h2::after {
 }
 
 input, select {
-  width: 50%;
+  width: 70%;
   padding: 0.7rem;
   margin-top: 1.7rem;
   border: none;
@@ -135,5 +135,6 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
 
