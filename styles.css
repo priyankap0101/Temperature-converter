@@ -50,7 +50,7 @@ input, select {
   border-radius: 22px;
   background: #e0e5ec;
   box-shadow: inset 8px 8px 16px #c1c8d0,
-   inset -9px -8px 16px #ffffff;
+   inset -6px -8px 16px #ffffff;
   font-size: 1rem;
   color: #333;
   outline: none;
@@ -135,6 +135,7 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
 
 
