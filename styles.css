@@ -36,7 +36,7 @@ h2::after {
   content: "";
   display: block;
   width: 60px;
-  height: 2px;
+  height: 2.5px;
   background: #7a5ef9;
   margin: 20px auto 0;
   border-radius: 5px;
@@ -135,6 +135,7 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
 
 
