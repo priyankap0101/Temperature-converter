@@ -70,7 +70,7 @@ input, select {
 .convert-btn {
   margin-top: 2rem;
   padding: 0.6rem;
-  width: 100%;
+  width: 190%;
   border: none;
   border-radius: 15px;
   background: #e0e5ec;
@@ -135,6 +135,7 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
 
 
