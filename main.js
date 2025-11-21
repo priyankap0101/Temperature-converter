@@ -1,34 +1,37 @@
 function convertTemperature() {
-  const inputEl = document.getElementById('temperatureInput');
-  const fromUnit = document.getElementById('fromUnit').value.toLowerCase();
-  const toUnit = document.getElementById('toUnit').value.toLowerCase();
-  const resultEl = document.getElementById('resultText');
+  const inputEl = document.getElementById("temperatureInput");
+  const fromUnit = document.getElementById("fromUnit").value.toLowerCase();
+  const toUnit = document.getElementById("toUnit").value.toLowerCase();
+  const resultEl = document.getElementById("resultText");
 
   const rawInput = inputEl.value.trim();
   const temperature = parseFloat(rawInput);
 
-  const toCelsius = {
-    celsius: t => t,
-    fahrenheit: t => (t - 32) * 5 / 9,
-    kelvin: t => t - 273.15,
-  };
-
-  const fromCelsius = {
-    celsius: t => t,
-    fahrenheit: t => (t * 9 / 5) + 32,
-    kelvin: t => t + 273.15,
-  };
-
-  const formatUnit = unit => ({
+  // Centralized unit labels
+  const UNIT_LABELS = {
     celsius: "Celsius",
     fahrenheit: "Fahrenheit",
     kelvin: "Kelvin",
-  }[unit] || unit.charAt(0).toUpperCase() + unit.slice(1));
+  };
 
-  const showResult = (message, type = "info") => {
-    resultEl.textContent = message;
+  // Conversion Maps
+  const CONVERT = {
+    toCelsius: {
+      celsius: t => t,
+      fahrenheit: t => (t - 32) * 5 / 9,
+      kelvin: t => t - 273.15,
+    },
+    fromCelsius: {
+      celsius: t => t,
+      fahrenheit: t => (t * 9 / 5) + 32,
+      kelvin: t => t + 273.15,
+    }
+  };
+
+  // 🔵 Reusable show message
+  const showResult = (msg, type = "info") => {
+    resultEl.textContent = msg;
     resultEl.className = `result ${type} show`;
-    resultEl.setAttribute("aria-live", "polite");
 
     resultEl.style.display = "block";
     requestAnimationFrame(() => {
@@ -38,6 +41,7 @@ function convertTemperature() {
     });
   };
 
+  // 🔵 Hide message
   const hideResult = () => {
     resultEl.textContent = "";
     resultEl.className = "result";
@@ -46,25 +50,43 @@ function convertTemperature() {
     resultEl.style.transform = "translateY(10px)";
   };
 
-  
+  // ----------------------
+  // 🔴 Input Validations
+  // ----------------------
+
   if (!rawInput) return showResult("⚠️ Please enter a temperature value.", "error");
-  if (isNaN(temperature)) return showResult("⚠️ Temperature must be a numeric value.", "error");
-  if (!toCelsius[fromUnit] || !fromCelsius[toUnit])
+
+  if (isNaN(temperature))
+    return showResult("⚠️ Temperature must be a numeric value.", "error");
+
+  if (!CONVERT.toCelsius[fromUnit] || !CONVERT.fromCelsius[toUnit])
     return showResult("⚠️ Please select valid temperature units.", "error");
-  if (fromUnit === 'kelvin' && temperature < 0)
+
+  // Kelvin cannot be negative
+  if (fromUnit === "kelvin" && temperature < 0)
     return showResult("⚠️ Temperature in Kelvin cannot be below 0 K.", "error");
 
-  // No conversion needed
+  // ----------------------
+  // 🔵 No conversion needed
+  // ----------------------
   if (fromUnit === toUnit) {
-    return showResult(`ℹ️ ${temperature.toFixed(2)}° ${formatUnit(toUnit)} (no conversion needed)`, "success");
+    return showResult(
+      `ℹ️ ${temperature.toFixed(2)}° ${UNIT_LABELS[toUnit]} (no conversion needed)`,
+      "success"
+    );
   }
 
-  
-  const tempInCelsius = toCelsius[fromUnit](temperature);
-  const convertedTemp = fromCelsius[toUnit](tempInCelsius);
+  // ----------------------
+  // 🔵 Conversion Logic
+  // ----------------------
 
-  if (toUnit === 'kelvin' && convertedTemp < 0)
+  const tempInCelsius = CONVERT.toCelsius[fromUnit](temperature);
+  const finalTemp = CONVERT.fromCelsius[toUnit](tempInCelsius);
+
+  // Kelvin cannot be negative after conversion
+  if (toUnit === "kelvin" && finalTemp < 0)
     return showResult("⚠️ Resulting temperature in Kelvin cannot be below 0 K.", "error");
 
-  showResult(`${convertedTemp.toFixed(2)}° ${formatUnit(toUnit)}`, "success");
+  // Show success result
+  showResult(`${finalTemp.toFixed(2)}° ${UNIT_LABELS[toUnit]}`, "success");
 }
