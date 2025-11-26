@@ -93,7 +93,7 @@ input, select {
 #resultText {
   display: none; 
   margin-top: 1rem;
-  padding: 1.2rem 1.7rem;
+  padding: 1rem 1.7rem;
   border-radius: 20px;
   font-size: 1.5rem;
   font-weight: 700;
@@ -135,6 +135,7 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
 
 
