@@ -59,7 +59,7 @@ input, select {
 
 .units-container {
   display: flex;
-  gap: 2rem;
+  gap: 4rem;
   margin-top: 1rem;
 }
 
@@ -135,6 +135,7 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
 
 
