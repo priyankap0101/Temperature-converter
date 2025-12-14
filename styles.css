@@ -69,7 +69,7 @@ input, select {
 
 .convert-btn {
   margin-top: 2rem;
-  padding: 0.6rem;
+  padding: 0.8rem;
   width: 190%;
   border: none;
   border-radius: 15px;
@@ -135,6 +135,7 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
 
 
