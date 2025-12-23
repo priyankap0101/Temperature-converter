@@ -6,7 +6,7 @@
 }
 
 body {
-  height: 100vh;
+  height: 80vh;
   background: #e0e5ec;
   display: flex;
   align-items: center;
@@ -135,6 +135,7 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
 
 
