@@ -64,7 +64,7 @@ input, select {
 }
 
 .units-container select {
-  flex: 1;
+  flex: 2;
 }
 
 .convert-btn {
@@ -135,6 +135,7 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
 
 
