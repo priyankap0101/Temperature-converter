@@ -35,7 +35,7 @@ h2 {
 h2::after {
   content: "";
   display: block;
-  width: 830px;
+  width: 500px;
   height: 2px;
   background: #7a5ef9;
   margin: 20px auto 0;
@@ -135,6 +135,7 @@ input, select {
   border-left: 6px solid #e53935;
   transform: scale(1.02);
 }
+
 
 
 
